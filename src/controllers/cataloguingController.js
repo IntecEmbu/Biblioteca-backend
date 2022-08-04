@@ -40,6 +40,12 @@ router.get('/getallbooks', async (req, res) => {
     try {
         const results = await db.getAllBooks()
 
+        if (results.length === 0){
+            return res.status(404).json({
+                message: 'No books found'
+            })
+        }
+
         res.status(200).json(results)
 
     } catch (error) {
@@ -53,7 +59,9 @@ router.get('/getcountbooks', async (req, res) => {
     try {
         const results = await db.getCountBooks()
 
-        res.status(200).json(results)
+        res.status(200).json({
+            count: results
+        })
 
     } catch (error) {
         return res.status(500).json({
