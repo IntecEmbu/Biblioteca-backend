@@ -62,7 +62,7 @@ router.get('/countbooks', async (req, res) => {
         const results = await db.getCountBooks()
 
         res.status(200).json({
-            count: results
+            count: results[0].total
         })
 
     } catch (error) {
