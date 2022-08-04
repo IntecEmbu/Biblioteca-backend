@@ -25,6 +25,6 @@
 > ## Método GET 👋
 > ### Rotas com o método GET
 
-#### Todos os livros cadastrados ```.../cataloguin/getallbooks```
+#### Todos os livros cadastrados ```.../cataloguin/allbooks```
 
-#### Quantidade de livros cadastrados ```.../cataloguin/getcountbooks```
+#### Quantidade de livros cadastrados ```.../cataloguin/countbooks```
