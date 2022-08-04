@@ -39,4 +39,4 @@ async function getCountBooks(){
     return rows
 }
 
-export default {insertBook, getAllBooks}
+export default {insertBook, getAllBooks, getCountBooks}
