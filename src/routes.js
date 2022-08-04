@@ -6,7 +6,7 @@ const router = express.Router()
 
 router.use('/cataloguin', cataloguingController)
 
-router.use('/*', (req, res) => {
+router.use('*', (req, res) => {
     res.status(404).json({
         notfound: 'verify on github the endpoints',
         by: '@blibion'
