@@ -36,7 +36,7 @@ router.post('/insertbook',[
     }
 })
 
-router.get('/getallbooks', async (req, res) => {
+router.get('/allbooks', async (req, res) => {
     try {
         const results = await db.getAllBooks()
 
@@ -57,7 +57,7 @@ router.get('/getallbooks', async (req, res) => {
     }
 })
 
-router.get('/getcountbooks', async (req, res) => {
+router.get('/countbooks', async (req, res) => {
     try {
         const results = await db.getCountBooks()
 
