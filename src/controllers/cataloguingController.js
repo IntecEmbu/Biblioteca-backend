@@ -46,7 +46,9 @@ router.get('/getallbooks', async (req, res) => {
             })
         }
 
-        res.status(200).json(results)
+        res.status(200).json({
+            books: results
+        })
 
     } catch (error) {
         return res.status(500).json({
