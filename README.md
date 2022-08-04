@@ -7,7 +7,7 @@
 > ### Rotas com o método POST
 
 
-##### Para inserir um livro use ```https://biblion-intec.herokuapp.com/cataloguin/insertbook```
+#### Para inserir um livro use ```.../cataloguin/insertbook```
 ``` 
 {
     "title": titulo,
@@ -25,6 +25,6 @@
 > ## Método GET 👋
 > ### Rotas com o método GET
 
-##### Todos os livros cadastrados ```https://biblion-intec.herokuapp.com/cataloguin/getallbooks```
+#### Todos os livros cadastrados ```.../cataloguin/getallbooks```
 
-##### Quantidade de livros cadastrados ```https://biblion-intec.herokuapp.com/cataloguin/getcountbooks```
+#### Quantidade de livros cadastrados ```.../cataloguin/getcountbooks```
