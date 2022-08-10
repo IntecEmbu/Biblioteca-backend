@@ -1,9 +1,9 @@
 import express from "express"
-import cataloguingController from './controllers/cataloguingController.js'
+import books from './controllers/BooksController.js'
 
 const router = express.Router()
 
-router.use('/cataloguin', cataloguingController)
+router.use('/books', books)
 
 router.use('*', (req, res) => {
     res.status(404).json({
