@@ -29,4 +29,4 @@
 
 #### Quantidade de livros cadastrados ```.../books/allcount```
 
-### Todas as categorias ```.../books/``` 
+### Todas as categorias ```.../books/allcategory``` 
