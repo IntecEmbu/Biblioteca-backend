@@ -27,6 +27,6 @@
 
 #### Todos os livros cadastrados ```.../books/all```
 
-#### Quantidade de livros cadastrados ```.../books/allcount```
+#### Quantidade de livros cadastrados ```.../books/all-count```
 
-### Todas as categorias ```.../books/allcategory``` 
+### Todas as categorias ```.../books/all-category``` 
