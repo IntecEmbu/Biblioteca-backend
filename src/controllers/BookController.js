@@ -1,5 +1,5 @@
 import express from 'express'
-import db from '../services/cataloguingService.js'
+import db from '../services/BookService.js'
 import { body, validationResult } from 'express-validator'
 
 const router = express.Router()
