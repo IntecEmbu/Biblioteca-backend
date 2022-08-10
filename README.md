@@ -1,5 +1,4 @@
-> ## Como usar a api 🤔
-> #### Passo a passo de como consumir a api
+# Como consumir a api 🤔
 
 <br>
 
