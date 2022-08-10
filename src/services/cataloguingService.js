@@ -39,4 +39,20 @@ async function getCountBooks(){
     return rows
 }
 
-export default {insertBook, getAllBooks, getCountBooks}
+async function getAllCategory(){
+    const conn = await db.connect()
+
+    const sql = 'SELECT category_name AS category FROM tbl_book group by category'
+
+    const [rows] = await conn.query(sql)
+
+    conn.end()
+
+    return rows
+}
+
+export default {
+    insertBook,
+    getAllBooks,
+    getCountBooks
+}
