@@ -7,7 +7,7 @@
 > ### Rotas com o método POST
 
 
-#### Para inserir um livro use ```.../cataloguin/insertbook```
+#### Para inserir um livro use ```.../books/insert```
 ``` 
 {
     "title": titulo,
@@ -25,6 +25,8 @@
 > ## Método GET 👋
 > ### Rotas com o método GET
 
-#### Todos os livros cadastrados ```.../cataloguin/allbooks```
+#### Todos os livros cadastrados ```.../books/all```
 
-#### Quantidade de livros cadastrados ```.../cataloguin/countbooks```
+#### Quantidade de livros cadastrados ```.../books/allcount```
+
+### Todas as categorias ```.../books/``` 
