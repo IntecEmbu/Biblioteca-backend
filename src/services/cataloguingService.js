@@ -54,5 +54,6 @@ async function getAllCategory(){
 export default {
     insertBook,
     getAllBooks,
-    getCountBooks
+    getCountBooks,
+    getAllCategory
 }

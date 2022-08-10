@@ -72,4 +72,24 @@ router.get('/countbooks', async (req, res) => {
     }
 })
 
+router.get('/allcategory', async (req, res) =>{
+    try {
+        const results = await db.getAllCategory()
+
+        if (results.length === 0){
+            return res.status(404).json({
+                message: 'No category found'
+            })
+        }
+        
+        return res.status(200).json({
+            category: results
+        })
+    } catch (error) {
+        return res.status(500).json({
+            DatabaseError: error.message
+        })
+    }
+})
+
 export default router
