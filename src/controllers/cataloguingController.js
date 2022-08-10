@@ -4,7 +4,7 @@ import { body, validationResult } from 'express-validator'
 
 const router = express.Router()
 
-router.post('/insertbook',[
+router.post('/insert',[
     body('title').not().isEmpty().withMessage('Title is required'),
     body('edition').not().isEmpty().withMessage('Edition is required'),
     body('isbn').not().isEmpty().withMessage('ISBN is required'),
@@ -36,7 +36,7 @@ router.post('/insertbook',[
     }
 })
 
-router.get('/allbooks', async (req, res) => {
+router.get('/all', async (req, res) => {
     try {
         const results = await db.getAllBooks()
 
@@ -57,7 +57,7 @@ router.get('/allbooks', async (req, res) => {
     }
 })
 
-router.get('/countbooks', async (req, res) => {
+router.get('/all-count', async (req, res) => {
     try {
         const results = await db.getCountBooks()
 
@@ -72,7 +72,7 @@ router.get('/countbooks', async (req, res) => {
     }
 })
 
-router.get('/allcategory', async (req, res) =>{
+router.get('/all-category', async (req, res) =>{
     try {
         const results = await db.getAllCategory()
 
