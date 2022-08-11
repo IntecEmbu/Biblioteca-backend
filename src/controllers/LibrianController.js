@@ -33,3 +33,40 @@ router.post('/insert-voluntary',[
         })
     }
 })
+
+// Endpoint: /librian/login (POST)
+// Description: Login a librian
+router.post('/login-librian',[
+    body('email').not().isEmpty().withMessage('Email is required'),
+    body('password').not().isEmpty().withMessage('Password is required')
+], async (req, res) => {
+
+    const errors = validationResult(req)
+    if(!errors.isEmpty()){
+        return res.status(400).json({
+            errors: errors.array()
+        })
+    }
+
+    const {email, password} = req.body
+
+    try{
+        const result = await db.loginLibrian({email, password})
+
+        if(result.length > 0){
+            res.status(200).json({
+                message: 'Login successful',
+                data: result
+            })
+        }
+        else{
+            res.status(400).json({
+                message: 'Login failed'
+            })
+        }
+    } catch (error) {
+        return res.status(500).json({
+            DatabaseError: error.message
+        })
+    }
+})
