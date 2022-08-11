@@ -85,7 +85,7 @@ async function getAllActivatedCollaborators(){
 }
 
 // Coleta todos os colaboradores inativos
-async function getAllDeactivatedCollaborators(){
+async function getAllDesactivatedCollaborators(){
   const conn = await db.connect()
 
   const sql = 'SELECT * FROM tbl_librian WHERE librian_status = ?'
@@ -104,5 +104,5 @@ export default{
   deactivatedCollaborator,
   getAllCollaborators,
   getAllActivatedCollaborators,
-  getAllDeactivatedCollaborators
+  getAllDesactivatedCollaborators
 }

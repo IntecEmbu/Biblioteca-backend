@@ -23,9 +23,7 @@
 > ### Método GET 👋
 
 ##### Todos os livros cadastrados ```.../books/all```
-
 ##### Quantidade de livros cadastrados ```.../books/all-count```
-
 ##### Todas as categorias ```.../books/all-category``` 
 
 #
@@ -58,3 +56,11 @@
     "newStatus": ativo/inativo
 }
 ```
+
+<br>
+
+> ### Método GET 👋
+
+##### Todos os colaboradores ```.../librian/all-collaborators```
+##### Colaboradores ativos ```.../librian/collaborators-active```
+##### Colaboradores inativos ```.../librian/collaborators-inactive```

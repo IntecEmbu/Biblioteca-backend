@@ -144,7 +144,7 @@ router.get('/all-collaborators', async (req, res) => {
 // Description: get all collaborators active
 router.get('/collaborators-active', async (req, res) => {
     try {
-        const result = await db.getCollaboratorsActive()
+        const result = await db.getAllActivatedCollaborators()
 
         if(result.length > 0){
             res.status(200).json({
@@ -167,7 +167,7 @@ router.get('/collaborators-active', async (req, res) => {
 // Description: get all collaborators inactive
 router.get('/collaborators-inactive', async (req, res) => {
     try {
-        const result = await db.getCollaboratorsInactive()
+        const result = await db.getAllDesactivatedCollaborators()
 
         if(result.length > 0){
             res.status(200).json({
