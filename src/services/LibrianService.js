@@ -15,21 +15,6 @@ async function createCollaborator(data){
   conn.end()
 }
 
-// Realiza a remoção de um colaborador
-async function removeCollaborator(data){
-  const conn = await db.connect()
-
-  const {id} = data
-
-  const sql = 'DELETE FROM tbl_librian WHERE librian_id = ?'
-
-  const values = [id]
-
-  await conn.query(sql, values)
-
-  conn.end()
-}
-
 // Realiza o login do Bibliotecario
 async function loginCollaborator(data){
   const conn = await db.connect()
@@ -45,6 +30,17 @@ async function loginCollaborator(data){
   conn.end()
 
   return rows
+}
+
+// Realiza a remoção de um colaborador
+async function removeCollaborator(id){
+  const conn = await db.connect()
+
+  const sql = 'DELETE FROM tbl_librian WHERE librian_id = ?'
+
+  await conn.query(sql, id)
+
+  conn.end()
 }
 
 export default{

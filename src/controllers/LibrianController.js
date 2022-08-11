@@ -4,7 +4,7 @@ import { body, validationResult } from 'express-validator'
 
 const router = express.Router()
 
-// Endpoint: /librian/insert (POST)
+// Endpoint: /librian/insert-collaborator (POST)
 // Description: Insert a new librian
 router.post('/insert-collaborator',[
     body('name').not().isEmpty().withMessage('Name is required'),
@@ -34,7 +34,7 @@ router.post('/insert-collaborator',[
     }
 })
 
-// Endpoint: /librian/login (POST)
+// Endpoint: /librian/login-collaborator (POST)
 // Description: Login a librian
 router.post('/login-collaborator',[
     body('email').not().isEmpty().withMessage('Email is required'),
