@@ -49,3 +49,6 @@
     "email": "email-colaborador",
     "password": "senha-colaborador"
 }
+```
+
+##### Para remover um colaborador ```.../librian/remove-collaborator```
