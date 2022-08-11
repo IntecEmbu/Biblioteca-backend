@@ -27,7 +27,7 @@ router.post('/insert-collaborator',[
             message: 'Voluntary inserted successfully'
         })
     }
-    catch (error) {
+    catch(error){
         return res.status(500).json({
             DatabaseError: error.message
         })
@@ -58,13 +58,12 @@ router.post('/login-collaborator',[
                 message: 'Login successful',
                 data: result
             })
-        }
-        else{
+        } else{
             res.status(400).json({
                 message: 'Login failed'
             })
         }
-    } catch (error) {
+    } catch(error){
         return res.status(500).json({
             DatabaseError: error.message
         })
@@ -93,7 +92,7 @@ router.post('/status-collaborator',[
             res.status(200).json({
                 message: 'Collaborator activated successfully'
             })
-        } catch (error) {
+        } catch(error){
             return res.status(500).json({
                 DatabaseError: error.message
             })
@@ -105,13 +104,12 @@ router.post('/status-collaborator',[
             res.status(200).json({
                 message: 'Collaborator deactivated successfully'
             })
-        } catch (error) {
+        } catch(error){
             return res.status(500).json({
                 DatabaseError: error.message
             })
         }
-    }
-    else{
+    } else{
         return res.status(400).json({
             message: 'Status invalid'
         })
@@ -130,13 +128,35 @@ router.get('/all-collaborators', async (req, res) => {
                 message: 'Collaborators found',
                 data: result
             })
-        }
-        else{
+        } else{
             res.status(400).json({
                 message: 'Collaborators not found'
             })
         }
-    } catch (error) {
+    } catch(error){
+        return res.status(500).json({
+            DatabaseError: error.message
+        })
+    }
+})
+
+// Endpoint: /librian/get-collaborator-active (GET)
+// Description: get all collaborators active
+router.get('/collaborators-active', async (req, res) => {
+    try {
+        const result = await db.getCollaboratorsActive()
+
+        if(result.length > 0){
+            res.status(200).json({
+                message: 'Collaborators found',
+                data: result
+            })
+        } else{
+            res.status(400).json({
+                message: 'Collaborators not found'
+            })
+        }
+    } catch(error){
         return res.status(500).json({
             DatabaseError: error.message
         })
