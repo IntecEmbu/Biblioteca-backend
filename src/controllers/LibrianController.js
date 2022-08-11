@@ -71,4 +71,31 @@ router.post('/login-collaborator',[
     }
 })
 
+// Endpoint: /librian/remove-collaborator (POST)
+// Description: Remove a collaborator
+router.post('/remove-collaborator',[
+    body('id').not().isEmpty().withMessage('Id is required')
+], async (req, res) => {
+
+    const errors = validationResult(req)
+    if(!errors.isEmpty()){
+        return res.status(400).json({
+            errors: errors.array()
+        })
+    }
+
+    const {id} = req.body
+
+    try{
+        await db.removeCollaborator(id)
+        res.status(200).json({
+            message: 'Voluntary removed successfully'
+        })
+    } catch (error) {
+        return res.status(500).json({
+            DatabaseError: error.message
+        })
+    }
+})
+
 export default router
