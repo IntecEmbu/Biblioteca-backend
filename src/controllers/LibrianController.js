@@ -70,3 +70,5 @@ router.post('/login-collaborator',[
         })
     }
 })
+
+export default router
