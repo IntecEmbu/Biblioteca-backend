@@ -2,7 +2,7 @@
 
 # Rota de livros 📚
 
-> ### Método POST ✉️
+> ### Método POST 🕊️
 
 
 ##### Para inserir um livro use ```.../books/insert```
@@ -20,7 +20,7 @@
 
 <br>
 
-> ### Método GET 👋
+> ### Método GET 📬
 
 ##### Todos os livros cadastrados ```.../books/all```
 ##### Quantidade de livros cadastrados ```.../books/all-count```
@@ -30,7 +30,7 @@
 
 # Rota de bibliotecário 📖
 
-> ### Método POST ✉️
+> ### Método POST 🕊️
 
 ##### Para inserir um voluntário use ```.../librian/insert-collaborator```
 ```
@@ -59,7 +59,7 @@
 
 <br>
 
-> ### Método GET 👋
+> ### Método GET 📬
 
 ##### Todos os colaboradores ```.../librian/all-collaborators```
 ##### Colaboradores ativos ```.../librian/collaborators-active```
