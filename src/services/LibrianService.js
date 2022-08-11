@@ -1,7 +1,7 @@
 import db from '../Database/Connection.js'
 
 // Realiza o cadastro de voluntários
-async function createVoluntary(data){
+async function createCollaborator(data){
   const conn = await db.connect()
 
   const {name, email, password} = data
@@ -16,7 +16,7 @@ async function createVoluntary(data){
 }
 
 // Realiza o login do Bibliotecario
-async function loginLibrian(data){
+async function loginCollaborator(data){
   const conn = await db.connect()
 
   const {email, password} = data
@@ -33,6 +33,6 @@ async function loginLibrian(data){
 }
 
 export default{
-  createVoluntary,
-  loginLibrian
+  createCollaborator,
+  loginCollaborator
 }
