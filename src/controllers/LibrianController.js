@@ -163,4 +163,27 @@ router.get('/collaborators-active', async (req, res) => {
     }
 })
 
+// Endpoint: /librian/get-collaborator-inactive (GET)
+// Description: get all collaborators inactive
+router.get('/collaborators-inactive', async (req, res) => {
+    try {
+        const result = await db.getCollaboratorsInactive()
+
+        if(result.length > 0){
+            res.status(200).json({
+                message: 'Collaborators found',
+                data: result
+            })
+        } else{
+            res.status(400).json({
+                message: 'Collaborators not found'
+            })
+        }
+    } catch(error){
+        return res.status(500).json({
+            DatabaseError: error.message
+        })
+    }
+})
+
 export default router
