@@ -1,6 +1,6 @@
 import db from '../Database/Connection.js'
 
-// Realiza o cadastro de voluntários
+// Realiza o cadastro de colaboradores
 async function createCollaborator(data){
   const conn = await db.connect()
 
@@ -9,6 +9,21 @@ async function createCollaborator(data){
   const sql = 'INSERT INTO tbl_librian (librian_name, librian_email, librian_password, librian_type) values (?, ?, ?, ?)'
 
   const values = [name, email, password, 'Colaborador']
+
+  await conn.query(sql, values)
+
+  conn.end()
+}
+
+// Realiza a remoção de um colaborador
+async function removeCollaborator(data){
+  const conn = await db.connect()
+
+  const {id} = data
+
+  const sql = 'DELETE FROM tbl_librian WHERE librian_id = ?'
+
+  const values = [id]
 
   await conn.query(sql, values)
 
@@ -34,5 +49,6 @@ async function loginCollaborator(data){
 
 export default{
   createCollaborator,
-  loginCollaborator
+  loginCollaborator,
+  removeCollaborator
 }
