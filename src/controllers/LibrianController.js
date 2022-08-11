@@ -74,7 +74,7 @@ router.post('/login-collaborator',[
 // Description: change status of a librian
 router.post('/status-collaborator',[
     body('id').not().isEmpty().withMessage('Id is required'),
-    body('status').not().isEmpty().withMessage('Status is required')
+    body('newStatus').not().isEmpty().withMessage('Status is required')
 ], async (req, res) => {
 
     const errors = validationResult(req)
@@ -84,9 +84,9 @@ router.post('/status-collaborator',[
         })
     }
 
-    const {id, status} = req.body
+    const {id, newStatus} = req.body
 
-    if(status.toLowerCase() === 'ativo'){
+    if(newStatus.toLowerCase() === 'ativo'){
         try {
             await db.activatedCollaborator(id)
             res.status(200).json({
@@ -98,7 +98,7 @@ router.post('/status-collaborator',[
             })
         }
     }
-    else if(status.toLowerCase() === 'inativo'){
+    else if(newStatus.toLowerCase() === 'inativo'){
         try {
             await db.deactivatedCollaborator(id)
             res.status(200).json({
@@ -111,7 +111,7 @@ router.post('/status-collaborator',[
         }
     } else{
         return res.status(400).json({
-            message: 'Status invalid'
+            message: 'newStatus invalid'
         })
     }
 })
