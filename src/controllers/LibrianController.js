@@ -118,4 +118,29 @@ router.post('/status-collaborator',[
     }
 })
 
+
+// Endpoint: /librian/get-all-collaborators (GET)
+// Description: get all collaborators
+router.get('/all-collaborators', async (req, res) => {
+    try {
+        const result = await db.getAllCollaborators()
+
+        if(result.length > 0){
+            res.status(200).json({
+                message: 'Collaborators found',
+                data: result
+            })
+        }
+        else{
+            res.status(400).json({
+                message: 'Collaborators not found'
+            })
+        }
+    } catch (error) {
+        return res.status(500).json({
+            DatabaseError: error.message
+        })
+    }
+})
+
 export default router

@@ -58,9 +58,37 @@ async function deactivatedCollaborator(id){
   conn.end()
 }
 
+// Coleta todos os colaboradores
+async function getAllCollaborators(){
+  const conn = await db.connect()
+
+  const sql = 'SELECT * FROM tbl_librian'
+
+  const [rows] = await conn.query(sql)
+
+  conn.end()
+
+  return rows
+}
+
+// Coleta todos os colaboradores ativos
+async function getAllActivatedCollaborators(){
+  const conn = await db.connect()
+
+  const sql = 'SELECT * FROM tbl_librian WHERE librian_status = ?'
+
+  const [rows] = await conn.query(sql, 'Ativo')
+
+  conn.end()
+
+  return rows
+}
+
 export default{
   createCollaborator,
   loginCollaborator,
   activatedCollaborator,
-  deactivatedCollaborator
+  deactivatedCollaborator,
+  getAllCollaborators,
+  getAllActivatedCollaborators
 }
