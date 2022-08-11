@@ -1,12 +1,11 @@
-# Como consumir a api 🤔
+#
 
-<br>
+# Rota de livros 📚
 
-> ## Método POST ✉️
-> ### Rotas com o método POST
+> ### Método POST ✉️
 
 
-#### Para inserir um livro use ```.../books/insert```
+##### Para inserir um livro use ```.../books/insert```
 ``` 
 {
     "title": titulo,
@@ -21,11 +20,33 @@
 
 <br>
 
-> ## Método GET 👋
-> ### Rotas com o método GET
+> ### Método GET 👋
 
-#### Todos os livros cadastrados ```.../books/all```
+##### Todos os livros cadastrados ```.../books/all```
 
-#### Quantidade de livros cadastrados ```.../books/all-count```
+##### Quantidade de livros cadastrados ```.../books/all-count```
 
-### Todas as categorias ```.../books/all-category``` 
+##### Todas as categorias ```.../books/all-category``` 
+
+#
+
+# Rota de bibliotecário 📖
+
+> ### Método POST ✉️
+
+##### Para inserir um voluntário use ```.../librian/insert-collaborator```
+```
+{
+    "name": "nome-colaborador",
+    "email": "email-colaborador",
+    "password": "senha-colaborador"
+}
+```
+<br>
+
+##### Para fazer login use ```.../librian/login-collaborator```
+```
+{
+    "email": "email-colaborador",
+    "password": "senha-colaborador"
+}
