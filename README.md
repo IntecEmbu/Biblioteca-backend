@@ -42,7 +42,6 @@
     "password": "senha-colaborador"
 }
 ```
-<br>
 
 ##### Para fazer login use ```.../librian/login-collaborator```
 ```
