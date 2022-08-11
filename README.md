@@ -51,4 +51,10 @@
 }
 ```
 
-##### Para remover um colaborador ```.../librian/remove-collaborator```
+##### Para mudar status do colaborador (ativo / inativo) ```.../librian/status-collaborator```
+```
+{
+    "id": "id-colaborador",
+    "newStatus": ativo/inativo
+}
+```

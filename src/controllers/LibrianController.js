@@ -71,10 +71,11 @@ router.post('/login-collaborator',[
     }
 })
 
-// Endpoint: /librian/remove-collaborator (POST)
-// Description: Remove a collaborator
-router.post('/remove-collaborator',[
-    body('id').not().isEmpty().withMessage('Id is required')
+// Endpoint: /librian/status-collaborator (POST)
+// Description: change status of a librian
+router.post('/status-collaborator',[
+    body('id').not().isEmpty().withMessage('Id is required'),
+    body('status').not().isEmpty().withMessage('Status is required')
 ], async (req, res) => {
 
     const errors = validationResult(req)
@@ -84,16 +85,35 @@ router.post('/remove-collaborator',[
         })
     }
 
-    const {id} = req.body
+    const {id, status} = req.body
 
-    try{
-        await db.removeCollaborator(id)
-        res.status(200).json({
-            message: 'Voluntary removed successfully'
-        })
-    } catch (error) {
-        return res.status(500).json({
-            DatabaseError: error.message
+    if(status.toLowerCase() === 'ativo'){
+        try {
+            await db.activatedCollaborator(id)
+            res.status(200).json({
+                message: 'Collaborator activated successfully'
+            })
+        } catch (error) {
+            return res.status(500).json({
+                DatabaseError: error.message
+            })
+        }
+    }
+    else if(status.toLowerCase() === 'inativo'){
+        try {
+            await db.deactivatedCollaborator(id)
+            res.status(200).json({
+                message: 'Collaborator deactivated successfully'
+            })
+        } catch (error) {
+            return res.status(500).json({
+                DatabaseError: error.message
+            })
+        }
+    }
+    else{
+        return res.status(400).json({
+            message: 'Status invalid'
         })
     }
 })

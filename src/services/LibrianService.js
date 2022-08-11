@@ -32,13 +32,28 @@ async function loginCollaborator(data){
   return rows
 }
 
-// Realiza a remoção de um colaborador
-async function removeCollaborator(id){
+// Altera status do colaborador para ativo
+async function activatedCollaborator(id){
   const conn = await db.connect()
 
-  const sql = 'DELETE FROM tbl_librian WHERE librian_id = ?'
+  const sql = 'UPDATE tbl_librian SET librian_status = ? WHERE librian_id = ?'
 
-  await conn.query(sql, id)
+  const values = ['Ativo', id]
+
+  await conn.query(sql, values)
+
+  conn.end()
+}
+
+// Altera status do colaborador para inativo
+async function deactivatedCollaborator(id){
+  const conn = await db.connect()
+
+  const sql = 'UPDATE tbl_librian SET librian_status = ? WHERE librian_id = ?'
+
+  const values = ['Inativo', id]
+
+  await conn.query(sql, values)
 
   conn.end()
 }
@@ -46,5 +61,6 @@ async function removeCollaborator(id){
 export default{
   createCollaborator,
   loginCollaborator,
-  removeCollaborator
+  activatedCollaborator,
+  deactivatedCollaborator
 }
