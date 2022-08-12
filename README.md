@@ -8,13 +8,13 @@
 ##### Para inserir um livro use ```.../book/insert```
 ``` 
 {
-    "title": titulo,
-    "edition": edição/volume,
-    "isbn": número,
-    "year": anoLançamento,
-    "category": categoria,
-    "cdd": númeroCdd,
-    "idiom": idioma
+    "title": "titulo",
+    "edition": "edição/volume",
+    "isbn": "número",
+    "year": "anoLançamento",
+    "category": "categoria",
+    "cdd": "númeroCdd",
+    "idiom": "idioma"
 }
 ```
 
@@ -54,7 +54,7 @@
 ```
 {
     "id": "id-colaborador",
-    "newStatus": ativo/inativo
+    "newStatus": "ativo/inativo"
 }
 ```
 
