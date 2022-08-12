@@ -24,7 +24,6 @@ async function getAllBooks(){
     const [rows] = await conn.query(sql)
 
     conn.end()
-
     return rows
 }
 
@@ -36,7 +35,6 @@ async function getCountBooks(){
     const [rows] = await conn.query(sql)
 
     conn.end()
-    
     return rows
 }
 
@@ -48,11 +46,10 @@ async function getAllCategory(){
     const [rows] = await conn.query(sql)
 
     conn.end()
-
     return rows
 }
 
-// Coleta o livro pelo autor
+// Pesquisa o livro pelo autor
 async function getBookByAuthor(author){
     const conn = await db.connect()
 
@@ -62,7 +59,19 @@ async function getBookByAuthor(author){
     const [rows] = await conn.query(sql, values)
 
     conn.end()
+    return rows
+}
 
+// Pesquisa livro pelo nome
+async function getBookByName(name){
+    const conn = await db.connect()
+
+    const sql = 'SELECT * FROM tbl_book WHERE book_name like ?'
+    const values = `%${name}%`
+
+    const [rows] = await conn.query(sql, values)
+
+    conn.end()
     return rows
 }
 
