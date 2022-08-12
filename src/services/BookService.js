@@ -75,10 +75,25 @@ async function getBookByName(name){
     return rows
 }
 
+// Pesquisa livro por categoria
+async function getBookByCategory(category){
+    const conn = await db.connect()
+
+    const sql = 'SELECT * FROM tbl_book WHERE category_name like ?'
+    const values = `%${category}%`
+
+    const [rows] = await conn.query(sql, values)
+
+    conn.end()
+    return rows
+}
+
 export default {
     insertBook,
     getAllBooks,
     getCountBooks,
     getAllCategory,
-    getBookByAuthor
+    getBookByAuthor,
+    getBookByName,
+    getBookByCategory
 }
