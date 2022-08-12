@@ -31,7 +31,7 @@ router.post('/insert',[
         res.status(200).json({
             message: 'Book inserted successfully'
         })
-    } catch (error) {
+    } catch(error){
         return res.status(500).json({
             DatabaseError: error.message
         })
@@ -54,7 +54,7 @@ router.get('/all', async (req, res) => {
             books: results
         })
 
-    } catch (error) {
+    } catch(error){
         return res.status(500).json({
             DatabaseError: error.message
         })
@@ -72,7 +72,7 @@ router.get('/all-count', async (req, res) => {
             count: results[0].total
         })
 
-    } catch (error) {
+    } catch(error){
         return res.status(500).json({
             DatabaseError: error.message
         })
@@ -97,7 +97,7 @@ router.get('/all-category', async (req, res) =>{
         return res.status(200).json({
             category: data
         })
-    } catch (error) {
+    } catch(error){
         return res.status(500).json({
             DatabaseError: error.message
         })
@@ -123,7 +123,33 @@ router.get('/search-author', async (req, res) => {
             books: results
         })
 
-    } catch (error) {
+    } catch(error){
+        return res.status(500).json({
+            DatabaseError: error.message
+        })
+    }
+})
+
+
+// Endpoint: /book/search-name (GET)
+// Description: Get all books by name
+router.get('/search-name', async (req, res) => {
+    const {name} = req.query
+
+    try {
+        const results = await db.getBookByName(name)
+
+        if (results.length === 0){
+            return res.status(404).json({
+                message: 'No books found'
+            })
+        }
+
+        res.status(200).json({
+            books: results
+        })
+
+    } catch(error){
         return res.status(500).json({
             DatabaseError: error.message
         })
