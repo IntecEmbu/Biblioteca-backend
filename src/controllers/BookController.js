@@ -91,8 +91,12 @@ router.get('/all-category', async (req, res) =>{
             })
         }
         
+        const data = results.map(item =>{
+            return item.value
+        })
+
         return res.status(200).json({
-            category: results
+            category: data
         })
     } catch (error) {
         return res.status(500).json({
