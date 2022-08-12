@@ -5,7 +5,7 @@
 > ### Método POST 🕊️
 
 
-##### Para inserir um livro use ```.../books/insert```
+##### Para inserir um livro use ```.../book/insert```
 ``` 
 {
     "title": titulo,
@@ -22,9 +22,9 @@
 
 > ### Método GET 📬
 
-##### Todos os livros cadastrados ```.../books/all```
-##### Quantidade de livros cadastrados ```.../books/all-count```
-##### Todas as categorias ```.../books/all-category``` 
+##### Todos os livros cadastrados ```.../book/all```
+##### Quantidade de livros cadastrados ```.../book/all-count```
+##### Todas as categorias ```.../book/all-category``` 
 
 #
 
