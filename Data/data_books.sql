@@ -1,6 +1,7 @@
 DROP TABLE IF EXISTS `tbl_book`;
 
-INSERT INTO `tbl_book` (`book_isbn`,`book_cdd`,`book_name`,`book_language`,`publisher_name`,`category`,`release_year`,`book_edition`)
+INSERT INTO `tbl_book` (`book_isbn`,`book_cdd`,`book_name`,`book_language`,`publisher_name`,
+            `category`,`release_year`,`book_edition`)
 VALUES
   (7467,4995,"enim,","Português","Morbi sit","Mistério","1985","dolor"),
   (4633,7364,"faucibus orci","Espanhol","ipsum. Phasellus vitae","Drama","1989","ut"),
@@ -54,7 +55,8 @@ VALUES
   (1127,4734,"lacus. Aliquam","Espanhol","enim.","Fantasia","1920","mauris");
 
 
-INSERT INTO `tbl_book` (`book_isbn`,`book_cdd`,`book_name`,`book_language`,`publisher_name`,`category`,`release_year`,`book_edition`)
+INSERT INTO `tbl_book` (`book_isbn`,`book_cdd`,`book_name`,`book_language`,`publisher_name`
+            ,`category`,`release_year`,`book_edition`)
 VALUES
   (6660,1795,"Phasellus fermentum convallis","Espanhol","magna. Duis","Financias","1908","parturient"),
   (9124,2271,"dui augue","Espanhol","et ultrices","Educativo","1930","ultricies"),
@@ -108,7 +110,8 @@ VALUES
   (6179,9398,"consectetuer adipiscing elit.","Espanhol","Donec","Romance","2022","Praesent");
 
   
-INSERT INTO `tbl_book` (`book_isbn`,`book_cdd`,`book_name`,`book_language`,`publisher_name`,`category`,`release_year`,`book_edition`)
+INSERT INTO `tbl_book` (`book_isbn`,`book_cdd`,`book_name`,`book_language`,`publisher_name`,
+            `category`,`release_year`,`book_edition`)
 VALUES
   (5733,2261,"pede","Português","pede. Suspendisse","Educativo","1905","tincidunt,"),
   (2956,8269,"mauris","Espanhol","quam vel sapien","Ação","2004","Duis"),
