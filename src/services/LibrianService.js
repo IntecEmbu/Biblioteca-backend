@@ -21,9 +21,9 @@ async function loginCollaborator(data){
 
   const {email, password} = data
 
-  const sql = 'SELECT * From tbl_librian where librian_email = ? and librian_password = ?'
+  const sql = 'SELECT * From tbl_librian where librian_email = ? and librian_password = ? and librian_status = ?'
 
-  const values = [email, password]
+  const values = [email, password, 'Ativo']
 
   const [rows] = await conn.query(sql, values)
 
