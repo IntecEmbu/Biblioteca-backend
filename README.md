@@ -37,7 +37,7 @@
 {
     "name": "nome-colaborador",
     "email": "email-colaborador",
-    "password": "senha-colaborador",]
+    "password": "senha-colaborador",
     "user": "nomeLogin-colaborador"
 }
 ```
