@@ -156,4 +156,30 @@ router.get('/search-name', async (req, res) => {
     }
 })
 
+
+// Endpoint: /book/search-category (GET)
+// Description: Get all books by category
+router.get('/search-category', async (req, res) => {
+    const {category} = req.query
+
+    try {
+        const results = await db.getBookByCategory(category)
+
+        if (results.length === 0){
+            return res.status(404).json({
+                message: 'No books found'
+            })
+        }
+
+        res.status(200).json({
+            books: results
+        })
+
+    } catch(error){
+        return res.status(500).json({
+            DatabaseError: error.message
+        })
+    }
+})
+
 export default router
