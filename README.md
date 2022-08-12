@@ -37,14 +37,15 @@
 {
     "name": "nome-colaborador",
     "email": "email-colaborador",
-    "password": "senha-colaborador"
+    "password": "senha-colaborador",]
+    "user": "nomeLogin-colaborador"
 }
 ```
 
 ##### Para fazer login use ```.../librian/login-collaborator```
 ```
 {
-    "email": "email-colaborador",
+    "user": "nomeLogin-colaborador",
     "password": "senha-colaborador"
 }
 ```
