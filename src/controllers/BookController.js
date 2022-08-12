@@ -91,8 +91,9 @@ router.get('/all-category', async (req, res) =>{
             })
         }
         
+        // Formata os dados para um array
         const data = results.map(item =>{
-            return item.value
+            return item.category
         })
 
         return res.status(200).json({
