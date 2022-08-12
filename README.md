@@ -24,7 +24,10 @@
 
 ##### Todos os livros cadastrados ```.../book/all```
 ##### Quantidade de livros cadastrados ```.../book/all-count```
-##### Todas as categorias ```.../book/all-category``` 
+##### Todas as categorias ```.../book/all-category```
+##### Livros por nome ```.../book/search-name?name=nome_livro```
+##### Livros por autor ```.../book/search-author?author=nome_autor```
+##### Livros por categoria ```.../book/search/search-category?category=nome_categoria```
 
 #
 
