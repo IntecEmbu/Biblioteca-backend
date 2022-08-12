@@ -4,7 +4,7 @@ import librian from './controllers/LibrianController.js'
 
 const router = express.Router()
 
-router.use('/books', books)
+router.use('/book', books)
 router.use('/librian', librian)
 
 router.use('*', (req, res) => {
