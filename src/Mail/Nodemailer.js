@@ -3,13 +3,16 @@ import nodeMailer from 'nodemailer'
 // Configurações do transporter
 const transporter = nodeMailer.createTransport({
     host: 'smtp.gmail.com',
-    port: 465,
-    secure: true,
+    port: 587,
+    secure: false,
     auth: {
-        user: process.env.EMAIL,
-        pass: process.env.EMAIL_PWD
-    }
-})
+      user: process.env.EMAIL_USER,
+      pass: process.env.EMAIL_PWD,
+    },
+    tls: {
+      rejectUnauthorized: false,
+    },
+});
 
 // Função para enviar o email
 async function sendMail(to, subject, text) {
