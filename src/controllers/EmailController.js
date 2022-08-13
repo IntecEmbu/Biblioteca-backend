@@ -2,7 +2,8 @@ import express from 'express'
 import '../Mail/Nodemailer'
 const router = express.Router()
 
-// Teste de envio de email
+// Endpoint: /email/send-email (POST)
+// Description: Send an email
 router.post('/send-email', async (req, res) => {
 
     const {email, subject, text} = req.body
