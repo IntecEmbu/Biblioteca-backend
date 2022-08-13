@@ -1,6 +1,6 @@
 #
 
-# Rota de livros 📚
+# Rota de Livros 📚
 
 > ### Método POST 🕊️
 
@@ -31,7 +31,7 @@
 
 #
 
-# Rota de bibliotecário 📖
+# Rota de Bibliotecário 📖
 
 > ### Método POST 🕊️
 
@@ -68,3 +68,19 @@
 ##### Todos os colaboradores ```.../librian/all-collaborators```
 ##### Colaboradores ativos ```.../librian/collaborators-active```
 ##### Colaboradores inativos ```.../librian/collaborators-inactive```
+
+#
+
+> # 🚧 Rota de Email 🚧
+> ### Rota em testes
+
+> ### Método POST 🕊️
+
+##### Para enviar um email ```.../email/send-email```
+```
+{
+    "email": "email-usuario",
+    "subject": "asssunto",
+    "text": "conteudo"
+}
+```

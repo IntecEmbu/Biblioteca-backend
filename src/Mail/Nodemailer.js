@@ -11,7 +11,7 @@ const transporter = nodeMailer.createTransport({
     },
     tls: {
       rejectUnauthorized: false,
-    },
+    }
 });
 
 // Função para enviar o email
