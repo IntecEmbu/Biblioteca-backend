@@ -13,8 +13,7 @@ router.post('/insert',[
     body('year').not().isEmpty().withMessage('Year is required'),
     body('category').not().isEmpty().withMessage('Category is required'),
     body('cdd').not().isEmpty().withMessage('CDD is required'),
-    body('idiom').not().isEmpty().withMessage('Idiom is required'),
-    body('publisher_name').not().isEmpty().withMessage('Publisher name is required')
+    body('idiom').not().isEmpty().withMessage('Idiom is required')
 ], async (req, res) => {
 
     const errors = validationResult(req)
@@ -24,10 +23,10 @@ router.post('/insert',[
         })
     }
 
-    const {title, edition, isbn, year, category, cdd, idiom, publisher_name} = req.body
+    const {title, edition, isbn, year, category, cdd, idiom} = req.body
 
     try {
-        await db.insertBook({title, edition, isbn, year, category, cdd, idiom, publisher_name})
+        await db.insertBook({title, edition, isbn, year, category, cdd, idiom})
         res.status(200).json({
             message: 'Book inserted successfully'
         })

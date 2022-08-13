@@ -4,11 +4,11 @@ import db from '../Database/Connection.js'
 async function insertBook(data){
     const conn = await db.connect()
 
-    const {title, edition, isbn, year, category, cdd, idiom, publisher_name} = data
+    const {title, edition, isbn, year, category, cdd, idiom} = data
 
     // Depois adicionar os nomes corretos das colunas
-    const sql = 'INSERT INTO tbl_book (book_name, book_edition, book_isbn, release_year, category_name, book_cdd, book_language, publisher_name) VALUES (?, ?, ?, ?, ?, ?, ?, ?)'
-    const values = [title, edition, isbn, year, category, cdd, idiom, publisher_name]
+    const sql = 'INSERT INTO tbl_book (book_name, book_edition, book_isbn, release_year, category_name, book_cdd, book_language) VALUES (?, ?, ?, ?, ?, ?, ?, )'
+    const values = [title, edition, isbn, year, category, cdd, idiom]
 
     await conn.query(sql, values)
 
