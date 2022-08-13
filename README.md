@@ -1,36 +1,4 @@
 #
-
-# Rota de Livros 📚
-
-> ### Método POST 🕊️
-
-
-##### Para inserir um livro use ```.../book/insert```
-``` 
-{
-    "title": "titulo",
-    "edition": "edição/volume",
-    "isbn": "número",
-    "year": "anoLançamento",
-    "category": "categoria",
-    "cdd": "númeroCdd",
-    "idiom": "idioma"
-}
-```
-
-<br>
-
-> ### Método GET 📬
-
-##### Todos os livros cadastrados ```.../book/all```
-##### Quantidade de livros cadastrados ```.../book/all-count```
-##### Todas as categorias ```.../book/all-category```
-##### Livros por nome ```.../book/search-name?name=nome_livro```
-##### Livros por autor ```.../book/search-author?author=nome_autor```
-##### Livros por categoria ```.../book/search/search-category?category=nome_categoria```
-
-#
-
 # Rota de Bibliotecário 📖
 
 > ### Método POST 🕊️
@@ -68,6 +36,41 @@
 ##### Todos os colaboradores ```.../librian/all-collaborators```
 ##### Colaboradores ativos ```.../librian/collaborators-active```
 ##### Colaboradores inativos ```.../librian/collaborators-inactive```
+
+<br>
+
+#
+
+# Rota de Livros 📚
+
+> ### Método POST 🕊️
+
+
+##### Para inserir um livro use ```.../book/insert```
+``` 
+{
+    "title": "titulo",
+    "edition": "edição/volume",
+    "isbn": "número",
+    "year": "anoLançamento",
+    "category": "categoria",
+    "cdd": "númeroCdd",
+    "idiom": "idioma"
+}
+```
+
+<br>
+
+> ### Método GET 📬
+
+##### Todos os livros cadastrados ```.../book/all```
+##### Quantidade de livros cadastrados ```.../book/all-count```
+##### Todas as categorias ```.../book/all-category```
+##### Livros por nome ```.../book/search-name?name=nome_livro```
+##### Livros por autor ```.../book/search-author?author=nome_autor```
+##### Livros por categoria ```.../book/search/search-category?category=nome_categoria```
+
+<br>
 
 #
 
