@@ -10,6 +10,7 @@ VALUES
   (3460,5373,"sodales purus, in molestie","Espanhol","Quadrinho","1989"),
   (6465,7134,"tellus eu augue porttitor","Português","Ação","1978"),
   (6850,3259,"molestie in, tempus eu,","Português","Drama","2010");
+  
 INSERT INTO tbl_book (book_isbn,book_cdd,book_name,book_language,category_name,release_year)
 VALUES
   (6297,5978,"sit amet massa.","Inglês","Ficção","1982"),
@@ -22,6 +23,7 @@ VALUES
   (7268,1123,"et magnis","Português","Fantasia","2013"),
   (9715,2735,"libero et tristique","Português","Quadrinho","2010"),
   (3911,7750,"eu, ultrices sit amet,","Inglês","Ficção","2011");
+  
 INSERT INTO tbl_book (book_isbn,book_cdd,book_name,book_language,category_name,release_year)
 VALUES
   (7119,3622,"blandit congue.","Inglês","Didático","1976"),
@@ -34,6 +36,7 @@ VALUES
   (1758,6571,"Donec consectetuer mauris","Espanhol","Fantasia","1993"),
   (5244,3480,"turpis. Nulla aliquet. Proin","Espanhol","Didático","2022"),
   (7477,2968,"erat. Etiam vestibulum","Inglês","Didático","2006");
+  
 INSERT INTO tbl_book (book_isbn,book_cdd,book_name,book_language,category_name,release_year)
 VALUES
   (3768,5301,"malesuada fringilla est.","Inglês","Ficção","2005"),
@@ -46,6 +49,7 @@ VALUES
   (3176,5761,"pellentesque. Sed","Espanhol","Fantasia","1982"),
   (7832,4107,"nulla. Integer","Português","Drama","2006"),
   (4719,4779,"arcu. Vestibulum ante ipsum","Português","Ação","2010");
+  
 INSERT INTO tbl_book (book_isbn,book_cdd,book_name,book_language,category_name,release_year)
 VALUES
   (3220,4794,"viverra. Donec","Inglês","Didático","1975"),
@@ -58,6 +62,7 @@ VALUES
   (6396,7448,"elit sed","Espanhol","Drama","1991"),
   (4146,1499,"in, dolor. Fusce","Espanhol","Ficção","2017"),
   (7705,5379,"orci.","Espanhol","Ficção","2005");
+  
 INSERT INTO tbl_book (book_isbn,book_cdd,book_name,book_language,category_name,release_year)
 VALUES
   (8346,1417,"condimentum. Donec at arcu.","Inglês","Ficção","2018"),
@@ -70,6 +75,7 @@ VALUES
   (2408,4279,"lorem,","Espanhol","Didático","1995"),
   (4711,7974,"luctus aliquet","Português","Ação","1993"),
   (6997,4760,"Pellentesque ut ipsum","Português","Didático","2014");
+  
 INSERT INTO tbl_book (book_isbn,book_cdd,book_name,book_language,category_name,release_year)
 VALUES
   (6114,1281,"velit","Inglês","Fantasia","1976"),
@@ -82,6 +88,7 @@ VALUES
   (5164,6753,"Aliquam auctor,","Inglês","Fantasia","1997"),
   (9128,1482,"Curae","Espanhol","Didático","1996"),
   (2543,4214,"orci. Ut sagittis","Espanhol","Drama","2015");
+  
 INSERT INTO tbl_book (book_isbn,book_cdd,book_name,book_language,category_name,release_year)
 VALUES
   (8510,1986,"Mauris","Espanhol","Ação","1989"),
@@ -94,6 +101,7 @@ VALUES
   (2539,2824,"ante lectus convallis","Espanhol","Ficção","1975"),
   (8468,7431,"Nunc","Inglês","Didático","2004"),
   (7855,8783,"ipsum. Suspendisse sagittis. Nullam","Inglês","Ficção","1977");
+  
 INSERT INTO tbl_book (book_isbn,book_cdd,book_name,book_language,category_name,release_year)
 VALUES
   (2924,5571,"quam a felis ullamcorper","Português","Drama","2019"),
@@ -106,6 +114,7 @@ VALUES
   (3140,7922,"suscipit","Inglês","Ficção","1990"),
   (3499,6330,"pharetra. Quisque ac","Espanhol","Ficção","2003"),
   (2351,7729,"Praesent luctus.","Inglês","Drama","1979");
+  
 INSERT INTO tbl_book (book_isbn,book_cdd,book_name,book_language,category_name,release_year)
 VALUES
   (5837,9428,"Donec egestas.","Espanhol","Didático","1998"),
@@ -118,6 +127,7 @@ VALUES
   (6756,3290,"dui. Fusce aliquam,","Inglês","Didático","2010"),
   (3314,3147,"commodo","Inglês","Ação","1999"),
   (5848,5044,"id nunc","Espanhol","Fantasia","1979");
+  
 INSERT INTO tbl_book (book_isbn,book_cdd,book_name,book_language,category_name,release_year)
 VALUES
   (9334,8353,"natoque penatibus","Espanhol","Ficção","2017"),
@@ -130,6 +140,7 @@ VALUES
   (1234,9315,"senectus et netus","Espanhol","Didático","1996"),
   (3525,2370,"sodales elit erat","Espanhol","Fantasia","2012"),
   (4304,2351,"nonummy. Fusce fermentum","Inglês","Fantasia","2017");
+  
 INSERT INTO tbl_book (book_isbn,book_cdd,book_name,book_language,category_name,release_year)
 VALUES
   (6499,4803,"ullamcorper viverra. Maecenas iaculis","Português","Drama","1980"),
@@ -142,6 +153,7 @@ VALUES
   (2568,1739,"egestas rhoncus. Proin nisl","Inglês","Drama","2022"),
   (7936,9146,"sollicitudin orci sem","Inglês","Drama","1995"),
   (3038,1198,"augue porttitor interdum.","Inglês","Quadrinho","2006");
+  
 INSERT INTO tbl_book (book_isbn,book_cdd,book_name,book_language,category_name,release_year)
 VALUES
   (5588,3306,"accumsan laoreet","Inglês","Didático","1977"),
@@ -154,6 +166,7 @@ VALUES
   (1847,3111,"quis, tristique","Inglês","Drama","2006"),
   (4876,9691,"cursus vestibulum. Mauris magna.","Inglês","Fantasia","1999"),
   (6025,6569,"elit sed consequat auctor,","Inglês","Ficção","2000");
+  
 INSERT INTO tbl_book (book_isbn,book_cdd,book_name,book_language,category_name,release_year)
 VALUES
   (2981,7393,"aliquet,","Português","Ação","2007"),
@@ -166,6 +179,7 @@ VALUES
   (2622,3533,"aliquam eu,","Português","Quadrinho","1981"),
   (2183,6952,"nec tellus. Nunc","Inglês","Drama","2001"),
   (1155,4373,"ut erat.","Espanhol","Drama","2001");
+  
 INSERT INTO tbl_book (book_isbn,book_cdd,book_name,book_language,category_name,release_year)
 VALUES
   (9892,5032,"Duis mi enim,","Português","Fantasia","1977"),
@@ -178,6 +192,7 @@ VALUES
   (6380,7914,"ipsum primis in","Português","Drama","1996"),
   (3287,4565,"fringilla. Donec feugiat metus","Português","Fantasia","1998"),
   (4961,4349,"enim. Curabitur massa.","Português","Quadrinho","1988");
+  
 INSERT INTO tbl_book (book_isbn,book_cdd,book_name,book_language,category_name,release_year)
 VALUES
   (7916,4136,"Curabitur vel lectus.","Inglês","Ficção","2020"),
@@ -190,6 +205,7 @@ VALUES
   (7373,3122,"nonummy ut,","Espanhol","Didático","1995"),
   (4403,3504,"et pede. Nunc sed","Português","Ficção","2003"),
   (2206,5329,"nec tempus","Inglês","Fantasia","1993");
+  
 INSERT INTO tbl_book (book_isbn,book_cdd,book_name,book_language,category_name,release_year)
 VALUES
   (2885,3320,"scelerisque dui. Suspendisse","Português","Fantasia","1994"),
@@ -202,6 +218,7 @@ VALUES
   (1615,6189,"mollis nec,","Inglês","Ficção","2012"),
   (2522,9135,"tortor, dictum","Espanhol","Ficção","2013"),
   (5879,8456,"Praesent","Inglês","Fantasia","2004");
+  
 INSERT INTO tbl_book (book_isbn,book_cdd,book_name,book_language,category_name,release_year)
 VALUES
   (3464,7651,"vulputate, nisi","Espanhol","Ficção","2014"),
@@ -214,6 +231,7 @@ VALUES
   (2672,9340,"lectus ante","Espanhol","Didático","2008"),
   (6316,2907,"mus. Donec","Inglês","Drama","1978"),
   (7509,5041,"Duis sit amet","Inglês","Fantasia","1982");
+  
 INSERT INTO tbl_book (book_isbn,book_cdd,book_name,book_language,category_name,release_year)
 VALUES
   (6239,2407,"pretium et,","Espanhol","Drama","2003"),
@@ -226,6 +244,7 @@ VALUES
   (8007,7121,"in sodales","Inglês","Ficção","2022"),
   (6647,6219,"parturient montes, nascetur ridiculus","Inglês","Drama","1987"),
   (3513,6115,"eu turpis.","Inglês","Ficção","1994");
+  
 INSERT INTO tbl_book (book_isbn,book_cdd,book_name,book_language,category_name,release_year)
 VALUES
   (1341,1496,"in","Inglês","Ficção","1977"),
