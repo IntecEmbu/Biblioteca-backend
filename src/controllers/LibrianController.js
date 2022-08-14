@@ -23,7 +23,7 @@ router.post('/insert-collaborator',[
     const {name, email, user, passsword} = req.body
 
     try {
-        await db.insertCollaborator({name, email, user, passsword})
+        await db.createCollaborator({name, email, user, passsword})
         res.status(200).json({
             message: 'Voluntary inserted successfully'
         })
@@ -130,7 +130,7 @@ router.get('/all-collaborators', async (req, res) => {
                 data: result
             })
         } else{
-            res.status(400).json({
+            res.status(204).json({
                 message: 'Collaborators not found'
             })
         }
@@ -153,7 +153,7 @@ router.get('/collaborators-active', async (req, res) => {
                 data: result
             })
         } else{
-            res.status(400).json({
+            res.status(204).json({
                 message: 'Collaborators not found'
             })
         }
@@ -176,7 +176,7 @@ router.get('/collaborators-inactive', async (req, res) => {
                 data: result
             })
         } else{
-            res.status(400).json({
+            res.status(204).json({
                 message: 'Collaborators not found'
             })
         }

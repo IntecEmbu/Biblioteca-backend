@@ -44,7 +44,7 @@ router.get('/all', async (req, res) => {
         const results = await db.getAllBooks()
 
         if (results.length === 0){
-            return res.status(404).json({
+            return res.status(204).json({
                 message: 'No books found'
             })
         }
@@ -85,7 +85,7 @@ router.get('/all-category', async (req, res) =>{
         const results = await db.getAllCategory()
 
         if (results.length === 0){
-            return res.status(404).json({
+            return res.status(204).json({
                 message: 'No category found'
             })
         }
@@ -113,7 +113,7 @@ router.get('/search-author', async (req, res) => {
         const results = await db.getBookByAuthor(author)
 
         if (results.length === 0){
-            return res.status(404).json({
+            return res.status(204).json({
                 message: 'No books found'
             })
         }
@@ -139,7 +139,7 @@ router.get('/search-name', async (req, res) => {
         const results = await db.getBookByName(name)
 
         if (results.length === 0){
-            return res.status(404).json({
+            return res.status(204).json({
                 message: 'No books found'
             })
         }
@@ -165,7 +165,7 @@ router.get('/search-category', async (req, res) => {
         const results = await db.getBookByCategory(category)
 
         if (results.length === 0){
-            return res.status(404).json({
+            return res.status(204).json({
                 message: 'No books found'
             })
         }
