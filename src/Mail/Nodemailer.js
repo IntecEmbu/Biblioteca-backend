@@ -4,7 +4,7 @@ import nodeMailer from 'nodemailer'
 // Função para enviar o email
 async function sendMail(to, subject, text) {
 
-  // Configurações do transporter
+  // Transporter for Gmail
   const transporter = nodeMailer.createTransport({
       host: 'smtp.gmail.com',
       port: 465,
@@ -18,7 +18,7 @@ async function sendMail(to, subject, text) {
       }
   });
   
-  // Configurações do email
+  // Congig mail
   const mailOptions = {
       from: process.env.EMAIL_USER,
       to,
