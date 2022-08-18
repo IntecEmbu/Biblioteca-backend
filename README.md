@@ -82,7 +82,7 @@
 ##### Para enviar um email ```.../email/send-email```
 ```
 {
-    "email": "email-usuario",
+    "to": "email-usuario",
     "subject": "asssunto",
     "text": "conteudo"
 }
