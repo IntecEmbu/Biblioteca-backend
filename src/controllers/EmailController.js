@@ -6,23 +6,16 @@ const router = express.Router()
 
 // Endpoint: /email/send-email (POST)
 // Description: Send an email
-router.post('/send-email',[
-    body('email').not().isEmpty().withMessage('Email is required'),
-    body('subject').not().isEmpty().withMessage('Subject is required'),
-    body('text').not().isEmpty().withMessage('Text is required')
-], async (req, res) => {
+router.get('/send-email', async (req, res) => {
 
-    const errors = validationResult(req)
-    if(!errors.isEmpty()){
-        return res.status(400).json({
-            errors: errors.array()
-        })
-    }
 
-    const {email, subject, text} = req.body
+    const email = 'email@gmail.com'
+    const subject = 'Teste de envio de email'
+    const text = 'Teste de envio de email'
 
     try {
         await nm.sendMail(email, subject, text)
+
         res.status(200).json({
             message: 'Email sent successfully'
         })
