@@ -18,6 +18,7 @@ async function sendMail(to, subject, text) {
       }
   });
   
+  // Configurações do email
   const mailOptions = {
       from: process.env.EMAIL_USER,
       to,
