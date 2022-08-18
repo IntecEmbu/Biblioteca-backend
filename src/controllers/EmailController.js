@@ -7,7 +7,7 @@ const router = express.Router()
 // Endpoint: /email/send-email (POST)
 // Description: Send an email
 router.post('/send-email',[
-    body('to').isEmail().withMessage('Email is not valid'),
+    body('email').isEmail().withMessage('email is not valid'),
     body('subject').isString().withMessage('Subject is not valid'),
     body('text').isString().withMessage('Text is not valid')
 ], async (req, res) => {
@@ -17,6 +17,8 @@ router.post('/send-email',[
         return res.status(400).json({ errors: errors.array() })
     }
 
+    const {email, subject, text} = req.body
+    
     try {
         await nm.sendMail(email, subject, text)
 
