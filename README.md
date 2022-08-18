@@ -75,7 +75,7 @@
 #
 
 > # 🚧 Rota de Email 🚧
-> ### Rota em testes
+> ### Rota em testes - Funcionando 🚀
 
 > ### Método POST 🕊️
 
