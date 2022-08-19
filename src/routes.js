@@ -9,8 +9,9 @@ router.use('/librian', librian)
 
 router.use('*', (req, res) => {
     res.status(404).json({
-        notfound: 'verify on github the endpoints',
-        by: '@BibliON'
+        notfound: 'Verifique os endpoints',
+        url: req.originalUrl,
+        method: req.method
     })
 })
 

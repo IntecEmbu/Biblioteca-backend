@@ -1,6 +1,6 @@
 import nodeMailer from 'nodemailer'
 
-// Create defalt transporter for Gmail
+// Cria um transporter para o envio de emails
 function createTransporter(){
   return nodeMailer.createTransport({
     host: 'smtp.gmail.com',
@@ -16,7 +16,7 @@ function createTransporter(){
   });
 }
 
-// For send email with text
+// Envia email com texto simples
 async function sendMailText(to, subject, text) {
 
   const transporter = createTransporter()
@@ -32,7 +32,7 @@ async function sendMailText(to, subject, text) {
 }
 
 
-// For send email with html
+// Envia email com html 
 async function sendMailHTML(to, subject, html) {
 
   const transporter = createTransporter()

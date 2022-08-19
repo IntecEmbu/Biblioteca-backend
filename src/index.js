@@ -3,7 +3,7 @@ import express from 'express'
 import routes from './routes.js'
 import cors from 'cors'
 
-config() // Load .env file
+config() // Carrega as variáveis de ambiente do .env
 
 const api = express()
 const port = process.env.PORT || 3333

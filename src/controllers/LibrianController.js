@@ -5,7 +5,7 @@ import { body, validationResult } from 'express-validator'
 const router = express.Router()
 
 // Endpoint: /librian/insert-collaborator (POST)
-// Description: Insert a new librian
+// Descrição: Cadastra um colaborador no banco de dados
 router.post('/insert-collaborator',[
     body('name').not().isEmpty().withMessage('Name is required'),
     body('email').not().isEmpty().withMessage('Email is required'),
@@ -36,7 +36,7 @@ router.post('/insert-collaborator',[
 })
 
 // Endpoint: /librian/login-collaborator (POST)
-// Description: Login a librian
+// Descrição: Login de um colaborador no sistema
 router.post('/login-collaborator',[
     body('login').not().isEmpty().withMessage('Email is required'),
     body('password').not().isEmpty().withMessage('Password is required')
@@ -72,7 +72,7 @@ router.post('/login-collaborator',[
 })
 
 // Endpoint: /librian/status-collaborator (POST)
-// Description: change status of a librian
+// Descrição: Altera o status de um colaborador 
 router.post('/status-collaborator',[
     body('id').not().isEmpty().withMessage('Id is required'),
     body('newStatus').not().isEmpty().withMessage('Status is required')
@@ -119,7 +119,7 @@ router.post('/status-collaborator',[
 
 
 // Endpoint: /librian/get-all-collaborators (GET)
-// Description: get all collaborators
+// Descrição: Retorna todos os colaboradores
 router.get('/all-collaborators', async (req, res) => {
     try {
         const result = await db.getAllCollaborators()
@@ -142,7 +142,7 @@ router.get('/all-collaborators', async (req, res) => {
 })
 
 // Endpoint: /librian/get-collaborator-active (GET)
-// Description: get all collaborators active
+// Descrição: Retorna todos os colaboradores ativos
 router.get('/collaborators-active', async (req, res) => {
     try {
         const result = await db.getActivatedCollaborators()
@@ -165,7 +165,7 @@ router.get('/collaborators-active', async (req, res) => {
 })
 
 // Endpoint: /librian/get-collaborator-inactive (GET)
-// Description: get all collaborators inactive
+// Descrição: Retorna todos os colaboradores inativos
 router.get('/collaborators-inactive', async (req, res) => {
     try {
         const result = await db.getDesactivatedCollaborators()

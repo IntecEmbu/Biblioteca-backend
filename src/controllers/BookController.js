@@ -5,7 +5,7 @@ import { body, validationResult } from 'express-validator'
 const router = express.Router()
 
 // Endpoint: /book/insert (POST)
-// Description: Insert a new book
+// Descrição: Cadastra um livro no banco de dados
 router.post('/insert',[
     body('title').not().isEmpty().withMessage('Title is required'),
     body('edition').not().isEmpty().withMessage('Edition is required'),
@@ -39,7 +39,7 @@ router.post('/insert',[
 })
 
 // Endpoint: /book/all (GET)
-// Description: Get all books
+// Descrição: Retorna todos os livros
 router.get('/all', async (req, res) => {
     try {
         const results = await db.getAllBooks()
@@ -63,7 +63,7 @@ router.get('/all', async (req, res) => {
 
 
 // Endpoint: /book/all-count (GET)
-// Description: Get all books count
+// Decrição: Conta todos os livros
 router.get('/all-count', async (req, res) => {
     try {
         const results = await db.getCountBooks()
@@ -80,7 +80,7 @@ router.get('/all-count', async (req, res) => {
 })
 
 // Endpoint: /book/all-category (GET)
-// Description: Get all category registered
+// Descrição: Busca todas as categorias de livros
 router.get('/all-category', async (req, res) =>{
     try {
         const results = await db.getAllCategory()
@@ -106,7 +106,7 @@ router.get('/all-category', async (req, res) =>{
 
 
 // Endpoint: /book/search-author (GET)
-// Description: Get all books by author
+// Descrição: Busca um livro pelo autor
 router.get('/search-author', async (req, res) => {
     const {author} = req.query
 
@@ -132,7 +132,7 @@ router.get('/search-author', async (req, res) => {
 
 
 // Endpoint: /book/search-name (GET)
-// Description: Get all books by name
+// Descrição: Busca um livro pelo nome
 router.get('/search-name', async (req, res) => {
     const {name} = req.query
 
@@ -158,7 +158,7 @@ router.get('/search-name', async (req, res) => {
 
 
 // Endpoint: /book/search-category (GET)
-// Description: Get all books by category
+// Descrição: Busca um livro pelo categoria
 router.get('/search-category', async (req, res) => {
     const {category} = req.query
 

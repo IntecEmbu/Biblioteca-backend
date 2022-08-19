@@ -6,7 +6,6 @@ async function insertBook(data){
 
     const {title, edition, isbn, year, category, cdd, idiom, author} = data
 
-    // Depois adicionar os nomes corretos das colunas
     const sql = 'INSERT INTO tbl_book (book_name, book_edition, book_isbn, release_year, category_name, book_cdd, book_language, book_author) VALUES (?, ?, ?, ?, ?, ?, ?, ?)'
     const values = [title, edition, isbn, year, category, cdd, idiom, author]
 
