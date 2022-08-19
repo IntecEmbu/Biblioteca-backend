@@ -1,5 +1,6 @@
-#
-# Rota de Bibliotecário 📖
+# Rotas 🛣️ 
+
+## Rota de Bibliotecário 📖
 
 > ### Método POST 🕊️
 
@@ -41,7 +42,7 @@
 
 #
 
-# Rota de Livros 📚
+## Rota de Livros 📚
 
 > ### Método POST 🕊️
 
@@ -71,17 +72,29 @@
 ##### Livros por categoria ```.../book/search/search-category?category=nome_categoria```
 
 <br>
+<br>
 
-#
+# Funcionalidades internas 🛠️
 
-> # 🚧 Funcionalidade de E-mail 🚧
+
+
+> ## 🚧 Funcionalidade de E-mail 🚧
 > ### Em testes - Funcionando 🚀
 
-##### Para enviar um email
+##### Para enviar um email com somente texto
 ```
 {
     "email": "email-usuario",
     "subject": "asssunto",
     "text": "conteudo"
+}
+```
+
+##### Para enviar um email com html
+```
+{
+    "email": "email-usuario",
+    "subject": "asssunto",
+    "html": "conteudo"
 }
 ```
