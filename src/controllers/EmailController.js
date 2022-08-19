@@ -1,5 +1,5 @@
 import express from 'express'
-import nm from '../Mail/Nodemailer.js'
+import nm from '../services/Nodemailer.js'
 import { body, validationResult } from 'express-validator'
 
 const router = express.Router()
