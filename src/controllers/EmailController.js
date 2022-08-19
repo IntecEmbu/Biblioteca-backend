@@ -6,7 +6,7 @@ const router = express.Router()
 
 // Endpoint: /email/send-email (POST)
 // Description: Send an email
-router.post('/send-email',[
+router.post('/send',[
     body('email').isEmail().withMessage('email is not valid'),
     body('subject').isString().withMessage('Subject is not valid'),
     body('text').isString().withMessage('Text is not valid')

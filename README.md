@@ -74,15 +74,13 @@
 
 #
 
-> # 🚧 Rota de Email 🚧
-> ### Rota em testes - Funcionando 🚀
+> # 🚧 Funcionalidade de E-mail 🚧
+> ### Em testes - Funcionando 🚀
 
-> ### Método POST 🕊️
-
-##### Para enviar um email ```.../email/send-email```
+##### Para enviar um email
 ```
 {
-    "to": "email-usuario",
+    "email": "email-usuario",
     "subject": "asssunto",
     "text": "conteudo"
 }
