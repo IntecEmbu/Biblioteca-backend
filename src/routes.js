@@ -9,7 +9,7 @@ router.use('/librian', librian)
 
 router.use('*', (req, res) => {
     res.status(404).json({
-        notfound: 'Verifique os endpoints',
+        message: 'Verifique os endpoints',
         url: req.originalUrl,
         method: req.method
     })
