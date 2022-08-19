@@ -10,7 +10,7 @@ router.post('/insert-collaborator',[
     body('name').not().isEmpty().withMessage('Name is required'),
     body('email').not().isEmpty().withMessage('Email is required'),
     body('password').not().isEmpty().withMessage('Password is required'),
-    body('user').not().isEmpty().withMessage('User is required')
+    body('login').not().isEmpty().withMessage('Login is required')
 ], async (req, res) => {
 
     const errors = validationResult(req)
@@ -20,10 +20,10 @@ router.post('/insert-collaborator',[
         })
     }
 
-    const {name, email, user, passsword} = req.body
+    const {name, email, login, passsword} = req.body
 
     try {
-        await db.createCollaborator({name, email, user, passsword})
+        await db.createCollaborator({name, email, login, passsword})
         res.status(200).json({
             message: 'Voluntary inserted successfully'
         })
@@ -38,7 +38,7 @@ router.post('/insert-collaborator',[
 // Endpoint: /librian/login-collaborator (POST)
 // Description: Login a librian
 router.post('/login-collaborator',[
-    body('user').not().isEmpty().withMessage('Email is required'),
+    body('login').not().isEmpty().withMessage('Email is required'),
     body('password').not().isEmpty().withMessage('Password is required')
 ], async (req, res) => {
 
@@ -49,10 +49,10 @@ router.post('/login-collaborator',[
         })
     }
 
-    const {user, password} = req.body
+    const {login, password} = req.body
 
     try{
-        const result = await db.loginCollaborator({user, password})
+        const result = await db.loginCollaborator({login, password})
 
         if(result.length > 0){
             res.status(200).json({

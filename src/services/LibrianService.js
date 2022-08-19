@@ -4,11 +4,11 @@ import db from '../Database/Connection.js'
 async function createCollaborator(data){
   const conn = await db.connect()
 
-  const {name, email, password, user} = data
+  const {name, email, password, login} = data
 
-  const sql = 'INSERT INTO tbl_librian (librian_name, librian_email, librian_password, librian_user, librian_type) values (?, ?, ?, ?, ?)'
+  const sql = 'INSERT INTO tbl_librian (librian_name, librian_email, librian_password, librian_login, librian_type, librian_status), values (?, ?, ?, ?, ?, ?)'
 
-  const values = [name, email, password, user, 'Colaborador']
+  const values = [name, email, password, login, 'Colaborador', 'Ativo']
 
   await conn.query(sql, values)
 
@@ -19,11 +19,11 @@ async function createCollaborator(data){
 async function loginCollaborator(data){
   const conn = await db.connect()
 
-  const {user, password} = data
+  const {login, password} = data
 
-  const sql = 'SELECT * From tbl_librian where librian_user = ? and librian_password = ? and librian_status = ?'
+  const sql = 'SELECT * From tbl_librian where librian_login = ? and librian_password = ? and librian_status = ?'
 
-  const values = [user, password, 'Ativo']
+  const values = [login, password, 'Ativo']
 
   const [rows] = await conn.query(sql, values)
 
