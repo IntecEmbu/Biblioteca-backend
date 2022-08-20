@@ -56,3 +56,22 @@ router.get('/get-all', async (req, res) => {
         })
     }
 })
+
+// Endpoint: /user/search-user (GET)
+// Descrição: Pesquisa usuarios pelo nome
+router.get('/search-user', async (req, res) => {
+    const {name} = req.query
+
+    try {
+        const users = await db.searchUserByName(name)
+        res.status(200).json({
+            users
+        })
+    } catch(error){
+        return res.status(500).json({
+            DatabaseError: error.message
+        })
+    }
+})
+
+export default router
