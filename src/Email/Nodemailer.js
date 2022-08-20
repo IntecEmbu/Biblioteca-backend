@@ -13,38 +13,28 @@ function createTransporter(){
     tls: {
       rejectUnauthorized: false
     }
-  });
+  })
 }
 
 // Envia email com texto simples
 async function sendMailText(to, subject, text) {
-
-  const transporter = createTransporter()
-  
-  const mailOptions = {
-    from: process.env.EMAIL_USER,
-    to,
-    subject,
-    text
-  }
-
-  await transporter.sendMail(mailOptions)
+  return createTransporter().sendMail({
+        from: process.env.EMAIL_USER,
+        to,
+        subject,
+        text
+    })
 }
 
 
 // Envia email com html 
-async function sendMailHTML(to, subject, html) {
-
-  const transporter = createTransporter()
-
-  const mailOptions = {
-    from: process.env.EMAIL_USER,
-    to,
-    subject,
-    html
-  }
-
-  await transporter.sendMail(mailOptions)
+function sendMailHTML(to, subject, html){
+    return createTransporter().sendMail({
+        from: process.env.EMAIL_USER,
+        to,
+        subject,
+        html
+    })
 }
 
 
