@@ -4,7 +4,7 @@
 
 > ### Método POST 🕊️
 
-##### Para inserir um voluntário use ```.../librian/insert-collaborator```
+##### Inserir um voluntário use ```.../librian/insert-collaborator```
 ```
 {
     "name": "nome-colaborador",
@@ -70,6 +70,30 @@
 ##### Livros por nome ```.../book/search-name?name=nome_livro```
 ##### Livros por autor ```.../book/search-author?author=nome_autor```
 ##### Livros por categoria ```.../book/search/search-category?category=nome_categoria```
+
+<br>
+
+#
+## Rota de Usuário
+
+> ### Método POST 🕊️
+
+##### Inserir um novo usuário ```.../user/insert```
+```
+    "name": "nome-usuario",
+    "email": "email-usuario",
+    "type": "Funcionario/aluno",
+    "phone": "telefone-usuario",
+    "course": "curso-usuario"
+```
+
+<br>
+
+> ### Método GET 📬
+
+##### Coletar todos os usuários ```.../user/all```
+#
+
 
 <br>
 <br>

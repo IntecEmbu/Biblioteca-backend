@@ -6,7 +6,7 @@ const router = express.Router()
 
 // Endpoint: /user/insert-user (POST)
 // Descrição: Cadastra um usuario no banco de dados
-router.post('/insert-user',[
+router.post('/insert',[
     body('name').not().isEmpty().withMessage('Name is required'),
     body('email').not().isEmpty().withMessage('Email is required'),
     body('type').not().isEmpty().withMessage('Type is required'),
