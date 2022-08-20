@@ -23,6 +23,7 @@ router.post('/insert-user',[
 
     const {name, email, type, phone, course} = req.body
 
+    // Verifica se o tipo de usuario é valido
     if(type != 'Aluno' || type != 'Funcionario'){
         return res.status(400).json({
             message: 'Type must be Aluno or Funcionario'
