@@ -28,7 +28,21 @@ async function getAllUsers(){
     return rows
 }
 
+// Pesquisa usuarios pelo nome
+async function searchUserByName(name){
+    const conn = await db.connect()
+
+    const sql = 'SELECT * From tbl_user where user_name = ?'
+
+    const [rows] = await conn.query(sql, name)
+
+    conn.end()
+
+    return rows
+}
+
 export default {
     createUser,
-    getAllUsers
+    getAllUsers,
+    searchUserByName
 }
