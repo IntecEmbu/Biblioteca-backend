@@ -92,10 +92,10 @@
 > ### Método GET 📬
 
 ##### Coletar todos os usuários ```.../user/all```
+##### Pesquisa usuário por nome ```.../user/search-user?name=nomeUsuario``` 
+
 #
 
-
-<br>
 <br>
 
 # Funcionalidades internas 🛠️
