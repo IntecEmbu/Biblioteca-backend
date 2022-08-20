@@ -38,7 +38,6 @@
 ##### Colaboradores ativos ```.../librian/collaborators-active```
 ##### Colaboradores inativos ```.../librian/collaborators-inactive```
 
-<br>
 
 #
 
@@ -70,8 +69,6 @@
 ##### Livros por nome ```.../book/search-name?name=nome_livro```
 ##### Livros por autor ```.../book/search-author?author=nome_autor```
 ##### Livros por categoria ```.../book/search/search-category?category=nome_categoria```
-
-<br>
 
 #
 ## Rota de Usuário
