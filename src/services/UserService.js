@@ -14,3 +14,21 @@ async function createUser(data){
 
     conn.end()
 }
+
+// Coleta todos os usuarios cadastrados
+async function getAllUsers(){
+    const conn = await db.connect()
+
+    const sql = 'SELECT * From tbl_user'
+
+    const [rows] = await conn.query(sql)
+
+    conn.end()
+
+    return rows
+}
+
+export default {
+    createUser,
+    getAllUsers
+}
