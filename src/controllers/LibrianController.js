@@ -27,8 +27,7 @@ router.post('/insert-collaborator',[
         res.status(200).json({
             message: 'Voluntary inserted successfully'
         })
-    }
-    catch(error){
+    } catch(error){
         return res.status(500).json({
             DatabaseError: error.message
         })
