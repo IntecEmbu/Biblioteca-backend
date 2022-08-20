@@ -41,3 +41,18 @@ router.post('/insert',[
         })
     }
 })
+
+// Endpoint: /user/get-all (GET)
+// Descrição: Coleta todos os usuarios cadastrados
+router.get('/get-all', async (req, res) => {
+    try {
+        const users = await db.getAllUsers()
+        res.status(200).json({
+            users
+        })
+    } catch(error){
+        return res.status(500).json({
+            DatabaseError: error.message
+        })
+    }
+})
