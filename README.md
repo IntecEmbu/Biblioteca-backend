@@ -110,8 +110,7 @@
 #### Devolver um livro ```.../lending/return-book```
 ```
 {
-    "lending_id": "id-emprestimo",
-    "return_date": "data-retorno"
+    "lending_id": "id-emprestimo"
 }
 ```
 
