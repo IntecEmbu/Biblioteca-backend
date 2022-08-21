@@ -148,4 +148,5 @@
 ```
 
 ## [API Auxiliar](https://github.com/pedroFnseca/Subprocess-API) 📈
-> #### Responsavel por realizar os emails automaticamente para os usuarios quando estiver proximo da data de devolução do livro, realizando processamentos de rotina. 
+> #### Envio emails automaticamente para os usuarios quando estiver proximo da data de devolução do livro, realizando processamentos de rotina.
+> #### Verificação e aplicação de multa para os usuarios que não devolveram o livro dentro do tempo estipulado.
