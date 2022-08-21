@@ -43,8 +43,22 @@ async function getAllNotReturned(){
     return rows
 }
 
+// Retorna todos os emprestimos
+async function getAll(){
+    const conn = await db.connect()
+
+    const sql = 'SELECT * FROM tbl_lending'
+
+    const [rows] = await conn.query(sql)
+
+    conn.end()
+
+    return rows
+}
+
 export default{
     createLending,
     returnBook,
-    getAllNotReturned
+    getAllNotReturned,
+    getAll
 }

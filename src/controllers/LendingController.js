@@ -88,4 +88,30 @@ router.get('/not-returned', async (req, res) => {
     }
 })
 
+// Endpoint: /all (GET)
+// Descrição: Lista todos os emprestimos
+router.get('/all', async (req, res) => {
+
+    try {
+        const result = await db.getAll()
+
+        if(result.length > 0){
+            return res.status(204).json({
+                message: 'All found',
+                data: result
+            })
+        }
+
+        res.status(200).json({
+            message: 'All list',
+            data: result
+        })
+
+    } catch(error){
+        return res.status(500).json({
+            DatabaseError: error.message
+        })
+    }
+})
+
 export default router
