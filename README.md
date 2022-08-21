@@ -77,11 +77,13 @@
 
 ##### Inserir um novo usuário ```.../user/insert```
 ```
+{
     "name": "nome-usuario",
     "email": "email-usuario",
     "type": "Funcionario/aluno",
     "phone": "telefone-usuario",
     "course": "curso-usuario"
+}
 ```
 
 <br>
@@ -92,6 +94,34 @@
 ##### Pesquisa usuário por nome ```.../user/search-user?name=nomeUsuario``` 
 
 #
+## Rota de Empréstimo
+
+> ### Método POST 🕊️
+##### Inserir um novo emprestimo ```.../lending/insert```
+```
+{
+    "librian_id": "id-bibliotecario",
+    "book_id": "id-livro",
+    "user_id": "id-usuário",
+    "withdraw_date": "data-emprestimo"
+}
+```
+
+##### Devolver um livro ```.../lending/return-book```
+```
+{
+    "lending_id": "id-emprestimo",
+    "return_date": "data-retorno"
+}
+```
+
+
+<br>
+
+> ### Método GET 📬
+
+##### Livros não devolvidos ```.../lending/not-returned```
+##### Todos os empréstimos ```.../lending/all```
 
 <br>
 

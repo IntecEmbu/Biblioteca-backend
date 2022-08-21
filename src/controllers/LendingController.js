@@ -4,9 +4,9 @@ import { body, validationResult } from 'express-validator'
 
 const router = express.Router()
 
-// Endpoint: / (POST)
+// Endpoint: /insert (POST)
 // Descrição: Cadastra um emprestimo no banco de dados
-router.post('/',[
+router.post('/insert',[
     body('librian_id').not().isEmpty().withMessage('Librarian id is required'),
     body('book_id').not().isEmpty().withMessage('Book id is required'),
     body('user_id').not().isEmpty().withMessage('User id is required'),
@@ -36,7 +36,7 @@ router.post('/',[
 
 // Endpoint: /return-book (UPDATE)
 // Descrição: Devolve um livro
-router.put('/return-book',[
+router.post('/return-book',[
     body('lending_id').not().isEmpty().withMessage('Lending id is required'),
     body('return_date').not().isEmpty().withMessage('Return date is required')
 ], async (req, res) => {
