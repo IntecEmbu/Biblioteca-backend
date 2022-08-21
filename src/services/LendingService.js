@@ -2,13 +2,13 @@ import db from '../Database/Connection.js'
 
 // Realiza o emprestimo de livros
 async function createLending(data){
-    const {librian_id, book_id, user_id, withdraw_date, return_date} = data
+    const {librarian_id, book_id, user_id} = data
 
     const conn = await db.connect()
 
-    const sql = 'INSERT INTO tbl_lending (FK_librarian, FK_book, FK_user, withdraw_date) values (?, ?, ?, ?)'
+    const sql = 'INSERT INTO tbl_lending (FK_librarian, FK_book, FK_user, withdraw_date) values (?, ?, ?, (SELECT NOW()))'
 
-    const values = [librian_id, book_id, user_id, withdraw_date]
+    const values = [librarian_id, book_id, user_id]
 
     await conn.query(sql, values)
 
@@ -16,14 +16,13 @@ async function createLending(data){
 }
 
 // Devolve um livro
-async function returnBook(data){
-    const {lending_id, return_date} = data
+async function returnBook(lending_id){
 
     const conn = await db.connect()
 
-    const sql = 'UPDATE tbl_lending SET return_date = ? WHERE id = ?'
+    const sql = 'UPDATE tbl_lending SET return_date = (SELECT NOW()) WHERE lending_code = ?'
 
-    const values = [return_date, lending_id]
+    const values = [lending_id]
 
     await conn.query(sql, values)
 

@@ -7,10 +7,9 @@ const router = express.Router()
 // Endpoint: /insert (POST)
 // Descrição: Cadastra um emprestimo no banco de dados
 router.post('/insert',[
-    body('librian_id').not().isEmpty().withMessage('Librarian id is required'),
+    body('librarian_id').not().isEmpty().withMessage('Librarian id is required'),
     body('book_id').not().isEmpty().withMessage('Book id is required'),
-    body('user_id').not().isEmpty().withMessage('User id is required'),
-    body('withdraw_date').not().isEmpty().withMessage('Withdraw date is required')
+    body('user_id').not().isEmpty().withMessage('User id is required')
 ], async (req, res) => {
 
     const errors = validationResult(req)
@@ -20,10 +19,10 @@ router.post('/insert',[
         })
     }
 
-    const {librian_id, book_id, user_id, withdraw_date, return_date} = req.body
+    const {librarian_id, book_id, user_id} = req.body
 
     try {
-        await db.createLending({librian_id, book_id, user_id, withdraw_date, return_date})
+        await db.createLending({librarian_id, book_id, user_id})
         res.status(200).json({
             message: 'Lending created successfully'
         })
@@ -37,8 +36,7 @@ router.post('/insert',[
 // Endpoint: /return-book (UPDATE)
 // Descrição: Devolve um livro
 router.post('/return-book',[
-    body('lending_id').not().isEmpty().withMessage('Lending id is required'),
-    body('return_date').not().isEmpty().withMessage('Return date is required')
+    body('lending_id').not().isEmpty().withMessage('Lending id is required')
 ], async (req, res) => {
 
     const errors = validationResult(req)
@@ -48,10 +46,10 @@ router.post('/return-book',[
         })
     }
 
-    const {lending_id, return_date} = req.body
+    const {lending_id} = req.body
 
     try {
-        await db.returnBook({lending_id, return_date})
+        await db.returnBook(lending_id)
         res.status(200).json({
             message: 'Book returned successfully'
         })
