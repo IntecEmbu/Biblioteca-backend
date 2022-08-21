@@ -94,7 +94,7 @@
 ##### Pesquisa usuário por nome ```.../user/search-user?name=nomeUsuario``` 
 
 #
-## Rota de Empréstimo
+## Rota de Empréstimo 🏁
 
 > ### Método POST 🕊️
 ##### Inserir um novo emprestimo ```.../lending/insert```
