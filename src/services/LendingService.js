@@ -2,13 +2,13 @@ import db from '../Database/Connection.js'
 
 // Realiza o emprestimo de livros
 async function createLending(data){
-    const {librarian_id, book_id, user_id} = data
+    const {librarian_id, book_id, user_id, return_prediction} = data
 
     const conn = await db.connect()
 
-    const sql = 'INSERT INTO tbl_lending (FK_librarian, FK_book, FK_user, withdraw_date) values (?, ?, ?, (SELECT NOW()))'
+    const sql = 'INSERT INTO tbl_lending (FK_librarian, FK_book, FK_user, withdraw_date, return_prediction) values (?, ?, ?, (SELECT NOW()), (SELECT NOW() + INTERVAL ? DAY))'
 
-    const values = [librarian_id, book_id, user_id]
+    const values = [librarian_id, book_id, user_id, return_prediction]
 
     await conn.query(sql, values)
 

@@ -103,7 +103,7 @@
     "librian_id": "id-bibliotecario",
     "book_id": "id-livro",
     "user_id": "id-usuário",
-    "withdraw_date": "data-emprestimo"
+    "return_prediction": "dias-emprestimo"
 }
 ```
 
