@@ -126,8 +126,6 @@
 
 # Funcionalidades internas 🛠️
 
-
-
 > ## 🚧 Funcionalidade de E-mail 🚧
 > ### Em testes - Funcionando 🚀
 
@@ -148,3 +146,6 @@
     "html": "conteudo"
 }
 ```
+
+## [API Auxiliar](https://github.com/pedroFnseca/Subprocess-API) 📈
+> #### Responsavel por realizar os emails automaticamente para os usuarios quando estiver proximo da data de devolução do livro, realizando processamentos de rotina. 
