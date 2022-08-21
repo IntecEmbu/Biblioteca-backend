@@ -4,7 +4,7 @@
 
 > ### Método POST 🕊️
 
-##### Inserir um voluntário use ```.../librian/insert-collaborator```
+#### Inserir um voluntário use ```.../librian/insert-collaborator```
 ```
 {
     "name": "nome-colaborador",
@@ -14,7 +14,7 @@
 }
 ```
 
-##### Para fazer login use ```.../librian/login-collaborator```
+#### Para fazer login use ```.../librian/login-collaborator```
 ```
 {
     "login": "nomeLogin-colaborador",
@@ -22,7 +22,7 @@
 }
 ```
 
-##### Para mudar status do colaborador (ativo / inativo) ```.../librian/status-collaborator```
+#### Para mudar status do colaborador (ativo / inativo) ```.../librian/status-collaborator```
 ```
 {
     "id": "id-colaborador",
@@ -34,9 +34,9 @@
 
 > ### Método GET 📬
 
-##### Todos os colaboradores ```.../librian/all-collaborators```
-##### Colaboradores ativos ```.../librian/collaborators-active```
-##### Colaboradores inativos ```.../librian/collaborators-inactive```
+#### Todos os colaboradores ```.../librian/all-collaborators```
+#### Colaboradores ativos ```.../librian/collaborators-active```
+#### Colaboradores inativos ```.../librian/collaborators-inactive```
 
 
 #
@@ -46,7 +46,7 @@
 > ### Método POST 🕊️
 
 
-##### Para inserir um livro use ```.../book/insert```
+#### Para inserir um livro use ```.../book/insert```
 ``` 
 {
     "title": "titulo",
@@ -63,19 +63,19 @@
 
 > ### Método GET 📬
 
-##### Todos os livros cadastrados ```.../book/all```
-##### Quantidade de livros cadastrados ```.../book/all-count```
-##### Todas as categorias ```.../book/all-category```
-##### Livros por nome ```.../book/search-name?name=nome_livro```
-##### Livros por autor ```.../book/search-author?author=nome_autor```
-##### Livros por categoria ```.../book/search/search-category?category=nome_categoria```
+#### Todos os livros cadastrados ```.../book/all```
+#### Quantidade de livros cadastrados ```.../book/all-count```
+#### Todas as categorias ```.../book/all-category```
+#### Livros por nome ```.../book/search-name?name=nome_livro```
+#### Livros por autor ```.../book/search-author?author=nome_autor```
+#### Livros por categoria ```.../book/search/search-category?category=nome_categoria```
 
 #
 ## Rota de Usuário
 
 > ### Método POST 🕊️
 
-##### Inserir um novo usuário ```.../user/insert```
+#### Inserir um novo usuário ```.../user/insert```
 ```
 {
     "name": "nome-usuario",
@@ -90,14 +90,14 @@
 
 > ### Método GET 📬
 
-##### Coletar todos os usuários ```.../user/all```
-##### Pesquisa usuário por nome ```.../user/search-user?name=nomeUsuario``` 
+#### Coletar todos os usuários ```.../user/all```
+#### Pesquisa usuário por nome ```.../user/search-user?name=nomeUsuario``` 
 
 #
 ## Rota de Empréstimo
 
 > ### Método POST 🕊️
-##### Inserir um novo emprestimo ```.../lending/insert```
+#### Inserir um novo emprestimo ```.../lending/insert```
 ```
 {
     "librian_id": "id-bibliotecario",
@@ -107,7 +107,7 @@
 }
 ```
 
-##### Devolver um livro ```.../lending/return-book```
+#### Devolver um livro ```.../lending/return-book```
 ```
 {
     "lending_id": "id-emprestimo",
@@ -120,8 +120,8 @@
 
 > ### Método GET 📬
 
-##### Livros não devolvidos ```.../lending/not-returned```
-##### Todos os empréstimos ```.../lending/all```
+#### Livros não devolvidos ```.../lending/not-returned```
+#### Todos os empréstimos ```.../lending/all```
 
 <br>
 
@@ -132,7 +132,7 @@
 > ## 🚧 Funcionalidade de E-mail 🚧
 > ### Em testes - Funcionando 🚀
 
-##### Para enviar um email com somente texto
+#### Para enviar um email com somente texto
 ```
 {
     "email": "email-usuario",
@@ -141,7 +141,7 @@
 }
 ```
 
-##### Para enviar um email com html
+#### Para enviar um email com html
 ```
 {
     "email": "email-usuario",
