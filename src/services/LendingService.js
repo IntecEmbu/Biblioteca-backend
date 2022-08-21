@@ -31,6 +31,7 @@ async function returnBook(lending_id){
 
 // Retorna todos os emprestimos não devolvidos
 async function getAllNotReturned(){
+    
     const conn = await db.connect()
 
     const sql = 'SELECT * FROM tbl_lending WHERE return_date IS NULL'
