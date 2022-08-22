@@ -1,4 +1,4 @@
-import db from '../Database/Connection.js'
+import db from '../database/connection.js'
 
 // Realiza o cadastro de usuarios 
 async function createUser(data){

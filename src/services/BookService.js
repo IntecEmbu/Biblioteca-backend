@@ -1,4 +1,4 @@
-import db from '../Database/Connection.js'
+import db from '../database/connection.js'
 
 // Insere um novo livro no banco de dados
 async function insertBook(data){

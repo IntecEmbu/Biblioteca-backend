@@ -1,4 +1,4 @@
-import db from '../Database/Connection.js'
+import db from '../database/connection.js'
 
 // Realiza o emprestimo de livros
 async function createLending(data){
