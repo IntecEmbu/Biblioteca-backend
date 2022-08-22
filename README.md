@@ -124,28 +124,14 @@
 
 <br>
 
-# Funcionalidades internas 🛠️
+# Funcionalidades Internas 🛠️
 
-> ## 🚧 Funcionalidade de E-mail 🚧
+## 🚧 Envio de E-mail 🚧
 > ### Em testes - Funcionando 🚀
 
-#### Para enviar um email com somente texto
-```
-{
-    "email": "email-usuario",
-    "subject": "asssunto",
-    "text": "conteudo"
-}
-```
+<br>
 
-#### Para enviar um email com html
-```
-{
-    "email": "email-usuario",
-    "subject": "asssunto",
-    "html": "conteudo"
-}
-```
+# Funcionalidades Externas 🌳
 
 ## [API Auxiliar](https://github.com/pedroFnseca/Subprocess-API) 📈
 > #### Envio emails automaticamente para os usuarios quando estiver proximo da data de devolução do livro, realizando processamentos de rotina.
