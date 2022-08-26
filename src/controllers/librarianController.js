@@ -1,10 +1,10 @@
 import express from 'express'
-import db from '../services/LibrianService.js'
+import db from '../services/librarianService.js'
 import { body, validationResult } from 'express-validator'
 
 const router = express.Router()
 
-// Endpoint: /librian/insert-collaborator (POST)
+// Endpoint: /librarian/insert-collaborator (POST)
 // Descrição: Cadastra um colaborador no banco de dados
 router.post('/insert-collaborator',[
     body('name').not().isEmpty().withMessage('Name is required'),
@@ -34,7 +34,7 @@ router.post('/insert-collaborator',[
     }
 })
 
-// Endpoint: /librian/login-collaborator (POST)
+// Endpoint: /librarian/login-collaborator (POST)
 // Descrição: Login de um colaborador no sistema
 router.post('/login-collaborator',[
     body('login').not().isEmpty().withMessage('Email is required'),
@@ -70,7 +70,7 @@ router.post('/login-collaborator',[
     }
 })
 
-// Endpoint: /librian/status-collaborator (POST)
+// Endpoint: /librarian/status-collaborator (POST)
 // Descrição: Altera o status de um colaborador 
 router.post('/status-collaborator',[
     body('id').not().isEmpty().withMessage('Id is required'),
@@ -117,7 +117,7 @@ router.post('/status-collaborator',[
 })
 
 
-// Endpoint: /librian/get-all-collaborators (GET)
+// Endpoint: /librarian/get-all-collaborators (GET)
 // Descrição: Retorna todos os colaboradores
 router.get('/all-collaborators', async (req, res) => {
     try {
@@ -140,7 +140,7 @@ router.get('/all-collaborators', async (req, res) => {
     }
 })
 
-// Endpoint: /librian/get-collaborator-active (GET)
+// Endpoint: /librarian/get-collaborator-active (GET)
 // Descrição: Retorna todos os colaboradores ativos
 router.get('/collaborators-active', async (req, res) => {
     try {
@@ -163,7 +163,7 @@ router.get('/collaborators-active', async (req, res) => {
     }
 })
 
-// Endpoint: /librian/get-collaborator-inactive (GET)
+// Endpoint: /librarian/get-collaborator-inactive (GET)
 // Descrição: Retorna todos os colaboradores inativos
 router.get('/collaborators-inactive', async (req, res) => {
     try {
