@@ -1,6 +1,6 @@
 import express from "express"
 import books from './controllers/BookController.js'
-import librian from './controllers/LibrianController.js'
+import librian from './controllers/LibrarianController.js'
 import user from './controllers/UserController.js'
 import lending from './controllers/LendingController.js'
 

@@ -1,5 +1,5 @@
 import express from 'express'
-import db from '../services/librarianService.js'
+import db from '../services/LibrarianService.js'
 import { body, validationResult } from 'express-validator'
 
 const router = express.Router()
