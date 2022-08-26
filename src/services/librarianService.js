@@ -6,7 +6,7 @@ async function createCollaborator(data){
 
   const conn = await db.connect()
 
-  const sql = 'INSERT INTO tbl_librian (librian_name, librian_email, librian_password, librian_login, librian_type, librian_status), values (?, ?, ?, ?, ?, ?)'
+  const sql = 'INSERT INTO tbl_librarian (librarian_name, librarian_email, librarian_password, librarian_login, librarian_type, librarian_status), values (?, ?, ?, ?, ?, ?)'
 
   const values = [name, email, password, login, 'Colaborador', 'Ativo']
 
@@ -21,7 +21,7 @@ async function loginCollaborator(data){
 
   const conn = await db.connect()
 
-  const sql = 'SELECT * From tbl_librian where librian_login = ? and librian_password = ? and librian_status = ?'
+  const sql = 'SELECT * From tbl_librarian where librarian_login = ? and librarian_password = ? and librarian_status = ?'
 
   const values = [login, password, 'Ativo']
 
@@ -36,7 +36,7 @@ async function loginCollaborator(data){
 async function activatedCollaborator(id){
   const conn = await db.connect()
 
-  const sql = 'UPDATE tbl_librian SET librian_status = ? WHERE librian_id = ?'
+  const sql = 'UPDATE tbl_librarian SET librarian_status = ? WHERE librarian_id = ?'
 
   const values = ['Ativo', id]
 
@@ -49,7 +49,7 @@ async function activatedCollaborator(id){
 async function deactivatedCollaborator(id){
   const conn = await db.connect()
 
-  const sql = 'UPDATE tbl_librian SET librian_status = ? WHERE librian_id = ?'
+  const sql = 'UPDATE tbl_librarian SET librarian_status = ? WHERE librarian_id = ?'
 
   const values = ['Inativo', id]
 
@@ -62,7 +62,7 @@ async function deactivatedCollaborator(id){
 async function getAllCollaborators(){
   const conn = await db.connect()
 
-  const sql = 'SELECT * FROM tbl_librian'
+  const sql = 'SELECT * FROM tbl_librarian'
 
   const [rows] = await conn.query(sql)
 
@@ -75,7 +75,7 @@ async function getAllCollaborators(){
 async function getActivatedCollaborators(){
   const conn = await db.connect()
 
-  const sql = 'SELECT * FROM tbl_librian WHERE librian_status = ?'
+  const sql = 'SELECT * FROM tbl_librarian WHERE librarian_status = ?'
 
   const [rows] = await conn.query(sql, 'Ativo')
 
@@ -88,7 +88,7 @@ async function getActivatedCollaborators(){
 async function getDesactivatedCollaborators(){
   const conn = await db.connect()
 
-  const sql = 'SELECT * FROM tbl_librian WHERE librian_status = ?'
+  const sql = 'SELECT * FROM tbl_librarian WHERE librarian_status = ?'
 
   const [rows] = await conn.query(sql, 'Inativo')
 
