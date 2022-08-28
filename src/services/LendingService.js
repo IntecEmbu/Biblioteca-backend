@@ -6,7 +6,9 @@ async function createLending(data){
 
     const conn = await db.connect()
 
-    const sql = 'INSERT INTO tbl_lending (FK_librarian, FK_book, FK_user, withdraw_date, return_prediction) values (?, ?, ?, (SELECT NOW()), (SELECT NOW() + INTERVAL ? DAY))'
+    const sql = `INSERT INTO tbl_lending
+     (FK_librarian, FK_book, FK_user, withdraw_date, return_prediction),
+      values (?, ?, ?, (SELECT NOW()), (SELECT NOW() + INTERVAL ? DAY))`
 
     const values = [librarian_id, book_id, user_id, return_prediction]
 
