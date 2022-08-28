@@ -83,7 +83,7 @@ DROP TABLE IF EXISTS tbl_librarian;
 # Dados para teste
 /*
 INSERT INTO tbl_user (user_name,user_type,user_email,user_phone,user_course)
-	VALUE ("Pedro Pereira da Fonseca", "Aluno", "pedropereira.pp264@gmail.com", "11 933578259", "AUT")
+	VALUE ("Josefino", "Aluno", "Josefino@gmail.com", "11 966488326", "AUT")
 */
 
 
