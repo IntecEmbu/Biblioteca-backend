@@ -122,12 +122,6 @@
 #### Livros não devolvidos ```.../lending/not-returned```
 #### Todos os empréstimos ```.../lending/all```
 
-<br>
-
-# Funcionalidades Internas 🛠️
-
-## 🚧 Envio de E-mail 🚧
-> ### Em testes - Funcionando 🚀
 
 <br>
 
@@ -136,3 +130,7 @@
 ## [API Auxiliar](https://github.com/pedroFnseca/Subprocess-API) 📈
 > #### Envio emails automaticamente para os usuarios quando estiver proximo da data de devolução do livro, realizando processamentos de rotina.
 > #### Verificação e aplicação de multa para os usuarios que não devolveram o livro dentro do tempo estipulado.
+
+## [API de email](https://github.com/pedroFnseca/SendMail-API) 📬
+> #### Envio de emails para os usuarios.
+> #### Envio de emails para os bibliotecarios.
