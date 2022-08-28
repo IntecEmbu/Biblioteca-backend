@@ -59,7 +59,7 @@ router.post('/login-collaborator',[
                 data: result
             })
         } else{
-            res.status(400).json({
+            res.status(401).json({
                 message: 'Login failed'
             })
         }
