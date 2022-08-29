@@ -5,7 +5,7 @@
 > ### Método POST 🕊️
 
 #### Inserir um voluntário use ```.../librian/insert-collaborator```
-```
+```json
 {
     "name": "nome-colaborador",
     "email": "email-colaborador",
@@ -15,7 +15,7 @@
 ```
 
 #### Para fazer login use ```.../librian/login-collaborator```
-```
+```json
 {
     "login": "nomeLogin-colaborador",
     "password": "senha-colaborador"
@@ -23,7 +23,7 @@
 ```
 
 #### Para mudar status do colaborador (ativo / inativo) ```.../librian/status-collaborator```
-```
+```json
 {
     "id": "id-colaborador",
     "newStatus": "ativo/inativo"
@@ -47,7 +47,7 @@
 
 
 #### Para inserir um livro use ```.../book/insert```
-``` 
+```json
 {
     "title": "titulo",
     "edition": "edição/volume",
@@ -76,7 +76,7 @@
 > ### Método POST 🕊️
 
 #### Inserir um novo usuário ```.../user/insert```
-```
+```json
 {
     "name": "nome-usuario",
     "email": "email-usuario",
@@ -98,7 +98,7 @@
 
 > ### Método POST 🕊️
 #### Inserir um novo emprestimo ```.../lending/insert```
-```
+```json
 {
     "librian_id": "id-bibliotecario",
     "book_id": "id-livro",
@@ -108,7 +108,7 @@
 ```
 
 #### Devolver um livro ```.../lending/return-book```
-```
+```json
 {
     "lending_id": "id-emprestimo"
 }
