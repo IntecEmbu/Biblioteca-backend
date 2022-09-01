@@ -18,7 +18,7 @@ async function insertBook(data){
 async function getAllBooks(){
     const conn = await db.connect()
 
-    const sql = 'SELECT * FROM tbl_book DESC'
+    const sql = 'SELECT * FROM tbl_book ORDER BY book_code DESC'
 
     const [rows] = await conn.query(sql)
 
