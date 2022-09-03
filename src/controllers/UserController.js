@@ -1,6 +1,7 @@
 import express from 'express'
 import db from '../services/UserService.js'
 import { body, validationResult } from 'express-validator'
+import welcomeUser from '../email/welcomeUser.js'
 
 const router = express.Router()
 
@@ -24,9 +25,10 @@ router.post('/insert',[
     const {name, email, type, phone, course} = req.body
 
     // Verifica se o tipo de usuario é valido
-    if(type != 'Aluno' || type != 'Funcionario'){
+    if(!(type == 'Aluno' || type == 'Funcionario')){
         return res.status(400).json({
-            message: 'Type must be Aluno or Funcionario'
+            message: 'Type must be Aluno or Funcionario',
+            type: type
         })
     }
 
@@ -35,8 +37,9 @@ router.post('/insert',[
         res.status(200).json({
             message: 'User inserted successfully'
         })
+        welcomeUser(name, email) // Envia email para o usuário
     } catch(error){
-        return res.status(500).json({
+        res.status(500).json({
             DatabaseError: error.message
         })
     }
