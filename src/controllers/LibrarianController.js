@@ -48,7 +48,7 @@ router.post('/login-collaborator',[
         })
     }
 
-    const {login, password} = req.body
+    const {user, password} = req.body
 
     try{
         const result = await db.loginCollaborator({user, password})
