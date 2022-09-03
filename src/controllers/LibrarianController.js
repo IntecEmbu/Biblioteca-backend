@@ -10,7 +10,7 @@ router.post('/insert-collaborator',[
     body('name').not().isEmpty().withMessage('Name is required'),
     body('email').not().isEmpty().withMessage('Email is required'),
     body('password').not().isEmpty().withMessage('Password is required'),
-    body('login').not().isEmpty().withMessage('Login is required')
+    body('user').not().isEmpty().withMessage('User is required')
 ], async (req, res) => {
 
     const errors = validationResult(req)
@@ -20,10 +20,10 @@ router.post('/insert-collaborator',[
         })
     }
 
-    const {name, email, login, passsword} = req.body
+    const {name, email, user, passsword} = req.body
 
     try {
-        await db.createCollaborator({name, email, login, passsword})
+        await db.createCollaborator({name, email, user, passsword})
         res.status(200).json({
             message: 'Voluntary inserted successfully'
         })
@@ -37,7 +37,7 @@ router.post('/insert-collaborator',[
 // Endpoint: /librarian/login-collaborator (POST)
 // Descrição: Login de um colaborador no sistema
 router.post('/login-collaborator',[
-    body('login').not().isEmpty().withMessage('Email is required'),
+    body('user').not().isEmpty().withMessage('User is required'),
     body('password').not().isEmpty().withMessage('Password is required')
 ], async (req, res) => {
 
@@ -51,7 +51,7 @@ router.post('/login-collaborator',[
     const {login, password} = req.body
 
     try{
-        const result = await db.loginCollaborator({login, password})
+        const result = await db.loginCollaborator({user, password})
 
         if(result.length > 0){
             res.status(200).json({

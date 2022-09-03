@@ -2,7 +2,7 @@ import db from '../database/connection.js'
 
 // Realiza o cadastro de colaboradores
 async function createCollaborator(data){
-  const {name, email, password, login} = data
+  const {name, email, password, user} = data
 
   const conn = await db.connect()
 
@@ -11,7 +11,7 @@ async function createCollaborator(data){
     librarian_user, librarian_type, librarian_status) 
       values (?, ?, ?, ?, 'Colaborador', 'Ativo')`
 
-  const values = [name, email, password, login]
+  const values = [name, email, password, user]
 
   await conn.query(sql, values)
 
@@ -20,7 +20,7 @@ async function createCollaborator(data){
 
 // Realiza o login do Bibliotecario
 async function loginCollaborator(data){
-  const {login, password} = data
+  const {user, password} = data
 
   const conn = await db.connect()
 
@@ -28,7 +28,7 @@ async function loginCollaborator(data){
     From tbl_librarian 
       where librarian_user = ? and librarian_password = ? and librarian_status = 'Ativo'`
 
-  const values = [login, password]
+  const values = [user, password]
 
   const [rows] = await conn.query(sql, values)
 
