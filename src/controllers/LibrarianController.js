@@ -19,11 +19,11 @@ router.post('/insert-collaborator',[
             errors: errors.array()
         })
     }
-
-    const {name, email, user, passsword} = req.body
+    
+    const {name, email, user, password} = req.body
 
     try {
-        await db.createCollaborator({name, email, user, passsword})
+        await db.createCollaborator({name, email, user, password})
         res.status(200).json({
             message: 'Voluntary inserted successfully'
         })
