@@ -98,6 +98,4 @@ function emailTemplate(title, name, message) {
   ` 
 }
 
-export default{
-  emailTemplate
-}
+export default emailTemplate
