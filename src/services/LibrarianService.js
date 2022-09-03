@@ -8,7 +8,7 @@ async function createCollaborator(data){
 
   const sql = `INSERT INTO tbl_librarian
     (librarian_name, librarian_email, librarian_password, 
-    librarian_login, librarian_type, librarian_status), 
+    librarian_user, librarian_type, librarian_status) 
       values (?, ?, ?, ?, 'Colaborador', 'Ativo')`
 
   const values = [name, email, password, login]
@@ -26,7 +26,7 @@ async function loginCollaborator(data){
 
   const sql = `SELECT librarian_code, librarian_name, librarian_type
     From tbl_librarian 
-      where librarian_login = ? and librarian_password = ? and librarian_status = 'Ativo'`
+      where librarian_user = ? and librarian_password = ? and librarian_status = 'Ativo'`
 
   const values = [login, password]
 
