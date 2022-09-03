@@ -3,7 +3,7 @@ import db from '../database/connection.js'
 // Realiza o cadastro de colaboradores
 async function createCollaborator(data){
   const {name, email, password, user} = data
-
+  
   const conn = await db.connect()
 
   const sql = `INSERT INTO tbl_librarian
@@ -67,8 +67,8 @@ async function deactivatedCollaborator(id){
 async function getAllCollaborators(){
   const conn = await db.connect()
 
-  const sql = `SELECT librarian_code, librarian_name, librarian_type, librarian_status
-  FROM tbl_librarian`
+  const sql = `SELECT librarian_code, librarian_name, librarian_type, librarian_status, librarian_email, librarian_user
+    FROM tbl_librarian where librarian_type = 'Colaborador'`
 
   const [rows] = await conn.query(sql)
 
