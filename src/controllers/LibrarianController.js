@@ -125,7 +125,6 @@ router.get('/all-collaborators', async (req, res) => {
 
         if(result.length > 0){
             res.status(200).json({
-                message: 'Collaborators found',
                 data: result
             })
         } else{
