@@ -1,5 +1,5 @@
 import emailTemplate from './template.js'
-import sendMail from '../services/SendMail.js'
+import sendEmail from '../services/sendEmail.js'
 
 async function welcomeUser(name, to){
     const html = emailTemplate(
@@ -10,7 +10,7 @@ async function welcomeUser(name, to){
     
     const subject = 'Boas vindas!'
 
-    await sendMail({
+    await sendEmail({
         to,
         html,
         subject
