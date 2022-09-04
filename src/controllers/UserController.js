@@ -34,6 +34,8 @@ router.post('/insert',[
 
     try {
         welcomeUser(name, email) // Envia email para o usuário
+        console.log('name: ' + name)
+        console.log('email: ' + email)
         
         await db.createUser({name, email, type, phone, course})
         res.status(200).json({
