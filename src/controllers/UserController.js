@@ -33,14 +33,11 @@ router.post('/insert',[
     }
 
     try {
-        welcomeUser(name, email) // Envia email para o usuário
-        console.log('name: ' + name)
-        console.log('email: ' + email)
-        
         await db.createUser({name, email, type, phone, course})
         res.status(200).json({
             message: 'User inserted successfully'
         })
+        await welcomeUser(name, email) // Envia email para o usuário
     } catch(error){
         res.status(500).json({
             DatabaseError: error.message
