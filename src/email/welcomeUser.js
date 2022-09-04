@@ -12,8 +12,8 @@ async function welcomeUser(name, to){
 
     await sendEmail({
         to,
-        html,
-        subject
+        subject,
+        html
     })
 }
 
