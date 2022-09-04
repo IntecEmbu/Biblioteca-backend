@@ -36,7 +36,7 @@ async function getAllNotReturned(){
     
     const conn = await db.connect()
 
-    const sql = 'SELECT * FROM tbl_lending WHERE return_date IS NULL'
+    const sql = 'SELECT * FROM tbl_lending WHERE return_date IS NULL ORDER BY lending_code DESC'
 
     const [rows] = await conn.query(sql)
 
@@ -49,7 +49,7 @@ async function getAllNotReturned(){
 async function getAll(){
     const conn = await db.connect()
 
-    const sql = 'SELECT * FROM tbl_lending'
+    const sql = 'SELECT * FROM tbl_lending ORDER BY lending_code DESC'
 
     const [rows] = await conn.query(sql)
 
