@@ -40,7 +40,7 @@ router.post('/insert',[
             message: 'User inserted successfully'
         })
     } catch(error){
-        console.log(error)
+        console.log(error.message)
         res.status(500).json({
             DatabaseError: error.message
         })
