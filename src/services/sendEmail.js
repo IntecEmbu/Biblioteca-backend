@@ -19,6 +19,10 @@ function createTransporter(){
 async function sendEmail(to, subject, html){
     const transporter = createTransporter()
 
+    console.log('\n\nto' + to)
+    console.log('subject' + subject)
+    console.log('html' + html)
+
     return transporter.sendMail({
         from: process.env.EMAIL_USER,
         to,
