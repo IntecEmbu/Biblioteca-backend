@@ -33,7 +33,7 @@ router.post('/insert',[
     }
 
     try {
-        // welcomeUser(name, email) // Envia email para o usuário (obs: sem await para performance)
+        welcomeUser(name, email) // Envia email para o usuário (obs: sem await para performance)
 
         await db.createUser({name, email, type, phone, course})
         res.status(200).json({
