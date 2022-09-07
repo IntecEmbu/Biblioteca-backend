@@ -126,4 +126,23 @@ router.put('/update-collaborator',[
     }
 })
 
+// Endpoint: /librarian/disable-collaborator (DELETE)
+// Descrição: Desabilita um colaborador
+router.delete('/disable-collaborator', async (req, res) => {
+
+    const {id} = req.query
+
+    try{
+        db.desativateCollaborator(id)
+
+        res.status(200).json({
+            message: 'Collaborator disabled successfully'
+        })
+    } catch(error){
+        return res.status(500).json({
+            DatabaseError: error.message
+        })
+    }
+})
+
 export default router

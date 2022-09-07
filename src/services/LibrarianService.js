@@ -37,21 +37,8 @@ async function loginCollaborator(data){
   return rows
 }
 
-// Altera status do colaborador para ativo
-async function activatedCollaborator(id){
-  const conn = await db.connect()
-
-  const sql = 'UPDATE tbl_librarian SET librarian_status = ? WHERE librarian_id = ?'
-
-  const values = ['Ativo', id]
-
-  await conn.query(sql, values)
-
-  conn.end()
-}
-
 // Altera status do colaborador para inativo
-async function deactivatedCollaborator(id){
+async function desativateCollaborator(id){
   const conn = await db.connect()
 
   const sql = 'UPDATE tbl_librarian SET librarian_status = ? WHERE librarian_id = ?'
@@ -72,34 +59,6 @@ async function getAllCollaborators(){
     FROM tbl_librarian where librarian_type = 'Colaborador' ORDER BY librarian_code DESC`
 
   const [rows] = await conn.query(sql)
-
-  conn.end()
-
-  return rows
-}
-
-// Coleta todos os colaboradores ativos
-async function getActivatedCollaborators(){
-  const conn = await db.connect()
-
-  const sql = `SELECT librarian_code, librarian_name, librarian_type, librarian_status
-  FROM tbl_librarian WHERE librarian_status = ? ORDER BY librarian_code DESC`
-
-  const [rows] = await conn.query(sql, 'Ativo')
-
-  conn.end()
-
-  return rows
-}
-
-// Coleta todos os colaboradores inativos
-async function getDesactivatedCollaborators(){
-  const conn = await db.connect()
-
-  const sql = `SELECT librarian_code, librarian_name, librarian_type, librarian_status
-  FROM tbl_librarian WHERE librarian_status = ? ORDER BY librarian_code DESC`
-
-  const [rows] = await conn.query(sql, 'Inativo')
 
   conn.end()
 
@@ -127,5 +86,6 @@ export default{
   createCollaborator,
   loginCollaborator,
   getAllCollaborators,
-  updateCollaborator
+  updateCollaborator,
+  desativateCollaborator
 }
