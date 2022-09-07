@@ -225,7 +225,13 @@ router.put('/update-book',[
 // Descrição: Deleta um livro
 router.delete('/', async (req, res) => {
 
-    const {id} = req.params
+    const {id} = req.query
+
+    if(!id){
+        return res.status(400).json({
+            message: 'ID is required'
+        })
+    }
 
     try {
         await db.deleteBook(id)
