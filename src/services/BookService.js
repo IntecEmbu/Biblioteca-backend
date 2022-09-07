@@ -122,7 +122,6 @@ export default {
     insertBook,
     getAllBooks,
     getCountBooks,
-    getAllCategory,
     getBookByAuthor,
     getBookByName,
     getBookByCategory,

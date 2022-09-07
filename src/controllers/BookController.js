@@ -79,32 +79,6 @@ router.get('/all-count', async (req, res) => {
     }
 })
 
-// Endpoint: /book/all-category (GET)
-// Descrição: Busca todas as categorias de livros
-router.get('/all-category', async (req, res) =>{
-    try {
-        const results = await db.getAllCategory()
-
-        if (results.length === 0){
-            return res.status(204).json({
-                message: 'No category found'
-            })
-        }
-        
-        // Formata os dados para um array
-        const data = results.map(item => item.category)
-
-        return res.status(200).json({
-            category: data
-        })
-    } catch(error){
-        return res.status(500).json({
-            DatabaseError: error.message
-        })
-    }
-})
-
-
 // Endpoint: /book/search-author (GET)
 // Descrição: Busca um livro pelo autor
 router.get('/search-author', async (req, res) => {
