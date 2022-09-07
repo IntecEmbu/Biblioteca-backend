@@ -188,10 +188,10 @@ router.put('/update-book',[
     body('title').not().isEmpty().withMessage('Title is required'),
     body('edition').not().isEmpty().withMessage('Edition is required'),
     body('isbn').not().isEmpty().withMessage('ISBN is required'),
-    body('year').not().isEmpty().withMessage('Year is required'),
+    body('release_year').not().isEmpty().withMessage('Release_year is required'),
     body('category').not().isEmpty().withMessage('Category is required'),
     body('cdd').not().isEmpty().withMessage('CDD is required'),
-    body('idiom').not().isEmpty().withMessage('Idiom is required'),
+    body('language').not().isEmpty().withMessage('Language is required'),
     body('author').not().isEmpty().withMessage('Author is required'),
     body('id').not().isEmpty().withMessage('ID is required')
 ], async (req, res) => {
@@ -203,12 +203,13 @@ router.put('/update-book',[
         })
     }
 
-    const {title, edition, isbn, year, category, cdd, idiom, author, id} = req.body
+    const {title, edition, isbn, release_year, 
+        category, cdd, language, author, id} = req.body
 
     try {
         await db.updateBook({
-            title, edition, isbn, year, 
-            category, cdd, idiom, author, id})
+            title, edition, isbn, release_year, 
+            category, cdd, language, author, id})
 
         res.status(200).json({
             message: 'Book updated successfully'

@@ -92,7 +92,7 @@ async function updateBook(data){
 
     const conn = await db.connect()
 
-    const {title, edition, isbn, year, category, cdd, idiom, author, id} = data
+    const {title, edition, isbn, release_year, category, cdd, language, author, id} = data
 
     const sql = `
     UPDATE tbl_book SET
@@ -100,7 +100,7 @@ async function updateBook(data){
         category_name = ?, book_cdd = ?, book_language = ?, book_author = ? 
             WHERE book_code = ?`
     
-    const values = [title, edition, isbn, year, category, cdd, idiom, author, id]
+    const values = [title, edition, isbn, release_year, category, cdd, language, author, id]
 
     await conn.query(sql, values)
 

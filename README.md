@@ -82,10 +82,10 @@
     "title": "titulo",
     "edition": "edição/volume",
     "isbn": "número",
-    "year": "anoLançamento",
+    "release_year": "anoLançamento",
     "category": "categoria",
     "cdd": "númeroCdd",
-    "idiom": "idioma"
+    "language": "idioma"
 }
 ```
 
