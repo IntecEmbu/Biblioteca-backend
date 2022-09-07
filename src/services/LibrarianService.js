@@ -106,12 +106,26 @@ async function getDesactivatedCollaborators(){
   return rows
 }
 
+// Atualiza os dados do colaborador
+async function updateCollaborator(data){
+  const {name, email, user, id} = data
+
+  const conn = await db.connect()
+
+  const sql = `UPDATE tbl_librarian SET
+  librarian_name = ?, librarian_email = ?, librarian_user = ? 
+    WHERE librarian_id = ?`
+
+  const values = [name, email, user, id]
+
+  await conn.query(sql, values)
+
+  conn.end()
+}
+
 export default{
   createCollaborator,
   loginCollaborator,
-  activatedCollaborator,
-  deactivatedCollaborator,
   getAllCollaborators,
-  getActivatedCollaborators,
-  getDesactivatedCollaborators
+  updateCollaborator
 }

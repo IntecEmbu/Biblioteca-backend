@@ -22,25 +22,28 @@
 }
 ```
 
-#### Para mudar status do colaborador (ativo / inativo) ```.../librian/status-collaborator```
-```json
-{
-    "id": "id-colaborador",
-    "newStatus": "ativo/inativo"
-}
-```
-
 <br>
 
 > ### Método GET 📬
 
 #### Todos os colaboradores ```.../librian/all-collaborators```
-#### Colaboradores ativos ```.../librian/collaborators-active```
-#### Colaboradores inativos ```.../librian/collaborators-inactive```
 
+<br>
+
+> ### Método PUT 📝
+
+#### Atualizar um colaborador ```.../librian/update-collaborator```
+```json
+{
+    "id": "id-colaborador",
+    "name": "nome-colaborador",
+    "email": "email-colaborador",
+    "password": "senha-colaborador",
+    "user": "nomeUsuario-colaborador"
+}
+```
 
 #
-
 ## Rota de Livros 📚
 
 > ### Método POST 🕊️

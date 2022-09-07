@@ -70,53 +70,6 @@ router.post('/login-collaborator',[
     }
 })
 
-// Endpoint: /librarian/status-collaborator (POST)
-// Descrição: Altera o status de um colaborador 
-router.post('/status-collaborator',[
-    body('id').not().isEmpty().withMessage('Id is required'),
-    body('newStatus').not().isEmpty().withMessage('Status is required')
-], async (req, res) => {
-
-    const errors = validationResult(req)
-    if(!errors.isEmpty()){
-        return res.status(400).json({
-            errors: errors.array()
-        })
-    }
-
-    const {id, newStatus} = req.body
-
-    if(newStatus.toLowerCase() === 'ativo'){
-        try {
-            await db.activatedCollaborator(id)
-            res.status(200).json({
-                message: 'Collaborator activated successfully'
-            })
-        } catch(error){
-            return res.status(500).json({
-                DatabaseError: error.message
-            })
-        }
-    }
-    else if(newStatus.toLowerCase() === 'inativo'){
-        try {
-            await db.deactivatedCollaborator(id)
-            res.status(200).json({
-                message: 'Collaborator deactivated successfully'
-            })
-        } catch(error){
-            return res.status(500).json({
-                DatabaseError: error.message
-            })
-        }
-    } else{
-        return res.status(400).json({
-            message: 'newStatus invalid'
-        })
-    }
-})
-
-
 // Endpoint: /librarian/get-all-collaborators (GET)
 // Descrição: Retorna todos os colaboradores
 router.get('/all-collaborators', async (req, res) => {
@@ -139,45 +92,33 @@ router.get('/all-collaborators', async (req, res) => {
     }
 })
 
-// Endpoint: /librarian/get-collaborator-active (GET)
-// Descrição: Retorna todos os colaboradores ativos
-router.get('/collaborators-active', async (req, res) => {
-    try {
-        const result = await db.getActivatedCollaborators()
+// Endpoint: /librarian/update-collaborator (PUT)
+// Descrição: Atualiza os dados de um colaborador
+router.put('/update-collaborator',[
+    body('id').not().isEmpty().withMessage('Id is required'),
+    body('name').not().isEmpty().withMessage('Name is required'),
+    body('email').not().isEmpty().withMessage('Email is required'),
+    body('user').not().isEmpty().withMessage('User is required')
+], async (req, res) => {
 
-        if(result.length > 0){
-            res.status(200).json({
-                message: 'Collaborators found',
-                data: result
-            })
-        } else{
-            res.status(204).json({
-                message: 'Collaborators not found'
-            })
-        }
-    } catch(error){
-        return res.status(500).json({
-            DatabaseError: error.message
+    const errors = validationResult(req)
+    if(!errors.isEmpty()){
+        return res.status(400).json({
+            errors: errors.array()
         })
     }
-})
 
-// Endpoint: /librarian/get-collaborator-inactive (GET)
-// Descrição: Retorna todos os colaboradores inativos
-router.get('/collaborators-inactive', async (req, res) => {
-    try {
-        const result = await db.getDesactivatedCollaborators()
+    const {id, name, user, email} = req.body
 
-        if(result.length > 0){
-            res.status(200).json({
-                message: 'Collaborators found',
-                data: result
-            })
-        } else{
-            res.status(204).json({
-                message: 'Collaborators not found'
-            })
-        }
+    try{
+        db.updateCollaborator({
+            id, name,
+            user, email
+        })
+
+        res.status(200).json({
+            message: 'Collaborator updated successfully'
+        })
     } catch(error){
         return res.status(500).json({
             DatabaseError: error.message
