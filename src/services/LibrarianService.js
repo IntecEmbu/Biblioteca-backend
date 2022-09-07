@@ -37,26 +37,14 @@ async function loginCollaborator(data){
   return rows
 }
 
-// Altera status do colaborador para inativo
-async function desativateCollaborator(id){
-  const conn = await db.connect()
-
-  const sql = 'UPDATE tbl_librarian SET librarian_status = ? WHERE librarian_id = ?'
-
-  const values = ['Inativo', id]
-
-  await conn.query(sql, values)
-
-  conn.end()
-}
-
 // Coleta todos os colaboradores
 async function getAllCollaborators(){
   const conn = await db.connect()
 
   const sql = `SELECT 
   librarian_code, librarian_name, librarian_type, librarian_status, librarian_email, librarian_user
-    FROM tbl_librarian where librarian_type = 'Colaborador' ORDER BY librarian_code DESC`
+    FROM tbl_librarian where librarian_type = 'Colaborador' AND librarian_status = 'Ativo'
+      ORDER BY librarian_code DESC`
 
   const [rows] = await conn.query(sql)
 
@@ -76,6 +64,19 @@ async function updateCollaborator(data){
     WHERE librarian_id = ?`
 
   const values = [name, email, user, id]
+
+  await conn.query(sql, values)
+
+  conn.end()
+}
+
+// Altera status do colaborador para inativo
+async function desativateCollaborator(id){
+  const conn = await db.connect()
+
+  const sql = 'UPDATE tbl_librarian SET librarian_status = ? WHERE librarian_id = ?'
+
+  const values = ['Inativo', id]
 
   await conn.query(sql, values)
 
