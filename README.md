@@ -89,6 +89,12 @@
 }
 ```
 
+<br>
+
+> ### Método DELETE 🗑️
+
+#### Para deletar um livro use ```.../book?id=id_livro```
+
 #
 ## Rota de Usuário
 

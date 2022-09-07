@@ -221,4 +221,22 @@ router.put('/update-book',[
     }
 })
 
+// Endpoint: /book (DELETE)
+// Descrição: Deleta um livro
+router.delete('/', async (req, res) => {
+
+    const {id} = req.params
+
+    try {
+        await db.deleteBook(id)
+        res.status(200).json({
+            message: 'Book deleted successfully'
+        })
+    } catch(error){
+        return res.status(500).json({
+            DatabaseError: error.message
+        })
+    }
+})
+
 export default router

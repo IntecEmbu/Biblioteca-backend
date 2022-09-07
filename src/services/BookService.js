@@ -107,6 +107,17 @@ async function updateBook(data){
     conn.end()
 }
 
+// deleta um livro
+async function deleteBook(id){
+    const conn = await db.connect()
+
+    const sql = 'DELETE FROM tbl_book WHERE book_code = ?'
+    
+    await conn.query(sql, id)
+
+    conn.end()
+}
+
 export default {
     insertBook,
     getAllBooks,
@@ -115,5 +126,6 @@ export default {
     getBookByAuthor,
     getBookByName,
     getBookByCategory,
-    updateBook
+    updateBook,
+    deleteBook
 }
