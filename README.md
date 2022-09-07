@@ -70,6 +70,25 @@
 #### Livros por autor ```.../book/search-author?author=nome_autor```
 #### Livros por categoria ```.../book/search/search-category?category=nome_categoria```
 
+
+<br>
+
+> ### Método PUT 📝
+
+#### Para atualizar um livro use ```.../book/update-book```
+```json
+{
+    "id": "id-livro",
+    "title": "titulo",
+    "edition": "edição/volume",
+    "isbn": "número",
+    "year": "anoLançamento",
+    "category": "categoria",
+    "cdd": "númeroCdd",
+    "idiom": "idioma"
+}
+```
+
 #
 ## Rota de Usuário
 

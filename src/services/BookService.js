@@ -87,6 +87,26 @@ async function getBookByCategory(category){
     return rows
 }
 
+// Atualiza os dados do livro
+async function updateBook(data){
+
+    const conn = await db.connect()
+
+    const {title, edition, isbn, year, category, cdd, idiom, author, id} = data
+
+    const sql = `
+    UPDATE tbl_book SET
+        book_name = ?, book_edition = ?, book_isbn = ?, release_year = ?,
+        category_name = ?, book_cdd = ?, book_language = ?, book_author = ? 
+            WHERE book_code = ?`
+    
+    const values = [title, edition, isbn, year, category, cdd, idiom, author, id]
+
+    await conn.query(sql, values)
+
+    conn.end()
+}
+
 export default {
     insertBook,
     getAllBooks,
@@ -94,5 +114,6 @@ export default {
     getAllCategory,
     getBookByAuthor,
     getBookByName,
-    getBookByCategory
+    getBookByCategory,
+    updateBook
 }
