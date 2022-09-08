@@ -47,7 +47,7 @@
 
 > ### Método DELETE 🗑️
 
-#### Desativar um colaborador ```.../librian/disable-collaborator?id=id-colaborador```
+#### Desativar um colaborador ```.../librian?id=id-colaborador```
 
 #
 ## Rota de Livros 📚
