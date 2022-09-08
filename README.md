@@ -1,6 +1,4 @@
-# Rotas 🛣️ 
-
-## Rota de Bibliotecário 📖
+# Rota de Bibliotecário 📖
 
 > ### Método POST 🕊️
 
@@ -49,7 +47,7 @@
 #### Desativar um colaborador ```.../librian?id=id-colaborador```
 
 #
-## Rota de Livros 📚
+# Rota de Livros 📚
 
 > ### Método POST 🕊️
 
@@ -103,7 +101,7 @@
 #### Para deletar um livro use ```.../book?id=id_livro```
 
 #
-## Rota de Usuário
+# Rota de Usuário
 
 > ### Método POST 🕊️
 
@@ -148,7 +146,7 @@
 #### Desativar um usuário ```.../user/disable-user?id=id-usuario```
 
 #
-## Rota de Empréstimo 🏁
+# Rota de Empréstimo 🏁
 
 > ### Método POST 🕊️
 #### Inserir um novo emprestimo ```.../lending/insert```
