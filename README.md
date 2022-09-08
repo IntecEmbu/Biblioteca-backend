@@ -142,6 +142,12 @@
 }
 ```
 
+<br>
+
+> ### Método DELETE 🗑️
+
+#### Desativar um usuário ```.../user/disable-user?id=id-usuario```
+
 #
 ## Rota de Empréstimo 🏁
 

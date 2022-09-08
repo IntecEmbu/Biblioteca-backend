@@ -119,4 +119,27 @@ router.put('/update-user',[
     }
 })
 
+// Endpoint: /user (DELETE)
+// Descrição: Deleta um usuario pelo id
+router.delete('/', async (req, res) => {
+    const {id} = req.query
+
+    if(!id){
+        return res.status(400).json({
+            message: 'Id is required'
+        })
+    }
+
+    try {
+        await db.deleteUser(id)
+        res.status(200).json({
+            message: 'User deleted successfully'
+        })
+    } catch(error){
+        return res.status(500).json({
+            DatabaseError: error.message
+        })
+    }
+})
+
 export default router

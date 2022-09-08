@@ -60,8 +60,21 @@ async function updateUser(data){
     conn.end()
 }
 
+// Deleta um usuario
+async function deleteUser(id){
+    const conn = await db.connect()
+
+    const sql = 'DELETE FROM tbl_user WHERE user_code = ?'
+
+    await conn.query(sql, id)
+
+    conn.end()
+}
+
 export default {
     createUser,
     getAllUsers,
-    searchUserByName
+    searchUserByName,
+    updateUser,
+    deleteUser
 }
