@@ -61,7 +61,7 @@ async function updateCollaborator(data){
 
   const sql = `UPDATE tbl_librarian SET
   librarian_name = ?, librarian_email = ?, librarian_user = ? 
-    WHERE librarian_id = ?`
+    WHERE librarian_code = ?`
 
   const values = [name, email, user, id]
 
@@ -74,7 +74,7 @@ async function updateCollaborator(data){
 async function desativateCollaborator(id){
   const conn = await db.connect()
 
-  const sql = 'UPDATE tbl_librarian SET librarian_status = ? WHERE librarian_id = ?'
+  const sql = 'UPDATE tbl_librarian SET librarian_status = ? WHERE librarian_code = ?'
 
   const values = ['Inativo', id]
 
