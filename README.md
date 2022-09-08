@@ -38,7 +38,6 @@
     "id": "id-colaborador",
     "name": "nome-colaborador",
     "email": "email-colaborador",
-    "password": "senha-colaborador",
     "user": "nomeUsuario-colaborador"
 }
 ```
