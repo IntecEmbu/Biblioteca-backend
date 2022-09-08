@@ -79,4 +79,44 @@ router.get('/search-user', async (req, res) => {
     }
 })
 
+// Endpoint: /user/update-user (PUT)
+// Descrição: Atualiza os dados do usuario
+router.put('/update-user',[
+    body('name').not().isEmpty().withMessage('Name is required'),
+    body('email').not().isEmpty().withMessage('Email is required'),
+    body('type').not().isEmpty().withMessage('Type is required'),
+    body('phone').not().isEmpty().withMessage('Phone is required'),
+    body('course').not().isEmpty().withMessage('Course is required'),
+    body('id').not().isEmpty().withMessage('Id is required')
+], async (req, res) => {
+
+    const errors = validationResult(req)
+    if(!errors.isEmpty()){
+        return res.status(400).json({
+            errors: errors.array()
+        })
+    }
+
+    const {name, email, type, phone, course, id} = req.body
+
+    // Verifica se o tipo de usuario é valido
+    if(!(type == 'Aluno' || type == 'Funcionario')){
+        return res.status(400).json({
+            message: 'Type must be Aluno or Funcionario',
+            type: type
+        })
+    }
+
+    try {
+        await db.updateUser({name, email, type, phone, course, id})
+        res.status(200).json({
+            message: 'User updated successfully'
+        })
+    } catch(error){
+        return res.status(500).json({
+            DatabaseError: error.message
+        })
+    }
+})
+
 export default router

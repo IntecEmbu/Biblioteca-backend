@@ -126,6 +126,22 @@
 #### Coletar todos os usuários ```.../user/all```
 #### Pesquisa usuário por nome ```.../user/search-user?name=nomeUsuario``` 
 
+<br>
+
+> ### Método PUT 📝
+
+#### Atualizar um usuário ```.../user/update-user```
+```json
+{
+    "id": "id-usuario",
+    "name": "nome-usuario",
+    "email": "email-usuario",
+    "type": "Funcionario/aluno",
+    "phone": "telefone-usuario",
+    "course": "curso-usuario"
+}
+```
+
 #
 ## Rota de Empréstimo 🏁
 

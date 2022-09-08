@@ -43,6 +43,23 @@ async function searchUserByName(name){
     return rows
 }
 
+// Atualiza os dados do usuario
+async function updateUser(data){
+    const {name, email, type, phone, course, id} = data
+
+    const conn = await db.connect()
+
+    const sql = `UPDATE tbl_user SET
+    user_name = ?, user_email = ?, user_type = ?, user_phone = ?, user_course = ? 
+        WHERE user_code = ?`
+
+    const values = [name, email, type, phone, course, id]
+
+    await conn.query(sql, values)
+
+    conn.end()
+}
+
 export default {
     createUser,
     getAllUsers,
