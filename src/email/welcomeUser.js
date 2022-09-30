@@ -10,7 +10,7 @@ async function welcomeUser(name, to){
     
     const subject = 'Boas vindas!'
 
-    await sendEmail(to, subject,html)
+    await sendEmail(to, subject, html)
 }
 
 export default welcomeUser
