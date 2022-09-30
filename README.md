@@ -4,29 +4,6 @@
 
 <br>
 
-# Como instalar 🦖
-
-### Primeiro clone o projeto dentro da pasta desejada
-```bash
-git clone https://github.com/IntecEmbu/Biblioteca-backend.git
-```
-
-### Após a instalação do projeto, entre na pasta criada
-```bash
-cd Biblioteca-backend
-```
-
-### Instale as dependências do projeto
-```bash
-npm install
-```
-
-## Nota importante 📝⚠️
-### Ao rodar ```node start src/index.js``` o projeto irá rodar em ```http://localhost:3333```
-
-
-<br>
-
 # Rota de Bibliotecário 📖
 
 > ### Método POST 🕊️
@@ -183,7 +160,7 @@ npm install
 {
     "librian_id": "id-bibliotecario",
     "book_id": "id-livro",
-    "user_id": "id-usuário",
+    "user_cpf": "cpf-usuário",
     "return_prediction": "dias-emprestimo"
 }
 ```

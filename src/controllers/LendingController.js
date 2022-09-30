@@ -9,7 +9,7 @@ const router = express.Router()
 router.post('/insert',[
     body('librarian_id').not().isEmpty().withMessage('Librarian id is required'),
     body('book_id').not().isEmpty().withMessage('Book id is required'),
-    body('user_id').not().isEmpty().withMessage('User id is required'),
+    body('user_cpf').not().isEmpty().withMessage('User CPF is required'),
     body('return_prediction').not().isEmpty().withMessage('Return prediction is required')
 ], async (req, res) => {
 
@@ -20,10 +20,10 @@ router.post('/insert',[
         })
     }
 
-    const {librarian_id, book_id, user_id, return_prediction} = req.body
+    const {librarian_id, book_id, user_cpf, return_prediction} = req.body
 
     try {
-        await db.createLending({librarian_id, book_id, user_id, return_prediction})
+        await db.createLending({librarian_id, book_id, user_cpf, return_prediction})
         res.status(200).json({
             message: 'Lending created successfully'
         })
