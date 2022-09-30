@@ -1,6 +1,6 @@
-DROP DATABASE IF EXISTS jade_bd;
-CREATE DATABASE jade_bd;
-USE jade_bd;
+DROP DATABASE IF EXISTS bd_biblioteca;
+CREATE DATABASE bd_biblioteca;
+USE bd_biblioteca;
 
 CREATE TABLE tbl_librarian(
 	librarian_code INT(10) PRIMARY KEY AUTO_INCREMENT ,
