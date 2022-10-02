@@ -2,15 +2,15 @@ import db from "../database/connection.js";
 
 // Realiza o cadastro de usuarios
 async function createUser(data) {
-  const { name, email, type, phone, course } = data;
+  const { name, email, type, phone, course, cpf } = data;
 
   const conn = await db.connect();
 
   const sql = `INSERT INTO tbl_user 
-    (user_name, user_email, user_type, user_phone, user_course) 
-        value (?, ?, ?, ?, ?)`;
+    (user_name, user_email, user_type, user_phone, user_course, user_cpf)) 
+        value (?, ?, ?, ?, ?, ?)`;
 
-  const values = [name, email, type, phone, course];
+  const values = [name, email, type, phone, course, cpf];
 
   await conn.query(sql, values);
 
@@ -45,15 +45,15 @@ async function searchUserByName(name) {
 
 // Atualiza os dados do usuario
 async function updateUser(data) {
-  const { name, email, type, phone, course, id } = data;
+  const { name, email, type, phone, course, id, cpf } = data;
 
   const conn = await db.connect();
 
   const sql = `UPDATE tbl_user SET
-    user_name = ?, user_email = ?, user_type = ?, user_phone = ?, user_course = ? 
+    user_name = ?, user_email = ?, user_type = ?, user_phone = ?, user_course = ?, user_cpf = ?
         WHERE user_code = ?`;
 
-  const values = [name, email, type, phone, course, id];
+  const values = [name, email, type, phone, course, id, cpf];
 
   await conn.query(sql, values);
 

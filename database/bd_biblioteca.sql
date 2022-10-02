@@ -100,5 +100,11 @@ SELECT a.book_code, a.book_isbn, a.book_cdd, a.book_name, a.book_language, a.cat
 	from tbl_book a, tbl_quantity b
 		where a.book_code = b.FK_book;
 
+# Todos os emprestimos que estão pendentes
+CREATE VIEW VW_lending_pending AS
+SELECT a.lending_code, a.withdraw_date, a.return_prediction, a.return_date, b.user_name, b.user_email, c.book_name, d.librarian_name
+	from tbl_lending a, tbl_user b, tbl_book c, tbl_librarian d
+		where a.return_date IS NULL AND a.FK_user = b.user_code AND a.FK_book = c.book_code AND a.FK_librarian = d.librarian_code;
+
 # DROP VIEW IF EXISTS vw_lending;
 # DROP VIEW IF EXISTS vw_all_books;

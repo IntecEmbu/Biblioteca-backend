@@ -15,6 +15,7 @@ router.post(
     body("type").not().isEmpty().withMessage("Type is required"),
     body("phone").not().isEmpty().withMessage("Phone is required"),
     body("course").not().isEmpty().withMessage("Course is required"),
+    body("cpf").not().isEmpty().withMessage("CPF is required"),
   ],
   async (req, res) => {
     const errors = validationResult(req);
@@ -24,7 +25,7 @@ router.post(
       });
     }
 
-    const { name, email, type, phone, course } = req.body;
+    const { name, email, type, phone, course, cpf } = req.body;
 
     // Verifica se o tipo de usuario é valido
     if (!(type == "Aluno" || type == "Funcionario")) {
@@ -37,7 +38,7 @@ router.post(
     try {
       welcomeUser(name.split(" ")[0], email); // Envia email para o usuário (obs: sem await para performance)
 
-      await db.createUser({ name, email, type, phone, course });
+      await db.createUser({ name, email, type, phone, course, cpf });
       res.status(200).json({
         message: "User inserted successfully",
       });
@@ -93,6 +94,7 @@ router.put(
     body("phone").not().isEmpty().withMessage("Phone is required"),
     body("course").not().isEmpty().withMessage("Course is required"),
     body("id").not().isEmpty().withMessage("Id is required"),
+    body("cpf").not().isEmpty().withMessage("CPF is required"),
   ],
   async (req, res) => {
     const errors = validationResult(req);
@@ -102,7 +104,7 @@ router.put(
       });
     }
 
-    const { name, email, type, phone, course, id } = req.body;
+    const { name, email, type, phone, course, id, cpf } = req.body;
 
     // Verifica se o tipo de usuario é valido
     if (!(type == "Aluno" || type == "Funcionario")) {
@@ -113,7 +115,7 @@ router.put(
     }
 
     try {
-      await db.updateUser({ name, email, type, phone, course, id });
+      await db.updateUser({ name, email, type, phone, course, id, cpf });
       res.status(200).json({
         message: "User updated successfully",
       });
