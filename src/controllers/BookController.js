@@ -30,7 +30,7 @@ router.post(
       req.body;
 
     try {
-      await db.insertBook({
+      const result = await db.insertBook({
         title,
         edition,
         isbn,
@@ -40,9 +40,16 @@ router.post(
         idiom,
         author,
       });
-      res.status(200).json({
-        message: "Book inserted successfully",
-      });
+
+      if (result) {
+        return res.status(200).json({
+          message: "Book inserted successfully",
+        });
+      } else {
+        return res.status(401).json({
+          message: "Book already exists",
+        });
+      }
     } catch (error) {
       return res.status(500).json({
         DatabaseError: error.message,

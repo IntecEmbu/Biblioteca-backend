@@ -2,8 +2,6 @@ import db from "../database/connection.js";
 
 // Insere um novo livro no banco de dados
 async function insertBook(data) {
-  const conn = await db.connect();
-
   const { title, edition, isbn, year, category, cdd, idiom, author } = data;
 
   const book_sql = `INSERT INTO tbl_book 
@@ -27,17 +25,30 @@ async function insertBook(data) {
     author,
   ];
 
-  await conn.query(book_sql, book_values);
-  await conn.query(quantity_sql, book_values);
+  const conn = await db.connect();
+
+  const [rows] = await conn.query(
+    "SELECT (*) FROM tbl_book WHERE book_name = ? and book_edition = ? and book_isbn = ? and release_year = ? and category_name = ? and book_cdd = ? and book_language = ? and book_author = ?",
+    book_values
+  );
+
+  if (rows[0].total === 0) {
+    await conn.query(book_sql, book_values);
+    await conn.query(quantity_sql, book_values);
+
+    conn.end();
+    return true;
+  }
 
   conn.end();
+  return false;
 }
 
 // Coleta todos os livros do banco de dados
 async function getAllBooks() {
   const conn = await db.connect();
 
-  const sql = "SELECT * FROM VW_all_books";
+  const sql = "SELECT * FROM VW_all_books WHERE book_status = 'Ativo'";
 
   const [rows] = await conn.query(sql);
 
@@ -142,6 +153,12 @@ async function deleteBook(id) {
   await conn.query(sql, id);
 
   conn.end();
+
+  // OBS: Quando fazer todo o crud do sistema, fazer com que o livro seja deletado, e delete junto com ele todas as informações que estão relacionadas a ele, na seguinte ordem:
+  // 1 - tbl_quantity
+  // 2 - tbl_penalty
+  // 3 - tbl_lending
+  // 4 - tbl_book
 }
 
 export default {
