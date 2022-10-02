@@ -48,7 +48,7 @@ async function insertBook(data) {
 async function getAllBooks() {
   const conn = await db.connect();
 
-  const sql = "SELECT * FROM VW_all_books WHERE book_status = 'Ativo'";
+  const sql = "SELECT * FROM VW_all_books";
 
   const [rows] = await conn.query(sql);
 
