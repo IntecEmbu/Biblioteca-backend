@@ -6,11 +6,27 @@ async function insertBook(data) {
 
   const { title, edition, isbn, year, category, cdd, idiom, author } = data;
 
-  const sql =
-    "INSERT INTO tbl_book (book_name, book_edition, book_isbn, release_year, category_name, book_cdd, book_language, book_author) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-  const values = [title, edition, isbn, year, category, cdd, idiom, author];
+  const book_sql = `INSERT INTO tbl_book 
+    (book_name, book_edition, book_isbn, release_year, category_name, book_cdd, book_language, book_author)
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?)`;
 
-  await conn.query(sql, values);
+  const quantity_sql = `INSERT INTO tbl_quantity (book_code) 
+    VALUES (SELECT book_code FROM tbl_book WHERE book_isbn = ? and book_author = ?, book_name = ?)`;
+
+  const book_values = [
+    title,
+    edition,
+    isbn,
+    year,
+    category,
+    cdd,
+    idiom,
+    author,
+  ];
+  const quantity_values = [isbn, author, title];
+
+  await conn.query(book_sql, book_values);
+  await conn.query(quantity_sql, quantity_values); // não sei se está certo
 
   conn.end();
 }
@@ -19,7 +35,7 @@ async function insertBook(data) {
 async function getAllBooks() {
   const conn = await db.connect();
 
-  const sql = "SELECT * FROM tbl_book ORDER BY book_code DESC";
+  const sql = "SELECT * FROM VW_all_books";
 
   const [rows] = await conn.query(sql);
 
@@ -105,8 +121,7 @@ async function updateBook(data) {
     id,
   } = data;
 
-  const sql = `
-    UPDATE tbl_book SET
+  const sql = `UPDATE tbl_book SET
         book_name = ?, book_edition = ?, book_isbn = ?, release_year = ?,
         category_name = ?, book_cdd = ?, book_language = ?, book_author = ? 
             WHERE book_code = ?`;
@@ -132,7 +147,7 @@ async function updateBook(data) {
 async function deleteBook(id) {
   const conn = await db.connect();
 
-  const sql = "DELETE FROM tbl_book WHERE book_code = ?";
+  const sql = `DELETE FROM tbl_book WHERE book_code = ?`;
 
   await conn.query(sql, id);
 
