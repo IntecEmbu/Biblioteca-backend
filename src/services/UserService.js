@@ -6,9 +6,8 @@ async function createUser(data) {
 
   const conn = await db.connect();
 
-  const sql = `INSERT INTO tbl_user 
-    (user_name, user_email, user_type, user_phone, user_course, user_cpf)) 
-        value (?, ?, ?, ?, ?, ?)`;
+  const sql =
+    "INSERT INTO tbl_user (user_name, user_email, user_type, user_phone, user_course, user_cpf) VALUES (?, ?, ?, ?, ?, ?)";
 
   const values = [name, email, type, phone, course, cpf];
 
