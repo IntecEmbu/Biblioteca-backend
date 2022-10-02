@@ -5,7 +5,7 @@ USE bd_biblioteca;
 CREATE TABLE tbl_librarian(
 	librarian_code INT(10) PRIMARY KEY AUTO_INCREMENT ,
 	librarian_name  VARCHAR (45) UNIQUE NOT NULL,
-    librarian_login VARCHAR(45) UNIQUE NOT NUll,
+  librarian_login VARCHAR(45) UNIQUE NOT NUll,
 	librarian_email VARCHAR(45) UNIQUE NOT NULL,
 	librarian_password VARCHAR(30) NOT NULL,
 	librarian_type ENUM ('Bibliotecario','Colaborador', 'ADM') NOT NULL,
@@ -17,7 +17,7 @@ CREATE TABLE tbl_user(
 	user_name VARCHAR(45) NOT NULL,
 	user_type ENUM ('Aluno', 'Funcionario') NOT NULL,
 	user_email VARCHAR(45) NOT NULL,
-   	user_phone  VARCHAR(14) NOT NULL,	
+  user_phone  VARCHAR(14) NOT NULL,	
 	user_course VARCHAR(45) NOT NULL
 );
 
@@ -64,10 +64,10 @@ CREATE TABLE tbl_penalty(
 CREATE TABLE tbl_quantity(
 	quantity_code INT(10) AUTO_INCREMENT PRIMARY KEY,
 	FK_book INT(10) NOT NULL,
-    quantity_total int(10),
-    quantity_circulation int(10),
-    quantity_stopped int(10),
-    CONSTRAINT FK_book_quantity FOREIGN KEY ( FK_book) REFERENCES tbl_book (book_code)
+  quantity_total int(10),
+  quantity_circulation int(10),
+  quantity_stopped int(10),
+  CONSTRAINT FK_book_quantity FOREIGN KEY ( FK_book) REFERENCES tbl_book (book_code)
 );
 
 # Scripts Para deletar todas as tabelas na nuvem
