@@ -146,19 +146,26 @@ async function updateBook(data) {
 
 // deleta um livro
 async function deleteBook(id) {
-  const conn = await db.connect();
-
-  const sql = `UPDATE tbl_book SET book_status = "Inativo" WHERE book_code = ?`;
-
-  await conn.query(sql, id);
-
-  conn.end();
-
-  // OBS: Quando fazer todo o crud do sistema, fazer com que o livro seja deletado, e delete junto com ele todas as informações que estão relacionadas a ele, na seguinte ordem:
+  // OBS: Quando fazer todo o crud do sistema, fazer com que o livro seja deletado,
+  // e delete junto com ele todas as informações que estão relacionadas a ele, na seguinte ordem:
   // 1 - tbl_quantity
   // 2 - tbl_penalty
   // 3 - tbl_lending
   // 4 - tbl_book
+
+  const conn = await db.connect();
+
+  const tbl_quantity_sql = "DELETE FROM tbl_quantity WHERE FK_book = ?";
+  const tbl_penalty_sql = "DELETE FROM tbl_penalty WHERE FK_book = ?";
+  const tbl_lending_sql = "DELETE FROM tbl_lending WHERE FK_book = ?";
+  const tbl_book_sql = "DELETE FROM tbl_book WHERE book_code = ?";
+
+  await conn.query(tbl_quantity_sql, id);
+  await conn.query(tbl_penalty_sql, id);
+  await conn.query(tbl_lending_sql, id);
+  await conn.query(tbl_book_sql, id);
+
+  conn.end();
 }
 
 export default {
