@@ -56,18 +56,6 @@ async function getCountBooks() {
   return rows;
 }
 
-// Coleta todas as cateogorias do banco de dados
-async function getAllCategory() {
-  const conn = await db.connect();
-
-  const sql =
-    "SELECT category_name AS category FROM tbl_book group by category";
-  const [rows] = await conn.query(sql);
-
-  conn.end();
-  return rows;
-}
-
 // Pesquisa o livro pelo autor
 async function getBookByAuthor(author) {
   const conn = await db.connect();
@@ -149,7 +137,7 @@ async function updateBook(data) {
 async function deleteBook(id) {
   const conn = await db.connect();
 
-  const sql = `DELETE FROM tbl_book WHERE book_code = ?`;
+  const sql = `UPDATE tbl_book SET book_status = "Inativo" WHERE book_code = ?`;
 
   await conn.query(sql, id);
 

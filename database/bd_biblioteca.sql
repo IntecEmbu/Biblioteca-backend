@@ -31,7 +31,8 @@ CREATE TABLE tbl_book(
 	category_name VARCHAR(45) NOT NULL,
 	release_year YEAR NOT NULL,
 	book_author VARCHAR(45) NOT NULL,
-	book_edition VARCHAR(45) NOT NULL
+	book_edition VARCHAR(45) NOT NULL,
+	book_statuss ENUM ('Ativo', 'Inativo') NOT NULL DEFAULT 'Ativo'
 );
 
 CREATE TABLE tbl_lending(
