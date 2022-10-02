@@ -92,7 +92,7 @@ function emailTemplate(title, name, message) {
 
   </body>
 
-  </html>` 
+  </html>`;
 }
 
-export default emailTemplate
+export default emailTemplate;

@@ -1,92 +1,93 @@
-import db from '../database/connection.js'
+import db from "../database/connection.js";
 
 // Realiza o cadastro de colaboradores
-async function createCollaborator(data){
-  const {name, email, password, user} = data
-  
-  const conn = await db.connect()
+async function createCollaborator(data) {
+  const { name, email, password, user } = data;
+
+  const conn = await db.connect();
 
   const sql = `INSERT INTO tbl_librarian
     (librarian_name, librarian_email, librarian_password, 
     librarian_user, librarian_type, librarian_status) 
-      values (?, ?, ?, ?, 'Colaborador', 'Ativo')`
+      values (?, ?, ?, ?, 'Colaborador', 'Ativo')`;
 
-  const values = [name, email, password, user]
+  const values = [name, email, password, user];
 
-  await conn.query(sql, values)
+  await conn.query(sql, values);
 
-  conn.end()
+  conn.end();
 }
 
 // Realiza o login do Bibliotecario
-async function loginCollaborator(data){
-  const {user, password} = data
+async function loginCollaborator(data) {
+  const { user, password } = data;
 
-  const conn = await db.connect()
+  const conn = await db.connect();
 
   const sql = `SELECT librarian_code, librarian_name, librarian_type
     From tbl_librarian 
-      where librarian_user = ? and librarian_password = ? and librarian_status = 'Ativo'`
+      where librarian_user = ? and librarian_password = ? and librarian_status = 'Ativo'`;
 
-  const values = [user, password]
+  const values = [user, password];
 
-  const [rows] = await conn.query(sql, values)
+  const [rows] = await conn.query(sql, values);
 
-  conn.end()
+  conn.end();
 
-  return rows
+  return rows;
 }
 
 // Coleta todos os colaboradores
-async function getAllCollaborators(){
-  const conn = await db.connect()
+async function getAllCollaborators() {
+  const conn = await db.connect();
 
   const sql = `SELECT 
   librarian_code, librarian_name, librarian_type, librarian_status, librarian_email, librarian_user
     FROM tbl_librarian where librarian_type = 'Colaborador' AND librarian_status = 'Ativo'
-      ORDER BY librarian_code DESC`
+      ORDER BY librarian_code DESC`;
 
-  const [rows] = await conn.query(sql)
+  const [rows] = await conn.query(sql);
 
-  conn.end()
+  conn.end();
 
-  return rows
+  return rows;
 }
 
 // Atualiza os dados do colaborador
-async function updateCollaborator(data){
-  const {name, email, user, id} = data
+async function updateCollaborator(data) {
+  const { name, email, user, id } = data;
 
-  const conn = await db.connect()
+  const conn = await db.connect();
 
   const sql = `UPDATE tbl_librarian SET
   librarian_name = ?, librarian_email = ?, librarian_user = ? 
-    WHERE librarian_code = ?`
+    WHERE librarian_code = ?`;
 
-  const values = [name, email, user, id]
+  const values = [name, email, user, id];
 
-  await conn.query(sql, values)
+  await conn.query(sql, values);
 
-  conn.end()
+  conn.end();
 }
 
 // Altera status do colaborador para inativo
-async function desativateCollaborator(id){
-  const conn = await db.connect()
+async function desativateCollaborator(id) {
+  const conn = await db.connect();
 
-  const sql = 'UPDATE tbl_librarian SET librarian_status = ? WHERE librarian_code = ?'
+  const sql =
+    "UPDATE tbl_librarian SET librarian_status = ? WHERE librarian_code = ?";
 
-  const values = ['Inativo', id]
+  const values = ["Inativo", id];
 
-  await conn.query(sql, values)
+  await conn.query(sql, values);
 
-  conn.end()
+  conn.end();
 }
 
-export default{
+export default {
   createCollaborator,
   loginCollaborator,
   getAllCollaborators,
   updateCollaborator,
-  desativateCollaborator
-}
+  desativateCollaborator,
+};

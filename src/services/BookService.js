@@ -1,130 +1,151 @@
-import db from '../database/connection.js'
+import db from "../database/connection.js";
 
 // Insere um novo livro no banco de dados
-async function insertBook(data){
-    const conn = await db.connect()
+async function insertBook(data) {
+  const conn = await db.connect();
 
-    const {title, edition, isbn, year, category, cdd, idiom, author} = data
+  const { title, edition, isbn, year, category, cdd, idiom, author } = data;
 
-    const sql = 'INSERT INTO tbl_book (book_name, book_edition, book_isbn, release_year, category_name, book_cdd, book_language, book_author) VALUES (?, ?, ?, ?, ?, ?, ?, ?)'
-    const values = [title, edition, isbn, year, category, cdd, idiom, author]
+  const sql =
+    "INSERT INTO tbl_book (book_name, book_edition, book_isbn, release_year, category_name, book_cdd, book_language, book_author) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+  const values = [title, edition, isbn, year, category, cdd, idiom, author];
 
-    await conn.query(sql, values)
+  await conn.query(sql, values);
 
-    conn.end()
+  conn.end();
 }
 
 // Coleta todos os livros do banco de dados
-async function getAllBooks(){
-    const conn = await db.connect()
+async function getAllBooks() {
+  const conn = await db.connect();
 
-    const sql = 'SELECT * FROM tbl_book ORDER BY book_code DESC'
+  const sql = "SELECT * FROM tbl_book ORDER BY book_code DESC";
 
-    const [rows] = await conn.query(sql)
+  const [rows] = await conn.query(sql);
 
-    conn.end()
-    return rows
+  conn.end();
+  return rows;
 }
 
-async function getCountBooks(){
-    const conn = await db.connect()
+async function getCountBooks() {
+  const conn = await db.connect();
 
-    const sql = 'SELECT COUNT(*) AS total FROM tbl_book'
+  const sql = "SELECT COUNT(*) AS total FROM tbl_book";
 
-    const [rows] = await conn.query(sql)
+  const [rows] = await conn.query(sql);
 
-    conn.end()
-    return rows
+  conn.end();
+  return rows;
 }
 
 // Coleta todas as cateogorias do banco de dados
-async function getAllCategory(){
-    const conn = await db.connect()
+async function getAllCategory() {
+  const conn = await db.connect();
 
-    const sql = 'SELECT category_name AS category FROM tbl_book group by category'
-    const [rows] = await conn.query(sql)
+  const sql =
+    "SELECT category_name AS category FROM tbl_book group by category";
+  const [rows] = await conn.query(sql);
 
-    conn.end()
-    return rows
+  conn.end();
+  return rows;
 }
 
 // Pesquisa o livro pelo autor
-async function getBookByAuthor(author){
-    const conn = await db.connect()
+async function getBookByAuthor(author) {
+  const conn = await db.connect();
 
-    const sql = 'SELECT * FROM tbl_book WHERE book_author like ?'
-    const values = `%${author}%`
+  const sql = "SELECT * FROM tbl_book WHERE book_author like ?";
+  const values = `%${author}%`;
 
-    const [rows] = await conn.query(sql, values)
+  const [rows] = await conn.query(sql, values);
 
-    conn.end()
-    return rows
+  conn.end();
+  return rows;
 }
 
 // Pesquisa livro pelo nome
-async function getBookByName(name){
-    const conn = await db.connect()
+async function getBookByName(name) {
+  const conn = await db.connect();
 
-    const sql = 'SELECT * FROM tbl_book WHERE book_name like ?'
-    const values = `%${name}%`
+  const sql = "SELECT * FROM tbl_book WHERE book_name like ?";
+  const values = `%${name}%`;
 
-    const [rows] = await conn.query(sql, values)
+  const [rows] = await conn.query(sql, values);
 
-    conn.end()
-    return rows
+  conn.end();
+  return rows;
 }
 
 // Pesquisa livro por categoria
-async function getBookByCategory(category){
-    const conn = await db.connect()
+async function getBookByCategory(category) {
+  const conn = await db.connect();
 
-    const sql = 'SELECT * FROM tbl_book WHERE category_name like ?'
-    const values = `%${category}%`
+  const sql = "SELECT * FROM tbl_book WHERE category_name like ?";
+  const values = `%${category}%`;
 
-    const [rows] = await conn.query(sql, values)
+  const [rows] = await conn.query(sql, values);
 
-    conn.end()
-    return rows
+  conn.end();
+  return rows;
 }
 
 // Atualiza os dados do livro
-async function updateBook(data){
+async function updateBook(data) {
+  const conn = await db.connect();
 
-    const conn = await db.connect()
+  const {
+    title,
+    edition,
+    isbn,
+    release_year,
+    category,
+    cdd,
+    language,
+    author,
+    id,
+  } = data;
 
-    const {title, edition, isbn, release_year, category, cdd, language, author, id} = data
-
-    const sql = `
+  const sql = `
     UPDATE tbl_book SET
         book_name = ?, book_edition = ?, book_isbn = ?, release_year = ?,
         category_name = ?, book_cdd = ?, book_language = ?, book_author = ? 
-            WHERE book_code = ?`
-    
-    const values = [title, edition, isbn, release_year, category, cdd, language, author, id]
+            WHERE book_code = ?`;
 
-    await conn.query(sql, values)
+  const values = [
+    title,
+    edition,
+    isbn,
+    release_year,
+    category,
+    cdd,
+    language,
+    author,
+    id,
+  ];
 
-    conn.end()
+  await conn.query(sql, values);
+
+  conn.end();
 }
 
 // deleta um livro
-async function deleteBook(id){
-    const conn = await db.connect()
+async function deleteBook(id) {
+  const conn = await db.connect();
 
-    const sql = 'DELETE FROM tbl_book WHERE book_code = ?'
-    
-    await conn.query(sql, id)
+  const sql = "DELETE FROM tbl_book WHERE book_code = ?";
 
-    conn.end()
+  await conn.query(sql, id);
+
+  conn.end();
 }
 
 export default {
-    insertBook,
-    getAllBooks,
-    getCountBooks,
-    getBookByAuthor,
-    getBookByName,
-    getBookByCategory,
-    updateBook,
-    deleteBook
-}
+  insertBook,
+  getAllBooks,
+  getCountBooks,
+  getBookByAuthor,
+  getBookByName,
+  getBookByCategory,
+  updateBook,
+  deleteBook,
+};

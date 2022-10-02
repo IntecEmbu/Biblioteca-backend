@@ -96,4 +96,4 @@ SELECT a.lending_code, a.return_prediction, b.user_name, b.user_email, c.book_na
 		where return_date IS NULL AND return_prediction <= CURRENT_DATE + INTERVAL 1 DAY AND 
 			a.FK_user = b.user_code AND a.FK_book = c.book_code;
 
-/*
+*/

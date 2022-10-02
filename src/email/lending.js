@@ -1,11 +1,18 @@
-import emailTemplate from './template.js'
-import sendEmail from '../services/sendEmail.js'
+import emailTemplate from "./template.js";
+import sendEmail from "../services/sendEmail.js";
 
-async function welcomeUser(name, to, book_name, lending_id, day_week, return_prediction){
-    const html = emailTemplate(
-        'Empréstimo realizado!',
-        name,
-        `<p>
+async function welcomeUser(
+  name,
+  to,
+  book_name,
+  lending_id,
+  day_week,
+  return_prediction
+) {
+  const html = emailTemplate(
+    "Empréstimo realizado!",
+    name,
+    `<p>
             Você pegou o livro <b>${book_name}</b> emprestado na biblioteca da ETEC de Embu. Fique atento com o
             prazo, pois o atraso na devolução do livro resultará em multa.
           </p>
@@ -15,11 +22,11 @@ async function welcomeUser(name, to, book_name, lending_id, day_week, return_pre
             <br>
             Data de devolução: ${return_prediction} (${day_week})
           </p>`
-    )
-    
-    const subject = 'Empréstimo realizado!'
+  );
 
-    await sendEmail(to, subject,html)
+  const subject = "Empréstimo realizado!";
+
+  await sendEmail(to, subject, html);
 }
 
-export default welcomeUser
+export default welcomeUser;
