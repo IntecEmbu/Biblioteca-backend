@@ -10,7 +10,7 @@ async function insertBook(data) {
     (book_name, book_edition, book_isbn, release_year, category_name, book_cdd, book_language, book_author)
       VALUES (?, ?, ?, ?, ?, ?, ?, ?)`;
 
-  const quantity_sql = `INSERT INTO tbl_quantity (book_code) 
+  const quantity_sql = `INSERT INTO tbl_quantity (quantity_code) 
     VALUES (SELECT book_code FROM tbl_book WHERE book_isbn = ? and book_author = ?, book_name = ?)`;
 
   const book_values = [

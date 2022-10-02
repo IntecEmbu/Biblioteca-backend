@@ -100,3 +100,4 @@ SELECT a.book_code, a.book_isbn, a.book_cdd, a.book_name, a.book_language, a.cat
 		where a.book_code = b.FK_book;
 
 # DROP VIEW IF EXISTS vw_lending;
+# DROP VIEW IF EXISTS vw_all_books;
