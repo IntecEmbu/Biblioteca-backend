@@ -35,8 +35,7 @@ async function returnBook(lending_id) {
 async function getAllNotReturned() {
   const conn = await db.connect();
 
-  const sql =
-    "SELECT * FROM tbl_lending WHERE return_date IS NULL ORDER BY lending_code DESC";
+  const sql = "SELECT * FROM VW_lending_pending ORDER BY lending_code DESC";
 
   const [rows] = await conn.query(sql);
 
