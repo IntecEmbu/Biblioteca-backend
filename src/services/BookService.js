@@ -7,11 +7,14 @@ async function insertBook(data) {
   const { title, edition, isbn, year, category, cdd, idiom, author } = data;
 
   const book_sql = `INSERT INTO tbl_book 
-    (book_name, book_edition, book_isbn, release_year, category_name, book_cdd, book_language, book_author)
+    (book_name, book_edition, book_isbn, release_year, category_name, 
+    book_cdd, book_language, book_author)
       VALUES (?, ?, ?, ?, ?, ?, ?, ?)`;
 
   const quantity_sql = `INSERT INTO tbl_quantity (FK_book) 
-    VALUES (SELECT book_code FROM tbl_book WHERE book_isbn = ? and book_author = ?, book_name = ?)`;
+    VALUES (SELECT book_code FROM tbl_book WHERE book_name = ? and book_edition = ? and
+      book_isbn = ? and release_year = ? and category_name = ? and book_cdd = ? and
+      book_language = ? and book_author = ?)`;
 
   const book_values = [
     title,
@@ -23,10 +26,9 @@ async function insertBook(data) {
     idiom,
     author,
   ];
-  const quantity_values = [isbn, author, title];
 
   await conn.query(book_sql, book_values);
-  await conn.query(quantity_sql, quantity_values); // não sei se está certo
+  await conn.query(quantity_sql, book_values);
 
   conn.end();
 }
