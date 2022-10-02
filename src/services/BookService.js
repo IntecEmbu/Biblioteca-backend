@@ -28,7 +28,7 @@ async function insertBook(data) {
   const conn = await db.connect();
 
   const [rows] = await conn.query(
-    "SELECT (*) FROM tbl_book WHERE book_name = ? and book_edition = ? and book_isbn = ? and release_year = ? and category_name = ? and book_cdd = ? and book_language = ? and book_author = ?",
+    "SELECT count(*) total FROM tbl_book WHERE book_name = ? and book_edition = ? and book_isbn = ? and release_year = ? and category_name = ? and book_cdd = ? and book_language = ? and book_author = ?",
     book_values
   );
 
