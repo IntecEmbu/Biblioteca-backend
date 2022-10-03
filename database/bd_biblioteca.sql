@@ -17,8 +17,8 @@ CREATE TABLE tbl_user(
 	user_name VARCHAR(45) NOT NULL,
 	user_type ENUM ('Aluno', 'Funcionario') NOT NULL,
 	user_email VARCHAR(45) NOT NULL,
-	user_cpf VARCHAR(11) NOT NULL,
-  user_phone  VARCHAR(14) NOT NULL,	
+	user_cpf VARCHAR(20) NOT NULL,
+  user_phone  VARCHAR(20) NOT NULL,	
 	user_course VARCHAR(45) NOT NULL
 );
 
