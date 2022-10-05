@@ -67,8 +67,8 @@ CREATE TABLE tbl_penalty(
 CREATE TABLE tbl_quantity(
 	quantity_code INT(10) AUTO_INCREMENT PRIMARY KEY,
 	FK_book INT(10) NOT NULL,
-  quantity_total int(10) DEFAULT 0 NOT NULL,
-  quantity_circulation int(10) DEFAULT 0 NOT NULL,
+  quantity_total int(10) DEFAULT 1 NOT NULL,
+  quantity_circulation int(10) DEFAULT 1 NOT NULL,
   quantity_stopped int(10) DEFAULT 0 NOT NULL,
   CONSTRAINT FK_book_quantity FOREIGN KEY ( FK_book) REFERENCES tbl_book (book_code)
 );
