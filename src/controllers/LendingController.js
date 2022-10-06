@@ -90,7 +90,7 @@ router.post(
 // Descrição: Lista os emprestimos não devolvidos
 router.get("/not-returned", async (req, res) => {
   try {
-    const result = await db.getNotReturned();
+    const result = await db.getAllNotReturned();
 
     if (result.length > 0) {
       return res.status(204).json({
