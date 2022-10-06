@@ -15,10 +15,6 @@ router.post(
       .withMessage("Librarian id is required"),
     body("book_id").not().isEmpty().withMessage("Book id is required"),
     body("user_cpf").not().isEmpty().withMessage("User CPF is required"),
-    body("return_prediction")
-      .not()
-      .isEmpty()
-      .withMessage("Return prediction is required"),
   ],
   async (req, res) => {
     const errors = validationResult(req);
@@ -31,14 +27,21 @@ router.post(
     const { librarian_id, book_id, user_cpf } = req.body;
 
     try {
-      await db.createLending({
+      const result = await db.createLending({
         librarian_id,
         book_id,
         user_cpf,
-        return_prediction,
       });
-      res.status(200).json({
-        message: "Lending created successfully",
+
+      if (result) {
+        return res.status(400).json({
+          error: result.error,
+        });
+      }
+      console.log(result);
+
+      return res.status(200).json({
+        message: "Lending created successfully!",
       });
     } catch (error) {
       return res.status(500).json({
@@ -64,9 +67,16 @@ router.post(
     const { lending_id } = req.body;
 
     try {
-      await db.returnBook(lending_id);
-      res.status(200).json({
-        message: "Book returned successfully",
+      const result = await db.returnBook(lending_id);
+
+      if (result) {
+        return res.status(400).json({
+          error: result.error,
+        });
+      }
+
+      return res.status(200).json({
+        message: "Book returned successfully!",
       });
     } catch (error) {
       return res.status(500).json({

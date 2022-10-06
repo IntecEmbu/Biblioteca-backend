@@ -38,7 +38,7 @@ CREATE TABLE tbl_book(
 CREATE TABLE tbl_lending(
 	lending_code INT(10) PRIMARY KEY AUTO_INCREMENT,
 	withdraw_date DATE NOT NULL,
-    return_prediction DATE NOT NULL,
+  return_prediction DATE NOT NULL,
 	return_date DATE,
 	FK_user INT(10) NOT NULL,
 	FK_librarian INT(10) NOT NULL,
@@ -81,10 +81,9 @@ DROP TABLE IF EXISTS tbl_lending;
 DROP TABLE IF EXISTS tbl_book;
 DROP TABLE IF EXISTS tbl_user;
 DROP TABLE IF EXISTS tbl_librarian;
-/*
+*/
 
 # VIEWS
-/*
 
 # Livros proximos da devolução de 1 dia
 CREATE VIEW VW_lending_CloseToDate_4 AS
@@ -92,7 +91,7 @@ SELECT a.lending_code, a.return_prediction, b.user_name, b.user_email, c.book_na
 	from tbl_lending a, tbl_user b, tbl_book c
 		where return_date IS NULL AND return_prediction <= CURRENT_DATE + INTERVAL 4 DAY AND 
 			a.FK_user = b.user_code AND a.FK_book = c.book_code;
-*/
+
 
 # Todos os livros com quantidade
 CREATE VIEW VW_all_books AS
@@ -105,6 +104,9 @@ CREATE VIEW VW_lending_pending AS
 SELECT a.lending_code, a.withdraw_date, a.return_prediction, b.user_name, b.user_course, c.book_name, d.librarian_name
 	from tbl_lending a, tbl_user b, tbl_book c, tbl_librarian d
 		where a.return_date IS NULL AND a.FK_user = b.user_code AND a.FK_book = c.book_code AND a.FK_librarian = d.librarian_code;
+
+# Verifica se existe livro disponivel
+SELECT * FROM tbl_quantity WHERE FK_book = ? AND quantity_circulation > 0;
 
 # DROP VIWE IF EXISTS VW_lending_CloseToDate_4
 # DROP VIEW IF EXISTS VW_all_books;
