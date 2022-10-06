@@ -34,7 +34,7 @@ router.post(
       });
 
       if (result) {
-        return res.status(400).json({
+        return res.status(401).json({
           error: result.error,
         });
       }
