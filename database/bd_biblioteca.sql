@@ -105,9 +105,12 @@ SELECT a.lending_code, a.withdraw_date, a.return_prediction, b.user_name, b.user
 	from tbl_lending a, tbl_user b, tbl_book c, tbl_librarian d
 		where a.return_date IS NULL AND a.FK_user = b.user_code AND a.FK_book = c.book_code AND a.FK_librarian = d.librarian_code;
 
-# Verifica se existe livro disponivel
-SELECT * FROM tbl_quantity WHERE FK_book = ? AND quantity_circulation > 0;
+# Quantidade de livros parados e em circulação, quantidade e total
+CREATE VIEW VW_quantity AS
+	SELECT sum(quantity_total) as total, sum(quantity_circulation) as circulation, sum(quantity_stopped) as stopped
+		from tbl_quantity;
 
 # DROP VIWE IF EXISTS VW_lending_CloseToDate_4
 # DROP VIEW IF EXISTS VW_all_books;
 # DROP VIEW IF EXISTS VW_lending_pending;
+# DROP VIEW IF EXISTS VW_quantity;
