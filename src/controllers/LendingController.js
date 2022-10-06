@@ -92,17 +92,23 @@ router.get("/not-returned", async (req, res) => {
   try {
     const result = await db.getAllNotReturned();
 
-    if (result.length > 0) {
-      return res.status(204).json({
-        message: "Not returned found",
-        data: result,
-      });
-    }
-
-    res.status(200).json({
-      message: "Not returned list",
-      data: result,
+    // Formata a data para dd/mm/yyyy e remove o horario
+    result.forEach((lending) => {
+      lending.withdraw_date = lending.withdraw_date
+        .toISOString()
+        .split("T")[0]
+        .split("-")
+        .reverse()
+        .join("/");
+      lending.return_prediction = lending.return_prediction
+        .toISOString()
+        .split("T")[0]
+        .split("-")
+        .reverse()
+        .join("/");
     });
+
+    return res.status(200).json(result);
   } catch (error) {
     return res.status(500).json({
       DatabaseError: error.message,
@@ -116,17 +122,7 @@ router.get("/all", async (req, res) => {
   try {
     const result = await db.getAll();
 
-    if (result.length > 0) {
-      return res.status(204).json({
-        message: "All found",
-        data: result,
-      });
-    }
-
-    res.status(200).json({
-      message: "All list",
-      data: result,
-    });
+    return res.status(200).json(result);
   } catch (error) {
     return res.status(500).json({
       DatabaseError: error.message,
