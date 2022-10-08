@@ -197,7 +197,13 @@
 
 #### Todos os empréstimos `.../lending/all`
 
-<br>
+#
+
+# Rota de Relátório 📄
+
+> ### Método GET 📬
+
+#### Coleta a quantidade de livros parados, emprestados e em circulação `.../report/quantity-book"`
 
 # Funcionalidades Externas 🌳
 
