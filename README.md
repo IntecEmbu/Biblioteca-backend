@@ -205,6 +205,8 @@
 
 #### Coleta a quantidade de livros parados, emprestados e em circulação `.../report/quantity-book"`
 
+<br>
+
 # Funcionalidades Externas 🌳
 
 ## [API Auxiliar](https://github.com/pedroFnseca/Subprocess-API) 📈
