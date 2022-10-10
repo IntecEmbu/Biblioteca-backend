@@ -207,10 +207,7 @@
 
 <br>
 
-# Funcionalidades Externas 🌳
+## Projetos relacionados 📁
 
-## [API Auxiliar](https://github.com/pedroFnseca/Subprocess-API) 📈
-
-> #### Envio emails automaticamente para os usuarios quando estiver proximo da data de devolução do livro, realizando processamentos de rotina.
->
-> #### Verificação e aplicação de multa para os usuarios que não devolveram o livro dentro do tempo estipulado.
+- ### [Backend](https://github.com/IntecEmbu/Biblioteca-backend) - API REST desenvolvida em NodeJS.
+- ### [Backend auxiliar](https://github.com/PedroFnseca/Subprocess-API) - Desenvolvida em Nodejs para auxiliar o sistema aplicando multas e avisos de email.
