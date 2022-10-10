@@ -110,6 +110,11 @@ CREATE VIEW VW_quantity AS
 	SELECT sum(quantity_total) as total, sum(quantity_circulation) as circulation, sum(quantity_stopped) as stopped
 		from tbl_quantity;
 
+# Coleta os emprestimos em atraso
+CREATE VIEW VW_lending_delay AS
+	SELECT * from tbl_lending
+		where return_data IS NULL AND return_prediction < (SELECT CURRENT_DATE);
+
 # DROP VIWE IF EXISTS VW_lending_CloseToDate_4
 # DROP VIEW IF EXISTS VW_all_books;
 # DROP VIEW IF EXISTS VW_lending_pending;
