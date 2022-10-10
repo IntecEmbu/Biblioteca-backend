@@ -12,6 +12,18 @@ async function getBookQuantity() {
   return rows;
 }
 
+async function getTopReaders() {
+  const conn = await db.connect();
+
+  const sql = "SELECT * FROM VW_top_readers";
+
+  const [rows] = await conn.query(sql);
+  conn.end();
+
+  return rows;
+}
+
 export default {
   getBookQuantity,
+  getTopReaders,
 };

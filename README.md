@@ -205,6 +205,8 @@
 
 #### Coleta a quantidade de livros parados, emprestados e em circulação `.../report/quantity-book"`
 
+#### Coleta os leitores que mais coletaram livros `.../report/top-readers`
+
 <br>
 
 ## Projetos relacionados 📁

@@ -113,9 +113,20 @@ CREATE VIEW VW_quantity AS
 # Coleta os emprestimos em atraso
 CREATE VIEW VW_lending_delay AS
 	SELECT * from tbl_lending
-		where return_data IS NULL AND return_prediction < (SELECT CURRENT_DATE);
+		where return_date IS NULL AND return_prediction < (SELECT CURRENT_DATE);
+
+# Coleta os 3 leitores que mais coletaram livros no ultimo mes
+CREATE VIEW VW_top_readers AS
+	SELECT a.user_name as name,
+		FROM tbl_user a, tbl_lending b
+			where a.user_code = b.FK_user AND b.withdraw_date >= (SELECT CURRENT_DATE - INTERVAL 1 MONTH)
+				GROUP BY a.user_name
+					ORDER BY COUNT(a.user_name) DESC
+						LIMIT 3;
 
 # DROP VIWE IF EXISTS VW_lending_CloseToDate_4
 # DROP VIEW IF EXISTS VW_all_books;
 # DROP VIEW IF EXISTS VW_lending_pending;
 # DROP VIEW IF EXISTS VW_quantity;
+# DROP VIEW IF EXISTS VW_lending_delay;
+# DROP VIEW IF EXISTS VW_top_readers;
