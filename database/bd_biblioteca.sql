@@ -38,8 +38,10 @@ CREATE TABLE tbl_book(
 CREATE TABLE tbl_lending(
 	lending_code INT(10) PRIMARY KEY AUTO_INCREMENT,
 	withdraw_date DATE NOT NULL,
-  return_prediction DATE NOT NULL,
+  	return_prediction DATE NOT NULL,
 	return_date DATE,
+	warning BOOLEAN NOT NULL DEFAULT false,
+	overdue BOOLEAN NOT NULL DEFAULT false,
 	FK_user INT(10) NOT NULL,
 	FK_librarian INT(10) NOT NULL,
     FK_book INT(10) NOT NULL,
@@ -48,29 +50,13 @@ CREATE TABLE tbl_lending(
     CONSTRAINT FK_book_lending FOREIGN KEY (FK_book) REFERENCES tbl_book (book_code)
 );
 
-CREATE TABLE tbl_penalty(
-    FK_user INT(10) NOT NULL,
-    FK_book INT(10) NOT NULL,
-    FK_librarian INT(10) NOT NULL,
-    FK_lending INT (10) NOT NULL,
-    PRIMARY KEY(FK_user, FK_book,FK_librarian,FK_lending),
-    CONSTRAINT FK_user_penalty FOREIGN KEY ( FK_user) REFERENCES tbl_user (user_code),
-    CONSTRAINT FK_book_penalty FOREIGN KEY ( FK_book) REFERENCES tbl_book (book_code),
-    CONSTRAINT FK_librarian_penalty FOREIGN KEY ( FK_librarian) REFERENCES tbl_librarian (librarian_code),
-    CONSTRAINT FK_lending_penalty FOREIGN KEY ( FK_lending) REFERENCES tbl_lending (lending_code),
-    penalty_desc VARCHAR(10) NOT NULL,
-    penalty_init DATE NOT NULL,
-    penalty_finish DATE,
-		penalty_value FLOAT(10,2) NOT NULL DEFAULT 0.00
-);
-
 CREATE TABLE tbl_quantity(
 	quantity_code INT(10) AUTO_INCREMENT PRIMARY KEY,
 	FK_book INT(10) NOT NULL,
-  quantity_total int(10) DEFAULT 1 NOT NULL,
-  quantity_circulation int(10) DEFAULT 1 NOT NULL,
-  quantity_stopped int(10) DEFAULT 0 NOT NULL,
-  CONSTRAINT FK_book_quantity FOREIGN KEY ( FK_book) REFERENCES tbl_book (book_code)
+  	quantity_total int(10) DEFAULT 1 NOT NULL,
+  	quantity_circulation int(10) DEFAULT 1 NOT NULL,
+  	quantity_stopped int(10) DEFAULT 0 NOT NULL,
+  	CONSTRAINT FK_book_quantity FOREIGN KEY ( FK_book) REFERENCES tbl_book (book_code)
 );
 
 # Scripts Para deletar todas as tabelas na nuvem
