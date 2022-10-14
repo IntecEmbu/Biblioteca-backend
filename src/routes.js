@@ -4,7 +4,6 @@ import librian from "./controllers/LibrarianController.js";
 import user from "./controllers/UserController.js";
 import lending from "./controllers/LendingController.js";
 import report from "./controllers/ReportController.js";
-import verifyJWT from "./middlewares/jwt.js";
 
 const router = express.Router();
 
