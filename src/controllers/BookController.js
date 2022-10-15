@@ -18,7 +18,7 @@ router.post(
     body("idiom").not().isEmpty().withMessage("Idiom is required"),
     body("author").not().isEmpty().withMessage("Author is required"),
   ],
-  async (req, res) => {
+  async (req, res, next) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).json({
@@ -42,47 +42,52 @@ router.post(
       });
 
       if (result) {
-        return res.status(200).json({
+        res.status(200).json({
           message: "Book inserted successfully",
         });
       } else {
-        return res.status(401).json({
+        res.status(401).json({
           message: "Book already exists",
         });
       }
     } catch (error) {
-      return res.status(500).json({
+      res.status(500).json({
         DatabaseError: error.message,
       });
+    } finally{
+      next();
     }
   }
 );
 
 // Endpoint: /book/all (GET)
 // Descrição: Retorna todos os livros
-router.get("/all", async (req, res) => {
+router.get("/all", async (req, res, next) => {
   try {
     const results = await db.getAllBooks();
 
     if (results.length === 0) {
-      return res.status(204).json({
+      res.status(204).json({
         message: "No books found",
+      });
+    } else{
+      res.status(200).json({
+        books: results,
       });
     }
 
-    res.status(200).json({
-      books: results,
-    });
   } catch (error) {
-    return res.status(500).json({
+    res.status(500).json({
       DatabaseError: error.message,
     });
+  } finally{
+    next();
   }
 });
 
 // Endpoint: /book/all-count (GET)
 // Decrição: Conta todos os livros
-router.get("/all-count", async (req, res) => {
+router.get("/all-count", async (req, res, next) => {
   try {
     const results = await db.getCountBooks();
 
@@ -90,83 +95,94 @@ router.get("/all-count", async (req, res) => {
       count: results[0].total,
     });
   } catch (error) {
-    return res.status(500).json({
+    res.status(500).json({
       DatabaseError: error.message,
     });
+  } finally{
+    next();
   }
 });
 
 // Endpoint: /book/search-author (GET)
 // Descrição: Busca um livro pelo autor
-router.get("/search-author", async (req, res) => {
+router.get("/search-author", async (req, res, next) => {
   const { author } = req.query;
 
   try {
     const results = await db.getBookByAuthor(author);
 
     if (results.length === 0) {
-      return res.status(204).json({
+      res.status(204).json({
         message: "No books found",
+      });
+    } else{
+      res.status(200).json({
+        books: results,
       });
     }
 
-    res.status(200).json({
-      books: results,
-    });
   } catch (error) {
-    return res.status(500).json({
+    res.status(500).json({
       DatabaseError: error.message,
     });
+  } finally{
+    next();
   }
 });
 
 // Endpoint: /book/search-name (GET)
 // Descrição: Busca um livro pelo nome
-router.get("/search-name", async (req, res) => {
+router.get("/search-name", async (req, res, next) => {
   const { name } = req.query;
 
   try {
     const results = await db.getBookByName(name);
 
     if (results.length === 0) {
-      return res.status(204).json({
+      res.status(204).json({
         message: "No books found",
+      });
+    } else{
+      res.status(200).json({
+        books: results,
       });
     }
 
-    res.status(200).json({
-      books: results,
-    });
   } catch (error) {
     return res.status(500).json({
       DatabaseError: error.message,
     });
+  } finally{
+    next();
   }
 });
 
 // Endpoint: /book/search-category (GET)
 // Descrição: Busca um livro pelo categoria
-router.get("/search-category", async (req, res) => {
+router.get("/search-category", async (req, res, next) => {
   const { category } = req.query;
 
   try {
     const results = await db.getBookByCategory(category);
 
     if (results.length === 0) {
-      return res.status(204).json({
+      res.status(204).json({
         message: "No books found",
+      });
+    } else {
+      res.status(200).json({
+        books: results,
       });
     }
 
-    res.status(200).json({
-      books: results,
-    });
   } catch (error) {
     return res.status(500).json({
       DatabaseError: error.message,
     });
+  } finally{
+    next();
   }
-});
+}); 
 
 // Endpoint: /book/update-book (PUT)
 // Descrição: Atualiza um livro
@@ -186,7 +202,7 @@ router.put(
     body("author").not().isEmpty().withMessage("Author is required"),
     body("id").not().isEmpty().withMessage("ID is required"),
   ],
-  async (req, res) => {
+  async (req, res, next) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).json({
@@ -223,9 +239,11 @@ router.put(
         message: "Book updated successfully",
       });
     } catch (error) {
-      return res.status(500).json({
+      res.status(500).json({
         DatabaseError: error.message,
       });
+    } finally{
+      next();
     }
   }
 );
@@ -247,9 +265,11 @@ router.delete("/", async (req, res) => {
       message: "Book deleted successfully",
     });
   } catch (error) {
-    return res.status(500).json({
+    res.status(500).json({
       DatabaseError: error.message,
     });
+  } finally{
+    next();
   }
 });
 

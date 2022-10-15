@@ -5,18 +5,20 @@ const router = express.Router();
 
 // ENDPOINT: /reports/book-quantity (GET)
 // Descrição: Coleta a quantidade de livros parados, circulção e total
-router.get("/quantity-book", async (req, res) => {
+router.get("/quantity-book", async (req, res, next) => {
   try {
     const result = await ReportService.getBookQuantity();
     res.status(200).send(result);
   } catch (err) {
     res.status(500).send(err.message);
+  } finally{
+    next();
   }
 });
 
 // ENDPOINT: /reports/top-readers (GET)
 // Descrição: Coleta os 3 leitores que mais coletaram livros no ultimo mes
-router.get("/top-readers", async (req, res) => {
+router.get("/top-readers", async (req, res, next) => {
   try {
     const result = await ReportService.getTopReaders();
 
@@ -40,6 +42,8 @@ router.get("/top-readers", async (req, res) => {
     res.status(200).send(names);
   } catch (err) {
     res.status(500).send(err.message);
+  } finally{
+    next();
   }
 });
 

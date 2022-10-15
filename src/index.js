@@ -11,7 +11,9 @@ const port = process.env.PORT || 3333;
 api.use(cors());
 api.use(express.json());
 
-api.use("/", routes);
+api.use("/", routes, (req, res) => {
+  console.log("teste")
+});
 
 api.listen(port, () => {
   console.log(`server is running in ${port}`);

@@ -5,7 +5,7 @@ USE bd_biblioteca;
 CREATE TABLE tbl_librarian(
 	librarian_code INT(10) PRIMARY KEY AUTO_INCREMENT ,
 	librarian_name  VARCHAR (45) NOT NULL,
-  librarian_user VARCHAR(45) UNIQUE NOT NUll,
+  	librarian_user VARCHAR(45) UNIQUE NOT NUll,
 	librarian_email VARCHAR(45) UNIQUE NOT NULL,
 	librarian_password VARCHAR(30) NOT NULL,
 	librarian_type ENUM ('Bibliotecario','Colaborador', 'ADM') NOT NULL,
@@ -18,7 +18,7 @@ CREATE TABLE tbl_user(
 	user_type ENUM ('Aluno', 'Funcionario') NOT NULL,
 	user_email VARCHAR(45) NOT NULL,
 	user_cpf VARCHAR(20) NOT NULL,
-  user_phone  VARCHAR(20) NOT NULL,	
+  	user_phone  VARCHAR(20) NOT NULL,	
 	user_course VARCHAR(45) NOT NULL
 );
 
@@ -35,6 +35,15 @@ CREATE TABLE tbl_book(
 	book_date_register TIMESTAMP
 );
 
+CREATE TABLE tbl_quantity(
+	quantity_code INT(10) AUTO_INCREMENT PRIMARY KEY,
+	FK_book INT(10) NOT NULL,
+  	quantity_total int(10) DEFAULT 1 NOT NULL,
+  	quantity_circulation int(10) DEFAULT 0 NOT NULL,
+  	quantity_stopped int(10) DEFAULT 1 NOT NULL,
+  	CONSTRAINT FK_book_quantity FOREIGN KEY ( FK_book) REFERENCES tbl_book (book_code)
+);
+
 CREATE TABLE tbl_lending(
 	lending_code INT(10) PRIMARY KEY AUTO_INCREMENT,
 	withdraw_date DATE NOT NULL,
@@ -42,6 +51,7 @@ CREATE TABLE tbl_lending(
 	return_date DATE,
 	warning BOOLEAN NOT NULL DEFAULT false,
 	overdue BOOLEAN NOT NULL DEFAULT false,
+	penalty FLOAT(10,2) NOT NULL DEFAULT 0.00,
 	FK_user INT(10) NOT NULL,
 	FK_librarian INT(10) NOT NULL,
     FK_book INT(10) NOT NULL,
@@ -50,20 +60,10 @@ CREATE TABLE tbl_lending(
     CONSTRAINT FK_book_lending FOREIGN KEY (FK_book) REFERENCES tbl_book (book_code)
 );
 
-CREATE TABLE tbl_quantity(
-	quantity_code INT(10) AUTO_INCREMENT PRIMARY KEY,
-	FK_book INT(10) NOT NULL,
-  	quantity_total int(10) DEFAULT 1 NOT NULL,
-  	quantity_circulation int(10) DEFAULT 1 NOT NULL,
-  	quantity_stopped int(10) DEFAULT 0 NOT NULL,
-  	CONSTRAINT FK_book_quantity FOREIGN KEY ( FK_book) REFERENCES tbl_book (book_code)
-);
-
 # Scripts Para deletar todas as tabelas na nuvem
 /*
-DROP TABLE IF EXISTS tbl_quantity;
-DROP TABLE IF EXISTS tbl_penalty;
 DROP TABLE IF EXISTS tbl_lending;
+DROP TABLE IF EXISTS tbl_quantity;
 DROP TABLE IF EXISTS tbl_book;
 DROP TABLE IF EXISTS tbl_user;
 DROP TABLE IF EXISTS tbl_librarian;
@@ -71,13 +71,12 @@ DROP TABLE IF EXISTS tbl_librarian;
 
 # VIEWS
 
-# Livros proximos da devolução de 1 dia
+# Livros proximos da devolução de 4 dias
 CREATE VIEW VW_lending_CloseToDate_4 AS
 SELECT a.lending_code, a.return_prediction, b.user_name, b.user_email, c.book_name
 	from tbl_lending a, tbl_user b, tbl_book c
 		where return_date IS NULL AND return_prediction <= CURRENT_DATE + INTERVAL 4 DAY AND 
-			a.FK_user = b.user_code AND a.FK_book = c.book_code;
-
+			a.FK_user = b.user_code AND a.FK_book = c.book_code AND warning = false;
 
 # Todos os livros com quantidade
 CREATE VIEW VW_all_books AS
@@ -110,7 +109,7 @@ CREATE VIEW VW_top_readers AS
 					ORDER BY COUNT(a.user_name) DESC
 						LIMIT 3;
 
-# DROP VIWE IF EXISTS VW_lending_CloseToDate_4
+# DROP VIEW IF EXISTS VW_lending_CloseToDate_4
 # DROP VIEW IF EXISTS VW_all_books;
 # DROP VIEW IF EXISTS VW_lending_pending;
 # DROP VIEW IF EXISTS VW_quantity;

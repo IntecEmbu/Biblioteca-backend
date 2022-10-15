@@ -14,7 +14,7 @@ router.post(
     body("password").not().isEmpty().withMessage("Password is required"),
     body("user").not().isEmpty().withMessage("User is required"),
   ],
-  async (req, res) => {
+  async (req, res, next) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).json({
@@ -30,9 +30,11 @@ router.post(
         message: "Voluntary inserted successfully",
       });
     } catch (error) {
-      return res.status(500).json({
+      res.status(500).json({
         DatabaseError: error.message,
       });
+    } finally{
+      next();
     }
   }
 );
@@ -45,10 +47,10 @@ router.post(
     body("user").not().isEmpty().withMessage("User is required"),
     body("password").not().isEmpty().withMessage("Password is required"),
   ],
-  async (req, res) => {
+  async (req, res, next) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      return res.status(400).json({
+      res.status(400).json({
         errors: errors.array(),
       });
     }
@@ -69,16 +71,18 @@ router.post(
         });
       }
     } catch (error) {
-      return res.status(500).json({
+      res.status(500).json({
         DatabaseError: error.message,
       });
+    } finally{
+      next();
     }
   }
 );
 
 // Endpoint: /librarian/get-all-collaborators (GET)
 // Descrição: Retorna todos os colaboradores
-router.get("/all-collaborators", async (req, res) => {
+router.get("/all-collaborators", async (req, res, next) => {
   try {
     const result = await db.getAllCollaborators();
 
@@ -92,9 +96,11 @@ router.get("/all-collaborators", async (req, res) => {
       });
     }
   } catch (error) {
-    return res.status(500).json({
+    res.status(500).json({
       DatabaseError: error.message,
     });
+  } finally{
+    next();
   }
 });
 
@@ -108,7 +114,7 @@ router.put(
     body("email").not().isEmpty().withMessage("Email is required"),
     body("user").not().isEmpty().withMessage("User is required"),
   ],
-  async (req, res) => {
+  async (req, res, next) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).json({
@@ -130,17 +136,25 @@ router.put(
         message: "Collaborator updated successfully",
       });
     } catch (error) {
-      return res.status(500).json({
+      res.status(500).json({
         DatabaseError: error.message,
       });
+    } finally{
+      next();
     }
   }
 );
 
 // Endpoint: /librarian (DELETE)
 // Descrição: Desabilita um colaborador
-router.delete("/", async (req, res) => {
+router.delete("/", async (req, res, next) => {
   const { id } = req.query;
+
+  if(!id){
+    return res.status(400).json({
+      message: "Id is required"
+    });
+  }
 
   try {
     db.desativateCollaborator(id);
@@ -149,9 +163,11 @@ router.delete("/", async (req, res) => {
       message: "Collaborator disabled successfully",
     });
   } catch (error) {
-    return res.status(500).json({
+    res.status(500).json({
       DatabaseError: error.message,
     });
+  } finally{
+    next();
   }
 });
 

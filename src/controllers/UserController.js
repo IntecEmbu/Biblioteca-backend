@@ -17,7 +17,7 @@ router.post(
     body("course").not().isEmpty().withMessage("Course is required"),
     body("cpf").not().isEmpty().withMessage("CPF is required"),
   ],
-  async (req, res) => {
+  async (req, res, next) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).json({
@@ -36,39 +36,42 @@ router.post(
     }
 
     try {
-      welcomeUser(name.split(" ")[0], email); // Envia email para o usuário (obs: sem await para performance)
+      welcomeUser(name.split(" ")[0], email); // Envia email para o usuário
 
       await db.createUser({ name, email, type, phone, course, cpf });
       res.status(200).json({
         message: "User inserted successfully",
       });
     } catch (error) {
-      console.log(error);
       res.status(500).json({
         DatabaseError: error.message,
       });
+    } finally{
+      next();
     }
   }
 );
 
 // Endpoint: /user/get-all (GET)
 // Descrição: Coleta todos os usuarios cadastrados
-router.get("/all", async (req, res) => {
+router.get("/all", async (req, res, next) => {
   try {
     const users = await db.getAllUsers();
     res.status(200).json({
       users,
     });
   } catch (error) {
-    return res.status(500).json({
+    res.status(500).json({
       DatabaseError: error.message,
     });
+  } finally{
+    next();
   }
 });
 
 // Endpoint: /user/search-user (GET)
 // Descrição: Pesquisa usuarios pelo nome
-router.get("/search-user", async (req, res) => {
+router.get("/search-user", async (req, res, next) => {
   const { name } = req.query;
 
   try {
@@ -77,9 +80,11 @@ router.get("/search-user", async (req, res) => {
       users,
     });
   } catch (error) {
-    return res.status(500).json({
+    res.status(500).json({
       DatabaseError: error.message,
     });
+  } finally{
+    next();
   }
 });
 
@@ -96,7 +101,7 @@ router.put(
     body("id").not().isEmpty().withMessage("Id is required"),
     body("cpf").not().isEmpty().withMessage("CPF is required"),
   ],
-  async (req, res) => {
+  async (req, res, next) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).json({
@@ -120,16 +125,18 @@ router.put(
         message: "User updated successfully",
       });
     } catch (error) {
-      return res.status(500).json({
+      res.status(500).json({
         DatabaseError: error.message,
       });
+    } finally{
+      next();
     }
   }
 );
 
 // Endpoint: /user (DELETE)
 // Descrição: Deleta um usuario pelo id
-router.delete("/", async (req, res) => {
+router.delete("/", async (req, res, next) => {
   const { id } = req.query;
 
   if (!id) {
@@ -144,9 +151,11 @@ router.delete("/", async (req, res) => {
       message: "User deleted successfully",
     });
   } catch (error) {
-    return res.status(500).json({
+    res.status(500).json({
       DatabaseError: error.message,
     });
+  } finally{
+    next();
   }
 });
 

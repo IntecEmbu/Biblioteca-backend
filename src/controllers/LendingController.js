@@ -16,7 +16,7 @@ router.post(
     body("book_id").not().isEmpty().withMessage("Book id is required"),
     body("user_cpf").not().isEmpty().withMessage("User CPF is required"),
   ],
-  async (req, res) => {
+  async (req, res, next) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).json({
@@ -34,19 +34,21 @@ router.post(
       });
 
       if (result) {
-        return res.status(401).json({
+        res.status(401).json({
           error: result.error,
         });
+      } else{
+        res.status(200).json({
+          message: "Lending created successfully!",
+        });
       }
-      console.log(result);
 
-      return res.status(200).json({
-        message: "Lending created successfully!",
-      });
     } catch (error) {
-      return res.status(500).json({
+      res.status(500).json({
         DatabaseError: error.message,
       });
+    } finally{
+      next();
     }
   }
 );
@@ -56,7 +58,7 @@ router.post(
 router.post(
   "/return-book",
   [body("lending_id").not().isEmpty().withMessage("Lending id is required")],
-  async (req, res) => {
+  async (req, res, next) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).json({
@@ -70,25 +72,28 @@ router.post(
       const result = await db.returnBook(lending_id);
 
       if (result) {
-        return res.status(400).json({
+        res.status(400).json({
           error: result.error,
         });
+      } else{
+        res.status(200).json({
+          message: "Book returned successfully!",
+        });
       }
-
-      return res.status(200).json({
-        message: "Book returned successfully!",
-      });
+      
     } catch (error) {
-      return res.status(500).json({
+      res.status(500).json({
         DatabaseError: error.message,
       });
+    } finally{
+      next();
     }
   }
 );
 
 // Endpoint: /not-returned (GET)
 // Descrição: Lista os emprestimos não devolvidos
-router.get("/not-returned", async (req, res) => {
+router.get("/not-returned", async (req, res, next) => {
   try {
     const result = await db.getAllNotReturned();
 
@@ -108,25 +113,29 @@ router.get("/not-returned", async (req, res) => {
         .join("/");
     });
 
-    return res.status(200).json(result);
+    res.status(200).json(result);
   } catch (error) {
-    return res.status(500).json({
+    res.status(500).json({
       DatabaseError: error.message,
     });
+  } finally{
+    next();
   }
 });
 
 // Endpoint: /all (GET)
 // Descrição: Lista todos os emprestimos
-router.get("/all", async (req, res) => {
+router.get("/all", async (req, res, next) => {
   try {
     const result = await db.getAll();
 
-    return res.status(200).json(result);
+    res.status(200).json(result);
   } catch (error) {
-    return res.status(500).json({
+    res.status(500).json({
       DatabaseError: error.message,
     });
+  } finally{
+    next();
   }
 });
 
