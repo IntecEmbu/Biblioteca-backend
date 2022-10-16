@@ -1,10 +1,13 @@
-// import db from "../services/TaskService.js"
-// import closeToDateEmail from "../email/closeToDate.js";
-// import sendEmail from "../services/sendEmail.js";
-
+import service from "../services/TaskService.js";
 
 async function execTask(){
-    return 
+    try {
+        await service.applyPenalty();
+        console.log("Task concluída!");
+    } catch (error) {
+        console.log(error.message);
+    }
 }
 
-export default execTask
+execTask()
+// export default execTask

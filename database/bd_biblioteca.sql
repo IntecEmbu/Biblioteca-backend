@@ -47,11 +47,12 @@ CREATE TABLE tbl_quantity(
 CREATE TABLE tbl_lending(
 	lending_code INT(10) PRIMARY KEY AUTO_INCREMENT,
 	withdraw_date DATE NOT NULL,
-  	return_prediction DATE NOT NULL,
+  return_prediction DATE NOT NULL,
 	return_date DATE,
 	warning BOOLEAN NOT NULL DEFAULT false,
 	overdue BOOLEAN NOT NULL DEFAULT false,
 	penalty FLOAT(10,2) NOT NULL DEFAULT 0.00,
+	last_penaly_date DATE,
 	FK_user INT(10) NOT NULL,
 	FK_librarian INT(10) NOT NULL,
     FK_book INT(10) NOT NULL,
@@ -86,7 +87,7 @@ SELECT a.book_code, a.book_isbn, a.book_cdd, a.book_name, a.book_language, a.cat
 
 # Todos os emprestimos que estão pendentes
 CREATE VIEW VW_lending_pending AS
-SELECT a.lending_code, a.withdraw_date, a.return_prediction, b.user_name, b.user_course, c.book_name, d.librarian_name
+SELECT a.lending_code, a.withdraw_date, a.return_prediction, b.user_name, b.user_course, c.book_name, d.librarian_name, a.overdue, a.penalty
 	from tbl_lending a, tbl_user b, tbl_book c, tbl_librarian d
 		where a.return_date IS NULL AND a.FK_user = b.user_code AND a.FK_book = c.book_code AND a.FK_librarian = d.librarian_code;
 
@@ -99,6 +100,12 @@ CREATE VIEW VW_quantity AS
 CREATE VIEW VW_lending_delay AS
 	SELECT * from tbl_lending
 		where return_date IS NULL AND return_prediction < (SELECT CURRENT_DATE);
+
+# Coleta os emprestimos em atraso e que não sofreram penalidade no dia
+CREATE VIEW VW_lending_delay_penalty AS
+	SELECT lending_code from tbl_lending
+		where return_date IS NULL AND return_prediction < (SELECT CURRENT_DATE) AND 
+			last_penaly_date != (SELECT CURRENT_DATE);
 
 # Coleta os 3 leitores que mais coletaram livros no ultimo mes
 CREATE VIEW VW_top_readers AS
@@ -115,3 +122,19 @@ CREATE VIEW VW_top_readers AS
 # DROP VIEW IF EXISTS VW_quantity;
 # DROP VIEW IF EXISTS VW_lending_delay;
 # DROP VIEW IF EXISTS VW_top_readers;
+
+
+# Procedures 
+
+# Procedure para aplicar multa em emprestimos que ainda não sofreram multa no dia
+delimiter $
+CREATE PROCEDURE SP_penalty(IN lending_code VARCHAR(11), IN penalty_value FLOAT(10,2))
+BEGIN
+	-- Aplica a multa
+	UPDATE tbl_lending
+		SET penalty = penalty + @penalty_value, last_penaly_date = CURRENT_DATE
+			where lending_code = @lending_code;
+END
+$
+
+# DROP PROCEDURE IF EXISTS SP_penalty;

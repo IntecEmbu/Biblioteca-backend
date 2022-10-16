@@ -12,11 +12,11 @@ async function getCloseToDate() {
     return rows;
 }
 
-// Coleta os empréstimos que estão atrasados
+// Coleta os empréstimos que estão atrasados que ainda não sofreram multa no dia
 async function getOverdue() {
     const conn = await db.connect();
 
-    const sql = "SELECT * FROM VW_lending_delay";
+    const sql = "SELECT * FROM VW_lending_delay_penalty";
 
     const [rows] = await conn.query(sql);
 
@@ -24,18 +24,17 @@ async function getOverdue() {
     return rows;
 }
 
-// Aplica multa nos emprestimos atrasados
-async function applyFine(){
-    const overdue = await getOverdue();
-    const value = 1.00;
+// Para cara emprestimo atrasado encontrado ele aplica multa dentro do bd
+async function applyPenalty(){
+    const lendings = await getOverdue();
 
     const conn = await db.connect();
-
-    // Irá percorrer todos os emprestimos atrasados
-    // E incrementar o valor da multa somente uma vez por dia de atraso
+    for (const lending of lendings) {
+        conn.query("CALL SP_lending_penalty(?)", lending.lending_code);
+    }
 }
 
 export default {
-    applyFine,
-    getCloseToDate
+    getCloseToDate,
+    applyPenalty
 }
