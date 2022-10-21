@@ -130,10 +130,11 @@ CREATE VIEW VW_top_readers AS
 delimiter $
 CREATE PROCEDURE SP_penalty(IN lending_code VARCHAR(11), IN penalty_value FLOAT(10,2))
 BEGIN
-	-- Aplica a multa
-	UPDATE tbl_lending
-		SET penalty = penalty + @penalty_value, last_penaly_date = CURRENT_DATE
-			where lending_code = @lending_code;
+	-- Calcula o valor da multa multiplicando a quantidade de dias que se passou pelo valor da multa
+	-- Exemplo: 10 dias de atraso * 0.50 = 5.00
+	UPDATE tbl_lending SET penalty = 
+		(SELECT penalty + (DATEDIFF(CURRENT_DATE, return_prediction) * @penalty_value)),
+		overdue = true, last_penaly_date = CURRENT_DATE WHERE lending_code = lending_code;
 END
 $
 
