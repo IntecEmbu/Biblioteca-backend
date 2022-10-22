@@ -26,6 +26,8 @@ async function getCloseToDate() {
 async function sendEmail(){
     const closeToDate = await getCloseToDate();
 
+    if (closeToDate.length === 0) return;
+
     for (const row of closeToDate) {
         // Formata a data de: 2022-10-20T00:00:00.000Z para: 20/10/2022
         const return_prediction_formatted = row.return_prediction
@@ -68,10 +70,14 @@ async function getOverdue() {
 async function applyPenalty(){
     const lendings = await getOverdue();
 
+    if (lendings.length === 0) return;
+
     const conn = await db.connect();
     for (const lending of lendings) {
         conn.query("CALL SP_lending_penalty(?)", lending.lending_code);
     }
+
+    conn.end();
 }
 
 export default {
