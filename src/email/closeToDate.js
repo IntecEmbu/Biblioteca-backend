@@ -17,7 +17,7 @@ function closeToDateEmail(
   <br>
   <p>Caso já tenha devolvido, ignore essa mensagem.</p>`;
 
-  return emailTemplate(user_name, title, message);
+  return emailTemplate(title, user_name, message);
 }
 
 export default closeToDateEmail;

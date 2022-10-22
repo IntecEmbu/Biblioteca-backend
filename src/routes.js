@@ -8,11 +8,11 @@ import tasks from "./tasks/index.js"
 
 const router = express.Router();
 
-router.use("/book", books, tasks);        // ✔️
-router.use("/librian", librian, tasks);   // ✔️
-router.use("/user", user, tasks);         // ✔️
-router.use("/lending", lending, tasks);   // ✔️
-router.use("/report", report, tasks);     // ✔️
+router.use("/book", books, tasks);     
+router.use("/librian", librian, tasks);
+router.use("/user", user, tasks);      
+router.use("/lending", lending, tasks);
+router.use("/report", report, tasks);  
 
 router.use("*", (req, res) => {
   res.status(404).json({

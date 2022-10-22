@@ -13,7 +13,7 @@ async function getCloseToDate() {
     // Para cada emprestimo proximo ao vencimento coletado, ele marca como avisado
     for (const row of rows) {
         await conn.query(
-            "UPDATE tbl_lending SET warning = true WHERE id = ?",
+            "UPDATE tbl_lending SET warning = true WHERE lending_code = ?",
             [row.lending_code]
         );
     }
@@ -35,9 +35,9 @@ async function sendEmail(){
             .reverse()
             .join("/");
 
-        // Formata a data de: 20/10/2022 para: Segunda-feira
+        // Formata a data de: 2022-10-20T00:00:00.000Z para: Segunda-feira
         const return_prediction_day = new Date(
-            return_prediction_formatted
+            row.return_prediction
         ).toLocaleDateString("pt-BR", { weekday: "long" });
 
         const email = closeToDateEmail(
