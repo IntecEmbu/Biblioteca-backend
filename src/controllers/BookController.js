@@ -273,4 +273,41 @@ router.delete("/", async (req, res) => {
   }
 });
 
+// Endpoint: /book/update-quantity (PUT)
+// Descrição: Altera a quantidade de um livro
+router.put("/update-quantity", [
+  body("id").not().isEmpty().withMessage("ID is required"),
+  body("qtd_total").not().isEmpty().withMessage("qtd_total is required"),
+  body("qtd_stopped").not().isEmpty().withMessage("qtd_stopped is required"),
+], async (req, res, next) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({
+      error: errors.array(),
+    });
+  }
+
+  const { id, qtd_total, qtd_stopped } = req.body;
+
+  if(qtd_total < 0 || qtd_stopped < 0){
+    return res.status(400).json({
+      message: "Qtd must be greater than 0",
+    });
+  }
+
+  try {
+    await db.updateQuantity({id, qtd_total, qtd_stopped});
+
+    res.status(200).json({
+      message: "Quantity updated successfully",
+    });
+  } catch (error) {
+    res.status(500).json({
+      DatabaseError: error.message,
+    });
+  } finally{
+    next();
+  }
+});
+
 export default router;

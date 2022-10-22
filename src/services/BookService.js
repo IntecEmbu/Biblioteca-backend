@@ -146,13 +146,6 @@ async function updateBook(data) {
 
 // deleta um livro
 async function deleteBook(id) {
-  // OBS: Quando fazer todo o crud do sistema, fazer com que o livro seja deletado,
-  // e delete junto com ele todas as informações que estão relacionadas a ele, na seguinte ordem:
-  // 1 - tbl_quantity
-  // 2 - tbl_penalty
-  // 3 - tbl_lending
-  // 4 - tbl_book
-
   const conn = await db.connect();
 
   const tbl_quantity_sql = "DELETE FROM tbl_quantity WHERE FK_book = ?";
@@ -168,6 +161,21 @@ async function deleteBook(id) {
   conn.end();
 }
 
+// Altera a quantidade de livros
+async function updateQuantity(data) {
+  const { id, qtd_total, qtd_stopped} = data;
+
+  const conn = await db.connect();
+
+  const sql = `UPDATE tbl_quantity SET quantity_total = ?, quantity_stopped = ? WHERE FK_book = ?`;
+
+  const values = [qtd_total, qtd_stopped, id];
+
+  await conn.query(sql, values);
+
+  conn.end();
+}
+
 export default {
   insertBook,
   getAllBooks,
@@ -177,4 +185,5 @@ export default {
   getBookByCategory,
   updateBook,
   deleteBook,
+  updateQuantity,
 };

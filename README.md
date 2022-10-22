@@ -110,6 +110,16 @@
 }
 ```
 
+#### Para atualizar a quantidade de livros use `.../book/update-quantity`
+
+```json
+{
+  "id": "id-livro",
+  "qtd_total": "quantidade-Total",
+  "qtd_stopped": "quantidade-Parada",
+}
+```
+
 <br>
 
 > ### Método DELETE 🗑️
