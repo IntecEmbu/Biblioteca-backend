@@ -63,7 +63,7 @@ async function updateCollaborator(data) {
   librarian_name = ?, librarian_email = ?, librarian_user = ?, librarian_type = ?, librarian_status = ?
     WHERE librarian_code = ?`;
 
-  const values = [name, email, user, id, type, status];
+  const values = [name, email, user, type, status, id];
 
   await conn.query(sql, values);
 
