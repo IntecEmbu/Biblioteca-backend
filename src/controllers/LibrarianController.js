@@ -113,6 +113,8 @@ router.put(
     body("name").not().isEmpty().withMessage("Name is required"),
     body("email").not().isEmpty().withMessage("Email is required"),
     body("user").not().isEmpty().withMessage("User is required"),
+    body("status").not().isEmpty().withMessage("Status is required"),
+    body("type").not().isEmpty().withMessage("Type is required"),
   ],
   async (req, res, next) => {
     const errors = validationResult(req);
@@ -122,7 +124,7 @@ router.put(
       });
     }
 
-    const { id, name, user, email } = req.body;
+    const { id, name, user, email, type, status } = req.body;
 
     try {
       db.updateCollaborator({
@@ -130,6 +132,8 @@ router.put(
         name,
         user,
         email,
+        type,
+        status,
       });
 
       res.status(200).json({

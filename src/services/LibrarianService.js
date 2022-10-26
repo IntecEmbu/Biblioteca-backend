@@ -55,15 +55,15 @@ async function getAllCollaborators() {
 
 // Atualiza os dados do colaborador
 async function updateCollaborator(data) {
-  const { name, email, user, id } = data;
+  const { name, email, user, id, type, status } = data;
 
   const conn = await db.connect();
 
   const sql = `UPDATE tbl_librarian SET
-  librarian_name = ?, librarian_email = ?, librarian_user = ? 
+  librarian_name = ?, librarian_email = ?, librarian_user = ?, librarian_type = ?, librarian_status = ?
     WHERE librarian_code = ?`;
 
-  const values = [name, email, user, id];
+  const values = [name, email, user, id, type, status];
 
   await conn.query(sql, values);
 
