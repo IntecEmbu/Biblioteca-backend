@@ -171,4 +171,25 @@ router.delete("/", async (req, res, next) => {
   }
 });
 
+// Endpoint: /librarian/activate (PUT)
+// Descrição: Ativa um colaborador
+// irá coletar o id pelo query params
+router.put("/activate/:id", async (req, res, next) => {
+  const { id } = req.params;
+
+  try{
+    await db.activateCollaborator(id);
+
+    res.status(200).json({
+      message: "Collaborator activated successfully"
+    });
+  } catch(error){
+    res.status(500).json({
+      DatabaseError: error.message
+    });
+  } finally{
+    next();
+  }
+});
+
 export default router;

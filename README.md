@@ -51,6 +51,8 @@
 }
 ```
 
+#### Ativar um colaborador `.../librian/activate/123`
+
 <br>
 
 > ### Método DELETE 🗑️

@@ -84,10 +84,23 @@ async function desativateCollaborator(id) {
   conn.end();
 }
 
+// Altera status do colaborador para ativo
+async function activateCollaborator(id) {
+  const conn = await db.connect();
+
+  const sql =
+    "UPDATE tbl_librarian SET librarian_status = ? WHERE librarian_code = ?";
+  const values = ["Ativo", id];
+
+  await conn.query(sql, values);
+  conn.end();
+}
+
 export default {
   createCollaborator,
   loginCollaborator,
   getAllCollaborators,
   updateCollaborator,
   desativateCollaborator,
+  activateCollaborator
 };
