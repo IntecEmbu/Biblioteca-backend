@@ -20,21 +20,40 @@ async function createCollaborator(data) {
 
 // Realiza o login do Bibliotecario
 async function loginCollaborator(data) {
+  let dataResult = [];
   const { user, password } = data;
 
   const conn = await db.connect();
 
-  const sql = `SELECT librarian_code, librarian_name, librarian_type
+  // Verifica se o usuario existe
+  const sql1 = "SELECT count(*) from tbl_librarian WHERE librarian_user = ?";
+
+  let [rows] = await conn.query(sql1, [user]);
+
+  if (rows[0]["count(*)"] === 0) {
+    dataResult[0] = "Usuário não encontrado";
+    dataResult[1] = [];
+    
+    conn.end();
+    return dataResult;
+  }
+
+  const sql2 = `SELECT librarian_code, librarian_name, librarian_type
     From tbl_librarian 
       where librarian_user = ? and librarian_password = ? and librarian_status = 'Ativo'`;
 
-  const values = [user, password];
+  [rows] = await conn.query(sql2, [user, password]);
 
-  const [rows] = await conn.query(sql, values);
-
+  if(rows.length === 0){
+    dataResult[0] = "Senha incorreta!";
+    dataResult[1] = [];
+  }else{
+    dataResult[0] = "Login realizado com sucesso!";
+    dataResult[1] = rows;
+  }
+  
   conn.end();
-
-  return rows;
+  return dataResult;
 }
 
 // Coleta todos os colaboradores

@@ -60,14 +60,15 @@ router.post(
     try {
       const result = await db.loginCollaborator({ user, password });
 
-      if (result.length > 0) {
+      if (result[1] !== []) {
         res.status(200).json({
-          message: "Login successful",
-          data: result,
+          message: result[0],
+          data: result[1],
         });
       } else {
         res.status(401).json({
-          message: "Login failed",
+          message: result[0],
+          data: result[1],
         });
       }
     } catch (error) {
