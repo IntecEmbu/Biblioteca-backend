@@ -50,6 +50,15 @@ async function getAllCollaborators() {
 
   conn.end();
 
+  // Ordena primeiro os ativos e depois os inativos
+  rows.sort((a, b) => {
+    if (a.librarian_status === "Ativo") {
+      return -1;
+    } else {
+      return 1;
+    }
+  });
+
   return rows;
 }
 
