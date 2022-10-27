@@ -25,10 +25,24 @@ async function loginCollaborator(data) {
 
   const conn = await db.connect();
 
-  // Verifica se o usuario existe
-  const sql1 = "SELECT count(*) from tbl_librarian WHERE librarian_user = ?";
+  // Verifica se o usuário está ativo
+  let [rows] = await conn.query(
+    `SELECT COUNT(*) AS count FROM tbl_librarian WHERE librarian_status = ? AND librarian_user = ?`, 
+    ["Inativo", user]
+  );
 
-  let [rows] = await conn.query(sql1, [user]);
+  if (rows[0].count > 0) {
+    dataResult[0] = "Usuário inativo";
+    conn.end();
+    return dataResult;
+  }
+
+
+  // Verifica se o usuario existe
+  [rows] = await conn.query(
+    "SELECT count(*) from tbl_librarian WHERE librarian_user = ?",
+    [user]
+  );
 
   if (rows[0]["count(*)"] === 0) {
     dataResult[0] = "Usuário não encontrado";
@@ -37,11 +51,14 @@ async function loginCollaborator(data) {
     return dataResult;
   }
 
-  const sql2 = `SELECT librarian_code, librarian_name, librarian_type
-    From tbl_librarian 
-      where librarian_user = ? and librarian_password = ? and librarian_status = 'Ativo'`;
 
-  [rows] = await conn.query(sql2, [user, password]);
+  // Verifica se a senha está correta
+  [rows] = await conn.query(
+    `SELECT librarian_code, librarian_name, librarian_type
+    From tbl_librarian 
+      where librarian_user = ? and librarian_password = ? and librarian_status = 'Ativo'`, 
+    [user, password]
+  );
 
   if(rows.length === 0){
     dataResult[0] = "Senha incorreta!";
