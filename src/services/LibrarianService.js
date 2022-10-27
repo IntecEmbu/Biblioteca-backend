@@ -32,7 +32,6 @@ async function loginCollaborator(data) {
 
   if (rows[0]["count(*)"] === 0) {
     dataResult[0] = "Usuário não encontrado";
-    dataResult[1] = [];
     
     conn.end();
     return dataResult;
@@ -46,7 +45,6 @@ async function loginCollaborator(data) {
 
   if(rows.length === 0){
     dataResult[0] = "Senha incorreta!";
-    dataResult[1] = [];
   }else{
     dataResult[0] = "Login realizado com sucesso!";
     dataResult[1] = rows;

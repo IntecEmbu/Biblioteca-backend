@@ -60,7 +60,7 @@ router.post(
     try {
       const result = await db.loginCollaborator({ user, password });
 
-      if (result[1] !== []) {
+      if (result[1]) {
         res.status(200).json({
           message: result[0],
           data: result[1],
