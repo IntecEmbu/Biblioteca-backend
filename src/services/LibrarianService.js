@@ -43,7 +43,7 @@ async function getAllCollaborators() {
 
   const sql = `SELECT 
   librarian_code, librarian_name, librarian_type, librarian_status, librarian_email, librarian_user
-    FROM tbl_librarian
+    FROM tbl_librarian WHERE librarian_type != "ADM"
       ORDER BY librarian_code DESC`;
 
   const [rows] = await conn.query(sql);
