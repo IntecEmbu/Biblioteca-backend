@@ -10,6 +10,8 @@ CREATE TABLE tbl_librarian(
 	librarian_password VARCHAR(30) NOT NULL,
 	librarian_type ENUM ('Bibliotecario','Colaborador', 'ADM') NOT NULL,
 	librarian_status ENUM ('Ativo', 'Inativo') NOT NULL DEFAULT 'Ativo'
+	recovery_token VARCHAR(100) DEFAULT NULL,
+	recovery_token_expiration DATE DEFAULT NULL
 );
 
 CREATE TABLE tbl_user(
@@ -138,4 +140,12 @@ BEGIN
 END
 $
 
+# Procedure para apagar o token de recuperação de senha caso esteja expirado
+delimiter $
+CREATE PROCEDURE SP_recovery_token_check()
+BEGIN
+	UPDATE tbl_librarian SET recovery_token = NULL, recovery_token_expiration = NULL WHERE recovery_token_expiration < CURRENT_DATE;
+END
+
 # DROP PROCEDURE IF EXISTS SP_penalty;
+# DROP PROCEDURE IF EXISTS SP_recovery_token_check;

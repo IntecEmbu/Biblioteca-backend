@@ -80,7 +80,19 @@ async function applyPenalty(){
     conn.end();
 }
 
+// Verifica se o token de recuperação de senha está expirado e apaga caso esteja expirado
+async function checkRecoveryToken() {
+    const conn = await db.connect();
+
+    const sql = "CALL SP_recovery_token_check()";
+
+    await conn.query(sql);
+
+    conn.end();
+}
+
 export default {
     sendEmail,
-    applyPenalty
+    applyPenalty,
+    checkRecoveryToken,
 }

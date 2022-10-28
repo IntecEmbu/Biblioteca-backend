@@ -1,9 +1,10 @@
-import service from "../services/TaskService.js";
+import service from "./service.js";
 
 async function execTask(){
     try {
         await service.applyPenalty();
         await service.sendEmail();
+        await service.checkRecoveryToken();
 
         console.log("Task concluída!");
     } catch (error) {
