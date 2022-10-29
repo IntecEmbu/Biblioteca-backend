@@ -213,7 +213,7 @@ router.post("/new-password", [
     const response = await db.forgotPWD(req.body.email);
 
     if(response == "Email não encontrado"){
-      return res.status(404).json({
+      return res.status(401).json({
         message: response
       });
     }
@@ -248,7 +248,7 @@ router.post("/verify-code", [
     const response = await db.verifyCode(req.body.code, req.body.email);
 
     if(response == "Token inválido"){
-      return res.status(404).json({
+      return res.status(401).json({
         message: response
       });
     }
