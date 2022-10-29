@@ -245,7 +245,7 @@ router.post("/verify-code", [
   }
 
   try{
-    const response = await db.verifyCode(req.body.code, req.body.email);
+    const response = await db.verifyToken(req.body.code, req.body.email);
 
     if(response == "Token inválido"){
       return res.status(401).json({
