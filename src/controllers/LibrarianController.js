@@ -197,4 +197,103 @@ router.put("/activate/:id", async (req, res, next) => {
   }
 });
 
+// Endpoint: /librarian/new-password
+// Descrição: Envia email para código para alteração de senha
+router.post("/new-password", [
+  body("email").not().isEmpty().withMessage("Email is required"),
+] ,async (req, res, next) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({
+      errors: errors.array(),
+    });
+  }
+
+  try{
+    const response = await db.forgotPWD(req.body.email);
+
+    if(response == "Email não encontrado"){
+      return res.status(404).json({
+        message: response
+      });
+    }
+    else{
+      return res.status(200).json({
+        message: response
+      });
+    }
+  } catch(error){
+    res.status(500).json({
+      DatabaseError: error.message
+    });
+  } finally{
+    next();
+  }
+});
+
+// Endpoint: /librian/verify-code (POST)
+// Descrição: Verifica se o código enviado por email é válido
+router.post("/verify-code", [
+  body("code").not().isEmpty().withMessage("Code is required"),
+  body("email").not().isEmpty().withMessage("Email is required")
+] ,async (req, res, next) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({
+      errors: errors.array(),
+    });
+  }
+
+  try{
+    const response = await db.verifyCode(req.body.code, req.body.email);
+
+    if(response == "Token inválido"){
+      return res.status(404).json({
+        message: response
+      });
+    }
+    else{
+      return res.status(200).json({
+        message: response
+      });
+    }
+  } catch(error){
+    res.status(500).json({
+      DatabaseError: error.message
+    });
+  } finally{
+    next();
+  }
+});
+
+// Endpoint: /librarian/change-password (POST)
+// Descrição: Altera a senha do colaborador
+router.post("/change-password", [
+  body("code").not().isEmpty().withMessage("Code is required"),
+  body("password").not().isEmpty().withMessage("Password is required"),
+  body("email").not().isEmpty().withMessage("Email is required")
+] ,async (req, res, next) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({
+      errors: errors.array(),
+    });
+  }
+
+  const { code, password, email } = req.body;
+
+  try{
+    await db.changePWD(email, password, code);
+    return res.status(200).json({
+      message: "Senha alterada com sucesso"
+    });
+  } catch(error){
+    res.status(500).json({
+      DatabaseError: error.message
+    });
+  } finally{
+    next();
+  }
+});
+  
 export default router;

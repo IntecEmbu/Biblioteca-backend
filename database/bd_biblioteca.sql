@@ -9,7 +9,7 @@ CREATE TABLE tbl_librarian(
 	librarian_email VARCHAR(45) UNIQUE NOT NULL,
 	librarian_password VARCHAR(30) NOT NULL,
 	librarian_type ENUM ('Bibliotecario','Colaborador', 'ADM') NOT NULL,
-	librarian_status ENUM ('Ativo', 'Inativo') NOT NULL DEFAULT 'Ativo'
+	librarian_status ENUM ('Ativo', 'Inativo') NOT NULL DEFAULT 'Ativo',
 	recovery_token VARCHAR(100) DEFAULT NULL,
 	recovery_token_expiration DATE DEFAULT NULL
 );

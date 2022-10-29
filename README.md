@@ -59,6 +59,38 @@
 
 #### Desativar um colaborador `.../librian?id=id-colaborador`
 
+
+<br>
+
+## Combo de senha 🔑
+
+####  Solicita nova senha via email ```post``` `.../librian/new-password` 
+  
+```json
+{
+  "email": "email-colaborador"
+}
+```
+
+#### Confirma código de nova senha ```post``` `.../librian/verify-code`
+  
+```json
+{
+  "code": "token-colaborador",
+  "email": "email-colaborador"
+}
+```
+
+#### Altera senha ```post``` `.../librian/change-password`
+  
+```json
+{
+  "code": "token-colaborador",
+  "email": "email-colaborador",
+  "password": "senha-colaborador"
+}
+```
+
 #
 
 # Rota de Livros 📚

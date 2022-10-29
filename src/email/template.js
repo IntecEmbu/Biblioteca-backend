@@ -60,6 +60,35 @@ function emailTemplate(title, name, message) {
         padding: 2rem;
         height: fit-content;
       }
+
+      #code-pwd{
+        color: #fff;
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin-top: 1rem;
+        width: fit-content;
+        background-color: #192039;
+        border-radius: 0.5rem;
+        padding: 1rem;
+      }
+
+      @media (prefers-color-scheme: dark) {
+        .email-container {
+          background-color: #192039;
+        }
+
+        .email-header {
+          background-color: #192039;
+        }
+
+        .email-main {
+          background-color: #dfdede;
+        }
+
+        .email-footer {
+          background-color: #fff;
+        }
+      }
     </style>
 
   </head>
