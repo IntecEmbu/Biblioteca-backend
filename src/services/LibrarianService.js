@@ -186,7 +186,7 @@ async function verifyToken(token, email) {
   // Verifica se o token é válido
   let [rows] = await conn.query(
     "SELECT count(*) FROM tbl_librarian WHERE recovery_token = ? AND librarian_email = ?",
-    [token]
+    [token, email]
   );
 
   if (rows[0]["count(*)"] === 0) {
@@ -196,7 +196,7 @@ async function verifyToken(token, email) {
     // Verifica se o token está expirado
     [rows] = await conn.query(
       "SELECT count(*) FROM tbl_librarian WHERE recovery_token = ? AND recovery_token_expiration > NOW() AND librarian_email = ?",
-      [token]
+      [token, email]
     );
 
     if (rows[0]["count(*)"] === 0) {
