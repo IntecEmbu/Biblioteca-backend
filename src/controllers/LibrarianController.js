@@ -88,9 +88,7 @@ router.get("/all-collaborators", async (req, res, next) => {
     const result = await db.getAllCollaborators();
 
     if (result.length > 0) {
-      res.status(200).json({
-        data: result,
-      });
+      res.status(200).json(result);
     } else {
       res.status(204).json({
         message: "Collaborators not found",

@@ -57,9 +57,7 @@ router.post(
 router.get("/all", async (req, res, next) => {
   try {
     const users = await db.getAllUsers();
-    res.status(200).json({
-      users,
-    });
+    res.status(200).json(users);
   } catch (error) {
     res.status(500).json({
       DatabaseError: error.message,

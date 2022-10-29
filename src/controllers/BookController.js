@@ -71,9 +71,7 @@ router.get("/all", async (req, res, next) => {
         message: "No books found",
       });
     } else{
-      res.status(200).json({
-        books: results,
-      });
+      res.status(200).json(results);
     }
 
   } catch (error) {
