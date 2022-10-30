@@ -210,7 +210,7 @@ router.post("/new-password", [
   try{
     const response = await db.forgotPWD(req.body.email);
 
-    if(response == "Email não encontrado"){
+    if(response == "Email não cadastrado!"){
       return res.status(401).json({
         message: response
       });
