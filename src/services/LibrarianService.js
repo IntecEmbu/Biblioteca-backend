@@ -154,7 +154,7 @@ async function forgotPWD(email) {
 
   if (rows[0]["count(*)"] === 0) {
     conn.end();
-    return "Email não encontrado";
+    return "Email não cadastrado!";
   }
 
   // Gera um token de recuperação de senha com 6 numeros
