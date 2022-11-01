@@ -20,5 +20,5 @@ async function execTask(){
   }
 }
 
-execTask()
-// export default execTask;
+// execTask()
+export default execTask;
