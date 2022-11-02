@@ -15,9 +15,7 @@ async function execTask(){
     console.log("Tempo de execução: ", new Date() - start);
   }catch (error) {
     console.log(error.message);
-  } finally {
-    process.exit();
-  }
+  } 
 }
 
 // execTask()
