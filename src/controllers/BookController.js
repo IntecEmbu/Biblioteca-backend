@@ -43,11 +43,11 @@ router.post(
 
       if (result) {
         res.status(200).json({
-          message: "Book inserted successfully",
+          message: "Livro inserido com sucesso!",
         });
       } else {
         res.status(401).json({
-          message: "Book already exists",
+          message: "Livro já cadastrado!",
         });
       }
     } catch (error) {

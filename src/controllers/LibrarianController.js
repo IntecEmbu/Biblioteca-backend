@@ -25,10 +25,17 @@ router.post(
     const { name, email, user, password } = req.body;
 
     try {
-      await db.createCollaborator({ name, email, user, password });
-      res.status(200).json({
-        message: "Voluntary inserted successfully",
-      });
+      const result = await db.createCollaborator({ name, email, user, password });
+
+      if(result){
+        res.status(200).json({
+          message: "Voluntário inserido com sucesso!",
+        });
+      } else{
+        res.status(401).json({
+          message: "Voluntário já cadastrado!"
+        })
+      }
     } catch (error) {
       res.status(500).json({
         DatabaseError: error.message,
