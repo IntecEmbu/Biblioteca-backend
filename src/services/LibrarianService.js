@@ -9,8 +9,8 @@ async function createCollaborator(data) {
   const conn = await db.connect();
 
   const sql_verify_data = `SELECT COUNT(*) total from tbl_librarian
-    WHERE librarian_name = ${name} AND librarian_email = ${email}
-      AND librarian_user = ${user}`
+    WHERE librarian_name = "${name}" AND librarian_email = "${email}"
+      AND librarian_user = "${user}"`
 
   const [rows] = conn.query(sql_verify_data)
 
