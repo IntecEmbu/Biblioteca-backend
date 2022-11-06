@@ -8,26 +8,13 @@ async function createCollaborator(data) {
 
   const conn = await db.connect();
 
-  const sql_verify_data = `SELECT COUNT(*) total from tbl_librarian
-    WHERE librarian_name = ? AND librarian_email = ?
-      AND librarian_user = ?`
-
-  const [rows] = conn.query(sql_verify_data, [name, email, user])
-
-  if(rows[0].total === 0){
-    const sql_insert = `INSERT INTO tbl_librarian
+  const sql_insert = `INSERT INTO tbl_librarian
     (librarian_name, librarian_email, librarian_password, 
     librarian_user, librarian_type, librarian_status) 
       values (?, ?, ?, ?, 'Colaborador', 'Ativo')`;
 
-    await conn.query(sql_insert, [name, email, password, user]);
-    conn.end();
-
-    return true 
-  }
-
+  await conn.query(sql_insert, [name, email, password, user]);
   conn.end();
-  return false
 }
 
 // Realiza o login do Bibliotecario
