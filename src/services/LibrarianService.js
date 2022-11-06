@@ -23,7 +23,7 @@ async function createCollaborator(data) {
     const values = [name, email, password, user];
 
     await conn.query(sql_insert, values);
-    conn.end
+    conn.end();
 
     return true 
   }
