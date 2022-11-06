@@ -9,10 +9,10 @@ async function createCollaborator(data) {
   const conn = await db.connect();
 
   const sql_verify_data = `SELECT COUNT(*) total from tbl_librarian
-    WHERE librarian_name = "${name}" AND librarian_email = "${email}"
-      AND librarian_user = "${user}"`
+    WHERE librarian_name = ? AND librarian_email = ?
+      AND librarian_user = ?`
 
-  const [rows] = conn.query(sql_verify_data)
+  const [rows] = conn.query(sql_verify_data, [name, email, user])
 
   if(rows[0].total === 0){
     const sql_insert = `INSERT INTO tbl_librarian
@@ -20,9 +20,7 @@ async function createCollaborator(data) {
     librarian_user, librarian_type, librarian_status) 
       values (?, ?, ?, ?, 'Colaborador', 'Ativo')`;
 
-    const values = [name, email, password, user];
-
-    await conn.query(sql_insert, values);
+    await conn.query(sql_insert, [name, email, password, user]);
     conn.end();
 
     return true 
