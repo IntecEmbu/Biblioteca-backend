@@ -89,7 +89,7 @@ SELECT a.book_code, a.book_isbn, a.book_cdd, a.book_name, a.book_language, a.cat
 
 # Todos os emprestimos que estão pendentes
 CREATE VIEW VW_lending_pending AS
-SELECT a.lending_code, a.withdraw_date, a.return_prediction, b.user_name, b.user_course, c.book_name, d.librarian_name, a.overdue, a.penalty
+SELECT a.lending_code, a.withdraw_date, a.return_prediction, b.user_name, b.user_course, b.user_email, b.user_phone, c.book_name, d.librarian_name, a.overdue, a.penalty
 	from tbl_lending a, tbl_user b, tbl_book c, tbl_librarian d
 		where a.return_date IS NULL AND a.FK_user = b.user_code AND a.FK_book = c.book_code AND a.FK_librarian = d.librarian_code;
 
