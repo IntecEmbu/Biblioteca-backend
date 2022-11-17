@@ -15,7 +15,7 @@ async function createCollaborator(data) {
 
   await conn.query(sql_insert, [name, email, password, user]);
   conn.end();
-}
+  }
 
 // Realiza o login do Bibliotecario
 async function loginCollaborator(data) {
@@ -26,8 +26,8 @@ async function loginCollaborator(data) {
 
   // Verifica se o usuário está ativo
   let [rows] = await conn.query(
-    `SELECT COUNT(*) AS count FROM tbl_librarian WHERE librarian_status = ? AND librarian_user = ?`, 
-    ["Inativo", user]
+    `SELECT COUNT(*) AS count FROM tbl_librarian WHERE librarian_status = ? AND (librarian_user = ? OR librarian_email = ?)`, 
+    ["Inativo", user, user]
   );
 
   if (rows[0].count > 0) {
@@ -39,8 +39,8 @@ async function loginCollaborator(data) {
 
   // Verifica se o usuario existe
   [rows] = await conn.query(
-    "SELECT count(*) from tbl_librarian WHERE librarian_user = ?",
-    [user]
+    "SELECT count(*) from tbl_librarian WHERE librarian_user = ? OR librarian_email = ?",
+    [user, user]
   );
 
   if (rows[0]["count(*)"] === 0) {
@@ -55,8 +55,8 @@ async function loginCollaborator(data) {
   [rows] = await conn.query(
     `SELECT librarian_code, librarian_name, librarian_type
     From tbl_librarian 
-      where librarian_user = ? and librarian_password = ? and librarian_status = 'Ativo'`, 
-    [user, password]
+      where (librarian_user = ? OR librarian_email = ?) and librarian_password = ? and librarian_status = 'Ativo'`, 
+    [user, user, password]
   );
 
   if(rows.length === 0){
