@@ -5,7 +5,7 @@ USE bd_biblioteca;
 CREATE TABLE tbl_librarian(
 	librarian_code INT(10) PRIMARY KEY AUTO_INCREMENT ,
 	librarian_name  VARCHAR (45) NOT NULL,
-  	librarian_user VARCHAR(45) UNIQUE NOT NUll,
+  librarian_user VARCHAR(45) UNIQUE NOT NUll,
 	librarian_email VARCHAR(45) UNIQUE NOT NULL,
 	librarian_password VARCHAR(30) NOT NULL,
 	librarian_type ENUM ('Bibliotecario','Colaborador', 'ADM') NOT NULL,
@@ -42,10 +42,10 @@ CREATE TABLE tbl_book(
 CREATE TABLE tbl_quantity(
 	quantity_code INT(10) AUTO_INCREMENT PRIMARY KEY,
 	FK_book INT(10) NOT NULL,
-  	quantity_total int(10) DEFAULT 1 NOT NULL,
-  	quantity_circulation int(10) DEFAULT 0 NOT NULL,
-  	quantity_stopped int(10) DEFAULT 1 NOT NULL,
-  	CONSTRAINT FK_book_quantity FOREIGN KEY ( FK_book) REFERENCES tbl_book (book_code)
+  quantity_total int(10) DEFAULT 1 NOT NULL,
+  quantity_circulation int(10) DEFAULT 0 NOT NULL,
+  quantity_stopped int(10) DEFAULT 1 NOT NULL,
+  CONSTRAINT FK_book_quantity FOREIGN KEY ( FK_book) REFERENCES tbl_book (book_code)
 );
 
 CREATE TABLE tbl_lending(
@@ -59,10 +59,10 @@ CREATE TABLE tbl_lending(
 	last_penaly_date DATE,
 	FK_user INT(10) NOT NULL,
 	FK_librarian INT(10) NOT NULL,
-    FK_book INT(10) NOT NULL,
+  FK_book INT(10) NOT NULL,
 	CONSTRAINT FK_user FOREIGN KEY (FK_user) REFERENCES tbl_user (user_code),
 	CONSTRAINT FK_librarian FOREIGN KEY (FK_librarian) REFERENCES tbl_librarian (librarian_code),
-    CONSTRAINT FK_book_lending FOREIGN KEY (FK_book) REFERENCES tbl_book (book_code)
+  CONSTRAINT FK_book_lending FOREIGN KEY (FK_book) REFERENCES tbl_book (book_code)
 );
 
 # Scripts Para deletar todas as tabelas na nuvem
@@ -85,9 +85,13 @@ SELECT a.lending_code, a.return_prediction, b.user_name, b.user_email, c.book_na
 
 # Todos os livros com quantidade
 CREATE VIEW VW_all_books AS
-SELECT a.book_code, a.book_isbn, a.book_cdd, a.book_name, a.book_language, a.category_name, a.release_year, a.book_author, a.book_edition, a.book_position, a.book_tombo, b.quantity_total, b.quantity_circulation, b.quantity_stopped
+SELECT a.book_code, a.book_isbn, a.book_cdd, a.book_name, a.book_language, 
+	   	 a.category_name, a.release_year, a.book_author, a.book_edition, 
+       a.book_position, a.book_tombo, b.quantity_total, b.quantity_circulation, 
+       b.quantity_stopped
 	from tbl_book a, tbl_quantity b
-		where a.book_code = b.FK_book;
+		where a.book_code = b.FK_book
+			order by a.book_code desc;
 
 # Todos os emprestimos que estão pendentes
 CREATE VIEW VW_lending_pending AS
