@@ -18,6 +18,7 @@ router.post(
     body("idiom").not().isEmpty().withMessage("Idiom is required"),
     body("author").not().isEmpty().withMessage("Author is required"),
     body("position").not().isEmpty().withMessage("Position is required"),
+    body("tombo").not().isEmpty().withMessage("Tombo is required")
   ],
   async (req, res, next) => {
     const errors = validationResult(req);
@@ -27,7 +28,7 @@ router.post(
       });
     }
 
-    const { title, edition, isbn, year, category, cdd, idiom, author, position } =
+    const { title, edition, isbn, year, category, cdd, idiom, author, position, tombo } =
       req.body;
 
     try {
@@ -40,7 +41,8 @@ router.post(
         cdd,
         idiom,
         author,
-        position
+        position,
+        tombo
       });
 
       if (result) {
@@ -183,7 +185,7 @@ router.get("/search-category", async (req, res, next) => {
     next();
   }
 }); 
-
+body("tombo").not().isEmpty().withMessage("Tombo is required")
 // Endpoint: /book/update-book (PUT)
 // Descrição: Atualiza um livro
 router.put(
@@ -201,7 +203,8 @@ router.put(
     body("language").not().isEmpty().withMessage("Language is required"),
     body("author").not().isEmpty().withMessage("Author is required"),
     body("id").not().isEmpty().withMessage("ID is required"),
-    body("position").not().isEmpty().withMessage("Position is required")
+    body("position").not().isEmpty().withMessage("Position is required"),
+    body("tombo").not().isEmpty().withMessage("Tombo is required")
   ],
   async (req, res, next) => {
     const errors = validationResult(req);
@@ -221,7 +224,8 @@ router.put(
       language,
       author,
       id,
-      position
+      position,
+      tombo
     } = req.body;
 
     try {
@@ -235,7 +239,8 @@ router.put(
         language,
         author,
         id,
-        position
+        position,
+        tombo
       });
 
       res.status(200).json({
