@@ -2,12 +2,12 @@ import db from "../database/connection.js";
 
 // Insere um novo livro no banco de dados
 async function insertBook(data) {
-  const { title, edition, isbn, year, category, cdd, idiom, author } = data;
+  const { title, edition, isbn, year, category, cdd, idiom, author, position } = data;
 
   const book_sql = `INSERT INTO tbl_book 
     (book_name, book_edition, book_isbn, release_year, category_name, 
-    book_cdd, book_language, book_author)
-      VALUES (?, ?, ?, ?, ?, ?, ?, ?)`;
+    book_cdd, book_language, book_author, book_position)
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`;
 
   const quantity_sql = `INSERT INTO tbl_quantity (FK_book) 
     VALUES ((SELECT book_code FROM tbl_book WHERE book_name = ? and book_edition = ? and
@@ -23,12 +23,13 @@ async function insertBook(data) {
     cdd,
     idiom,
     author,
+    position
   ];
 
   const conn = await db.connect();
 
   const [rows] = await conn.query(
-    "SELECT count(*) total FROM tbl_book WHERE book_name = ? and book_edition = ? and book_isbn = ? and release_year = ? and category_name = ? and book_cdd = ? and book_language = ? and book_author = ?",
+    "SELECT count(*) total FROM tbl_book WHERE book_name = ? and book_edition = ? and book_isbn = ? and release_year = ? and category_name = ? and book_cdd = ? and book_language = ? and book_author = ? and book_position = ?",
     book_values
   );
 
@@ -120,11 +121,12 @@ async function updateBook(data) {
     language,
     author,
     id,
+    position
   } = data;
 
   const sql = `UPDATE tbl_book SET
         book_name = ?, book_edition = ?, book_isbn = ?, release_year = ?,
-        category_name = ?, book_cdd = ?, book_language = ?, book_author = ? 
+        category_name = ?, book_cdd = ?, book_language = ?, book_author = ?, book_position = ?
             WHERE book_code = ?`;
 
   const values = [
@@ -136,6 +138,7 @@ async function updateBook(data) {
     cdd,
     language,
     author,
+    position,
     id,
   ];
 

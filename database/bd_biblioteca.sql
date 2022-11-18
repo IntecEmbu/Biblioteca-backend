@@ -34,7 +34,8 @@ CREATE TABLE tbl_book(
 	release_year YEAR NOT NULL,
 	book_author VARCHAR(45) NOT NULL,
 	book_edition VARCHAR(45) NOT NULL,
-	book_date_register TIMESTAMP
+	book_date_register TIMESTAMP,
+	book_position VARCHAR(45) NOT NULL
 );
 
 CREATE TABLE tbl_quantity(
@@ -83,7 +84,7 @@ SELECT a.lending_code, a.return_prediction, b.user_name, b.user_email, c.book_na
 
 # Todos os livros com quantidade
 CREATE VIEW VW_all_books AS
-SELECT a.book_code, a.book_isbn, a.book_cdd, a.book_name, a.book_language, a.category_name, a.release_year, a.book_author, a.book_edition, b.quantity_total, b.quantity_circulation, b.quantity_stopped
+SELECT a.book_code, a.book_isbn, a.book_cdd, a.book_name, a.book_language, a.category_name, a.release_year, a.book_author, a.book_edition, a.book_position, b.quantity_total, b.quantity_circulation, b.quantity_stopped
 	from tbl_book a, tbl_quantity b
 		where a.book_code = b.FK_book;
 

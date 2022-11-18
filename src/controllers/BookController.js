@@ -17,6 +17,7 @@ router.post(
     body("cdd").not().isEmpty().withMessage("CDD is required"),
     body("idiom").not().isEmpty().withMessage("Idiom is required"),
     body("author").not().isEmpty().withMessage("Author is required"),
+    body("position").not().isEmpty().withMessage("Position is required"),
   ],
   async (req, res, next) => {
     const errors = validationResult(req);
@@ -26,7 +27,7 @@ router.post(
       });
     }
 
-    const { title, edition, isbn, year, category, cdd, idiom, author } =
+    const { title, edition, isbn, year, category, cdd, idiom, author, position } =
       req.body;
 
     try {
@@ -39,6 +40,7 @@ router.post(
         cdd,
         idiom,
         author,
+        position
       });
 
       if (result) {
@@ -199,6 +201,7 @@ router.put(
     body("language").not().isEmpty().withMessage("Language is required"),
     body("author").not().isEmpty().withMessage("Author is required"),
     body("id").not().isEmpty().withMessage("ID is required"),
+    body("position").not().isEmpty().withMessage("Position is required")
   ],
   async (req, res, next) => {
     const errors = validationResult(req);
@@ -218,6 +221,7 @@ router.put(
       language,
       author,
       id,
+      position
     } = req.body;
 
     try {
@@ -231,6 +235,7 @@ router.put(
         language,
         author,
         id,
+        position
       });
 
       res.status(200).json({
