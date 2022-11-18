@@ -11,7 +11,7 @@ async function createCollaborator(data) {
   const sql_insert = `INSERT INTO tbl_librarian
     (librarian_name, librarian_email, librarian_password, 
     librarian_user, librarian_type, librarian_status) 
-      values (?, ?, ?, ?, 'Colaborador', 'Ativo')`;
+      values (?, (LOWER(?)), ?, ?, 'Colaborador', 'Ativo')`;
 
   await conn.query(sql_insert, [name, email, password, user]);
   conn.end();
@@ -26,7 +26,7 @@ async function loginCollaborator(data) {
 
   // Verifica se o usuário está ativo
   let [rows] = await conn.query(
-    `SELECT COUNT(*) AS count FROM tbl_librarian WHERE librarian_status = ? AND (librarian_user = ? OR librarian_email = ?)`, 
+    `SELECT COUNT(*) AS count FROM tbl_librarian WHERE librarian_status = ? AND (librarian_user = LOWER(?) OR librarian_email = LOWER(?))`, 
     ["Inativo", user, user]
   );
 
@@ -39,7 +39,7 @@ async function loginCollaborator(data) {
 
   // Verifica se o usuario existe
   [rows] = await conn.query(
-    "SELECT count(*) from tbl_librarian WHERE librarian_user = ? OR librarian_email = ?",
+    "SELECT count(*) from tbl_librarian WHERE librarian_user = LOWER(?) OR librarian_email = LOWER(?)",
     [user, user]
   );
 
@@ -55,7 +55,7 @@ async function loginCollaborator(data) {
   [rows] = await conn.query(
     `SELECT librarian_code, librarian_name, librarian_type
     From tbl_librarian 
-      where (librarian_user = ? OR librarian_email = ?) and librarian_password = ? and librarian_status = 'Ativo'`, 
+      where (librarian_user = LOWER(?) OR librarian_email = LOWER(?)) and librarian_password = ? and librarian_status = 'Ativo'`, 
     [user, user, password]
   );
 
