@@ -258,7 +258,7 @@ router.put(
 
 // Endpoint: /book (DELETE)
 // Descrição: Deleta um livro
-router.delete("/", async (req, res) => {
+router.delete("/", async (req, res, next) => {
   const { id } = req.query;
 
   if (!id) {
