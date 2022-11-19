@@ -124,13 +124,22 @@ CREATE VIEW VW_top_readers AS
 					ORDER BY COUNT(a.user_name) DESC
 						LIMIT 3;
 
+# Relátorio para ver todos os livros registrados
+CREATE VIEW VW_report_all_books as
+select a.book_name "Título", a.book_author "Autor", a.book_edition "Edição", a.release_year "Ano",
+	   a.category_name "Categoria", a.book_position "Posição", a.book_tombo "Tombo", a.book_isbn "ISBN",
+       a.book_cdd "CDD", b.quantity_total "Quant. Total", b.quantity_stopped "Quant. Parado",
+       b.quantity_circulation "Quant. Circulação"
+	from tbl_book a, tbl_quantity b
+		where book_code = FK_book;
+
 # DROP VIEW IF EXISTS VW_lending_CloseToDate_4
 # DROP VIEW IF EXISTS VW_all_books;
 # DROP VIEW IF EXISTS VW_lending_pending;
 # DROP VIEW IF EXISTS VW_quantity;
 # DROP VIEW IF EXISTS VW_lending_delay;
 # DROP VIEW IF EXISTS VW_top_readers;
-
+# DROP VIEW IF EXISTS VW_report_all_books;
 
 # Procedures 
 
