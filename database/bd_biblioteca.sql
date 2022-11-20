@@ -153,7 +153,8 @@ SELECT a.book_name "Título", a.book_tombo "Tombo", a.book_position "Posição",
 		join tbl_lending d on a.book_code = d.FK_book
 		join tbl_user b on b.user_code = d.FK_user
 		join tbl_librarian c on c.librarian_code = d.FK_librarian
-			where d.return_date IS NULL;
+			where d.return_date IS NULL
+				order by d.withdraw_date desc;
 
 # Relatorio para ver todos os emprestimos que já foram devolvidos
 CREATE VIEW VW_report_lending_returned AS
@@ -166,7 +167,8 @@ SELECT a.book_name "Título", a.book_tombo "Tombo", a.book_position "Posição",
 		join tbl_lending d on a.book_code = d.FK_book
 		join tbl_user b on b.user_code = d.FK_user
 		join tbl_librarian c on c.librarian_code = d.FK_librarian
-			where d.return_date IS NOT NULL;
+			where d.return_date IS NOT NULL
+				order by d.withdraw_date desc;
 
 # DROP VIEW IF EXISTS VW_lending_CloseToDate_4
 # DROP VIEW IF EXISTS VW_all_books;
