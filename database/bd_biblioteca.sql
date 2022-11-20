@@ -133,6 +133,18 @@ select a.book_name "Título", a.book_author "Autor", a.book_edition "Edição", 
 	from tbl_book a, tbl_quantity b
 		where book_code = FK_book;
 
+# Relátorio para ver todos os emprestimos que ainda não foram devolvidos
+CREATE VIEW VW_report_lending_pending_join AS
+SELECT a.book_name "Título", a.book_tombo "Tombo", a.book_position "Posição", b.user_name "Nome", 
+			 b.user_course "Curso", b.user_email "Email", b.user_phone "Telefone", b.user_cpf "CPF", 
+			 c.librarian_name "Emprestado por", d.withdraw_date "Data do emprestimo", d.return_prediction "Previsão de devolução", 
+			 d.overdue "Dias de atraso", d.penalty "Penalidade"
+	from tbl_book a
+		join tbl_lending d on a.book_code = d.FK_book
+		join tbl_user b on b.user_code = d.FK_user
+		join tbl_librarian c on c.librarian_code = d.FK_librarian
+			where d.return_date IS NULL;
+
 # DROP VIEW IF EXISTS VW_lending_CloseToDate_4
 # DROP VIEW IF EXISTS VW_all_books;
 # DROP VIEW IF EXISTS VW_lending_pending;
