@@ -47,4 +47,35 @@ router.get("/top-readers", async (req, res, next) => {
   }
 });
 
+// ENDPOINT: /reports
+// Descrição: Gerencia a geração de relatórios
+router.get("/:type", async (req, res, next) => {
+  try {
+    const {type} = req.params
+    const {returned} = req.query
+
+    switch(type){
+      case "book":
+        const result = await ReportService.getReportAllBoks();
+        res.status(200).send(result);
+        break
+      case "lending":
+        if(returned === "true"){
+          const result = await ReportService.getReportLendingReturned()
+          res.status(200).send(result)
+        } else{
+          const result = await ReportService.getReportLendingPending()
+          res.status(200).send(result)
+        }
+        break
+      default:
+        res.status(400).send("Tipo de relatório inválido")
+    }
+  } catch (error) {
+    res.status(500).send(error.message)
+  } finally{
+    next()
+  }
+})
+
 export default router;
