@@ -96,23 +96,6 @@ router.post(
 router.get("/not-returned", async (req, res, next) => {
   try {
     const result = await db.getAllNotReturned();
-
-    // Formata a data para dd/mm/yyyy e remove o horario
-    result.forEach((lending) => {
-      lending.withdraw_date = lending.withdraw_date
-        .toISOString()
-        .split("T")[0]
-        .split("-")
-        .reverse()
-        .join("/");
-      lending.return_prediction = lending.return_prediction
-        .toISOString()
-        .split("T")[0]
-        .split("-")
-        .reverse()
-        .join("/");
-    });
-
     res.status(200).json(result);
   } catch (error) {
     res.status(500).json({

@@ -1,4 +1,5 @@
 import db from "../database/connection.js";
+import dateFormat from "dateformat.js";
 
 // Realiza o emprestimo de livros
 async function createLending(data) {
@@ -85,8 +86,12 @@ async function getAllNotReturned() {
   const sql = "SELECT * FROM VW_lending_pending ORDER BY lending_code DESC";
 
   const [rows] = await conn.query(sql);
-
   conn.end();
+
+  rows.forEach((row) => {
+    row.withdraw_date = dateFormat.formateDateFromDatabase(row.withdraw_date);
+    row.return_prediction = dateFormat.formateDateFromDatabase(row.return_prediction);
+  });
 
   return rows;
 }
