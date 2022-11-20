@@ -79,30 +79,38 @@ DROP TABLE IF EXISTS tbl_librarian;
 # Livros proximos da devolução de 4 dias
 CREATE VIEW VW_lending_CloseToDate_4 AS
 SELECT a.lending_code, a.return_prediction, b.user_name, b.user_email, c.book_name
-	from tbl_lending a, tbl_user b, tbl_book c
-		where return_date IS NULL AND return_prediction <= CURRENT_DATE + INTERVAL 4 DAY AND 
-			a.FK_user = b.user_code AND a.FK_book = c.book_code AND warning = false;
+	from tbl_lending a
+		inner join tbl_user b on a.FK_user = b.user_code
+		inner join tbl_book c on a.FK_book = c.book_code
+			where return_date IS NULL AND return_prediction <= CURRENT_DATE + INTERVAL 4 DAY AND warning = false;
 
 # Todos os livros com quantidade
 CREATE VIEW VW_all_books AS
 SELECT a.book_code, a.book_isbn, a.book_cdd, a.book_name, a.book_language, 
 	   	 a.category_name, a.release_year, a.book_author, a.book_edition, 
-       a.book_position, a.book_tombo, b.quantity_total, b.quantity_circulation, 
-       b.quantity_stopped
-	from tbl_book a, tbl_quantity b
-		where a.book_code = b.FK_book
+			 a.book_position, a.book_tombo, b.quantity_total, b.quantity_circulation, 
+			 b.quantity_stopped
+	from tbl_book a
+		inner join tbl_quantity b on a.book_code = b.FK_book
 			order by a.book_code desc;
 
 # Todos os emprestimos que estão pendentes
 CREATE VIEW VW_lending_pending AS
-SELECT a.lending_code, a.withdraw_date, a.return_prediction, b.user_name, b.user_course, b.user_email, b.user_phone, c.book_name, d.librarian_name, a.overdue, a.penalty
-	from tbl_lending a, tbl_user b, tbl_book c, tbl_librarian d
-		where a.return_date IS NULL AND a.FK_user = b.user_code AND a.FK_book = c.book_code AND a.FK_librarian = d.librarian_code;
+SELECT a.lending_code, a.withdraw_date, a.return_prediction, b.user_name, 
+       b.user_course, b.user_email, b.user_phone, c.book_name, d.librarian_name, 
+			 a.overdue, a.penalty
+	from tbl_lending a
+		inner join tbl_user b on a.FK_user = b.user_code
+		inner join tbl_book c on a.FK_book = c.book_code
+		inner join tbl_librarian d on a.FK_librarian = d.librarian_code
+			where a.return_date IS NULL;
 
 # Quantidade de livros parados e em circulação, quantidade e total
 CREATE VIEW VW_quantity AS
-	SELECT sum(quantity_total) as total, sum(quantity_circulation) as circulation, sum(quantity_stopped) as stopped
-		from tbl_quantity;
+SELECT sum(b.quantity_total) as total, sum(b.quantity_circulation) as circulation, 
+			 sum(b.quantity_stopped) as stopped
+	from tbl_book a
+		inner join tbl_quantity b on a.book_code = b.FK_book;		
 
 # Coleta os emprestimos em atraso
 CREATE VIEW VW_lending_delay AS
@@ -117,12 +125,13 @@ CREATE VIEW VW_lending_delay_penalty AS
 
 # Coleta os 3 leitores que mais coletaram livros no ultimo mes
 CREATE VIEW VW_top_readers AS
-	SELECT a.user_name as name,
-		FROM tbl_user a, tbl_lending b
-			where a.user_code = b.FK_user AND b.withdraw_date >= (SELECT CURRENT_DATE - INTERVAL 1 MONTH)
-				GROUP BY a.user_name
-					ORDER BY COUNT(a.user_name) DESC
-						LIMIT 3;
+	SELECT a.user_name as name, COUNT(a.user_name) as count
+		FROM tbl_user a
+			inner join tbl_lending b on a.user_code = b.FK_user
+				where b.withdraw_date >= (SELECT CURRENT_DATE - INTERVAL 1 MONTH)
+					GROUP BY a.user_name
+						ORDER BY COUNT(a.user_name) DESC
+							LIMIT 3;						
 
 # Relátorio para ver todos os livros registrados
 CREATE VIEW VW_report_all_books as
@@ -130,15 +139,16 @@ select a.book_name "Título", a.book_author "Autor", a.book_edition "Edição", 
 	   a.category_name "Categoria", a.book_position "Posição", a.book_tombo "Tombo", a.book_isbn "ISBN",
        a.book_cdd "CDD", b.quantity_total "Quant. Total", b.quantity_stopped "Quant. Parado",
        b.quantity_circulation "Quant. Circulação"
-	from tbl_book a, tbl_quantity b
-		where book_code = FK_book;
+	from tbl_book a
+		inner join tbl_quantity b on a.book_code = b.FK_book
+			order by a.book_code desc;
 
 # Relátorio para ver todos os emprestimos que ainda não foram devolvidos
 CREATE VIEW VW_report_lending_pending AS
 SELECT a.book_name "Título", a.book_tombo "Tombo", a.book_position "Posição", b.user_name "Nome", 
 			 b.user_course "Curso", b.user_email "Email", b.user_phone "Telefone", b.user_cpf "CPF", 
-			 c.librarian_name "Emprestado por", d.withdraw_date "Data do emprestimo", d.return_prediction "Previsão de devolução", 
-			 d.overdue "Dias de atraso", d.penalty "Penalidade"
+			 c.librarian_name "Emprestado por", d.withdraw_date "Data do emprestimo", 
+			 d.return_prediction "Previsão de devolução", d.overdue "Dias de atraso", d.penalty "Penalidade"
 	from tbl_book a
 		join tbl_lending d on a.book_code = d.FK_book
 		join tbl_user b on b.user_code = d.FK_user
@@ -149,8 +159,9 @@ SELECT a.book_name "Título", a.book_tombo "Tombo", a.book_position "Posição",
 CREATE VIEW VW_report_lending_returned AS
 SELECT a.book_name "Título", a.book_tombo "Tombo", a.book_position "Posição", b.user_name "Nome", 
 			 b.user_course "Curso", b.user_email "Email", b.user_phone "Telefone", b.user_cpf "CPF", 
-			 c.librarian_name "Emprestado por", d.withdraw_date "Data do emprestimo", d.return_prediction "Previsão de devolução", 
-			 d.return_date "Data de devolução", d.overdue "Dias de atraso", d.penalty "Penalidade"
+			 c.librarian_name "Emprestado por", d.withdraw_date "Data do emprestimo", 
+			 d.return_prediction "Previsão de devolução", d.return_date "Data de devolução", 
+			 d.overdue "Dias de atraso", d.penalty "Penalidade"
 	from tbl_book a
 		join tbl_lending d on a.book_code = d.FK_book
 		join tbl_user b on b.user_code = d.FK_user
@@ -185,7 +196,8 @@ $
 delimiter $
 CREATE PROCEDURE SP_recovery_token_check()
 BEGIN
-	UPDATE tbl_librarian SET recovery_token = NULL, recovery_token_expiration = NULL WHERE recovery_token_expiration < CURRENT_DATE;
+	UPDATE tbl_librarian SET recovery_token = NULL, recovery_token_expiration = NULL 
+		WHERE recovery_token_expiration < CURRENT_DATE;
 END
 
 # DROP PROCEDURE IF EXISTS SP_penalty;
