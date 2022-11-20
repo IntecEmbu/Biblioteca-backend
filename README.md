@@ -251,6 +251,12 @@
 
 #### Coleta os leitores que mais coletaram livros `.../report/top-readers`
 
+#### Coleta todos os livros com quantidade `.../report/book`
+
+#### Coleta todos os emprestimos que não foram devolvidos `.../report/lending?returned=false`
+
+#### Coleta todos os emprestimos que foram devolvidos `.../report/lending?returned=true`
+
 <br>
 
 ## Projetos relacionados 📁
