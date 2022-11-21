@@ -47,9 +47,9 @@ router.get("/top-readers", async (req, res, next) => {
   }
 });
 
-// ENDPOINT: /reports
+// ENDPOINT: /reports/
 // Descrição: Gerencia a geração de relatórios
-router.get("/:type", async (req, res, next) => {
+router.get("/generator/:type", async (req, res, next) => {
   try {
     const {type} = req.params
     const {returned} = req.query
