@@ -89,10 +89,9 @@ async function getAllNotReturned() {
   conn.end();
 
   rows.forEach((row) => {
-    row.withdraw_date = dateFormat.formateDateFromDatabase(row.withdraw_date);
-    row.return_prediction = dateFormat.formateDateFromDatabase(row.return_prediction);
+    row.withdraw_date = dateFormat(row.withdraw_date);
+    row.return_prediction = dateFormat(row.return_prediction);
   });
-
   return rows;
 }
 
