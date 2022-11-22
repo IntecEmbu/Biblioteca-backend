@@ -43,8 +43,8 @@ BEGIN
 				 b.quantity_total, b.quantity_stopped, b.quantity_circulation
 		FROM temp_books a
 			join temp_quantity b on a.book_code = b.FK_book;
-	DROP TEMPORARY TABLE temp_books;
 	DROP TEMPORARY TABLE temp_quantity;
+	DROP TEMPORARY TABLE temp_books;
 	*/
 END $
 
@@ -67,8 +67,8 @@ BEGIN
 				 b.quantity_total, b.quantity_stopped, b.quantity_circulation
 		FROM temp_books a
 			join temp_quantity b on a.book_code = b.FK_book;
-	DROP TEMPORARY TABLE temp_books;
 	DROP TEMPORARY TABLE temp_quantity;
+	DROP TEMPORARY TABLE temp_books;
 	*/
 END $
 
