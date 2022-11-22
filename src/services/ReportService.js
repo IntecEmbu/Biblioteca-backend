@@ -46,6 +46,7 @@ async function getReportLendingPending(){
   rows.forEach((row) => {
     row["Data do emprestimo"] = dateFormat(row["Data do emprestimo"])
     row["Previsão de devolução"] = dateFormat(row["Previsão de devolução"])
+    row["Penalidade"] = `R$ ${row["Penalidade"]}`
   })
 
   return rows
@@ -63,6 +64,7 @@ async function getReportLendingReturned(){
     row["Data do emprestimo"] = dateFormat(row["Data do emprestimo"])
     row["Previsão de devolução"] = dateFormat(row["Previsão de devolução"])
     row["Data de devolução"] = dateFormat(row["Data de devolução"])
+    row["Penalidade"] = `R$ ${row["Penalidade"]}`
   })
 
   return rows
