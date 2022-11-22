@@ -224,7 +224,31 @@ BEGIN
 	*/
 END $
 
+# Procedure para aumentar a perfomance da geração de relatóro de iventário com tabela temporaria
+delimiter $
+CREATE PROCEDURE SP_create_tempTable_reportInventory()
+BEGIN
+	-- Cria uma tabela temporaria e clona a tabela de livros com dados
+	CREATE TEMPORARY TABLE temp_books SELECT * FROM tbl_book;
+
+	-- Cria uma tabela temporaria e clona a tabela de quantidade com dados
+	CREATE TEMPORARY TABLE temp_quantity SELECT * FROM tbl_quantity;
+
+	-- Para realizar a consulta dessa tabela temporaria use os comandos:
+	/*
+	CALL SP_create_tempTable_reportInventory();
+	SELECT a.book_code, a.book_isbn, a.book_cdd, a.book_name, a.book_language, a.category_name, 
+				 a.release_year, a.book_author, a.book_edition, a.book_position, a.book_tombo, 
+				 b.quantity_total, b.quantity_stopped, b.quantity_circulation
+		FROM temp_books a
+			join temp_quantity b on a.book_code = b.FK_book;
+	DROP TEMPORARY TABLE temp_books;
+	DROP TEMPORARY TABLE temp_quantity;
+	*/
+END $
+
 	
 # DROP PROCEDURE IF EXISTS SP_penalty;
 # DROP PROCEDURE IF EXISTS SP_recovery_token_check;
-# DROP PROCEDURE IF EXISTS SP_create_tempTable_viewReference_loadBooks;
+# DROP PROCEDURE IF EXISTS SP_create_tempTable_loadBooks;
+# DROP PROCEDURE IF EXISTS SP_create_tempTable_reportInventory;
