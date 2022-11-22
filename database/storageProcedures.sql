@@ -3,6 +3,7 @@
 # DROP PROCEDURE IF EXISTS SP_create_tempTable_loadBooks;
 # DROP PROCEDURE IF EXISTS SP_create_tempTable_reportInventory;
 # DROP PROCEDURE IF EXISTS SP_create_tempTable_reportLendingReturned;
+# DROP PROCEDURE IF EXISTS SP_create_tempTable_reportLendingPending;
 
 # Aplicar multa em emprestimos que ainda não sofreram multa no dia
 delimiter $
@@ -77,7 +78,6 @@ END $
 delimiter $
 CREATE PROCEDURE SP_create_tempTable_reportLendingReturned()
 BEGIN
-
   -- Cria uma tabela temporaria e clona a tabela de livros com dados
   CREATE TEMPORARY TABLE temp_books SELECT * FROM tbl_book;
 
@@ -106,6 +106,47 @@ BEGIN
     join temp_lending d on b.user_code = d.FK_user
     join temp_librarian c on d.FK_librarian = c.librarian_code
 			where d.return_date IS NOT NULL
+				order by d.withdraw_date desc;
+  DROP TEMPORARY TABLE temp_lending;
+  DROP TEMPORARY TABLE temp_quantity;
+  DROP TEMPORARY TABLE temp_books;
+  DROP TEMPORARY TABLE temp_user;
+  DROP TEMPORARY TABLE temp_librarian;
+  */
+END $
+
+
+# Perfomance na geração de relatórios de emprestimos pendentes com tabela temporaria
+delimiter $
+CREATE PROCEDURE SP_create_tempTable_reportLendingPending()
+BEGIN
+  -- Cria uma tabela temporaria e clona a tabela de livros com dados
+  CREATE TEMPORARY TABLE temp_books SELECT * FROM tbl_book;
+
+  -- Cria uma tabela temporaria e clona a tabela de quantidade com dados
+  CREATE TEMPORARY TABLE temp_quantity SELECT * FROM tbl_quantity;
+
+  -- Cria uma tabela temporaria e clona a tabela de emprestimos com dados
+  CREATE TEMPORARY TABLE temp_lending SELECT * FROM tbl_lending;
+
+  -- Cria uma tabela temporaria e clona a tabela de bibliotecario com dados
+  CREATE TEMPORARY TABLE temp_librarian SELECT * FROM tbl_librarian;
+
+  -- Cria uma tabela temporaria e clona a tabela de usuario com dados
+  CREATE TEMPORARY TABLE temp_user SELECT * FROM tbl_user;
+
+  -- Para realizar a consulta dessa tabela temporaria use os comandos:
+  /*
+  CALL SP_create_tempTable_reportLendingPending();
+  SELECT a.book_name "Título", a.book_tombo "Tombo", a.book_position "Posição", b.user_name "Nome", 
+			 b.user_course "Curso", b.user_email "Email", b.user_phone "Telefone", b.user_cpf "CPF", 
+			 c.librarian_name "Emprestado por", d.withdraw_date "Data do emprestimo", 
+			 d.return_prediction "Previsão de devolução", d.overdue "Dias de atraso", d.penalty "Penalidade"
+	from temp_books a
+    join temp_user b on a.book_code = b.FK_book
+    join temp_lending d on b.user_code = d.FK_user
+    join temp_librarian c on d.FK_librarian = c.librarian_code
+      where d.return_date IS NULL
 				order by d.withdraw_date desc;
   DROP TEMPORARY TABLE temp_lending;
   DROP TEMPORARY TABLE temp_quantity;
