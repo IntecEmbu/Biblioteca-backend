@@ -201,21 +201,15 @@ BEGIN
 		WHERE recovery_token_expiration < CURRENT_DATE;
 END $
 
-# Pocedure para aumentar a perfomance ddo carregamento de livros com tabela temporaria
+# Pocedure para aumentar a perfomance do carregamento de livros com tabela temporaria
 delimiter $
 CREATE PROCEDURE SP_create_tempTable_loadBooks()
 BEGIN
-	-- Cria uma tabela temporaria para armazenar os dados dos livros
+	-- Cria uma tabela temporaria e clona a tabela de livros com dados
 	CREATE TEMPORARY TABLE temp_books SELECT * FROM tbl_book;
 
-	-- Cria uma tabela temporaria para armazenar os dados das quantidades
+	-- Cria uma tabela temporaria e clona a tabela de quantidade com dados
 	CREATE TEMPORARY TABLE temp_quantity SELECT * FROM tbl_quantity;
-
-	-- Clona os dados da tabela de livros e insere na tabela temporaria
-	INSERT INTO temp_books SELECT * FROM tbl_book;
-
-	-- Clona os dados da tabela de quantidades e insere na tabela temporaria
-	INSERT INTO temp_quantity SELECT * FROM tbl_quantity;
 
 	-- Para realizar a consulta dessa tabela temporaria use o comando:
 	/*
