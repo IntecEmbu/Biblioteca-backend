@@ -211,7 +211,7 @@ BEGIN
 	-- Cria uma tabela temporaria e clona a tabela de quantidade com dados
 	CREATE TEMPORARY TABLE temp_quantity SELECT * FROM tbl_quantity;
 
-	-- Para realizar a consulta dessa tabela temporaria use o comando:
+	-- Para realizar a consulta dessa tabela temporaria use os comandos:
 	/*
 	CALL SP_create_tempTable_loadBooks();
 	SELECT a.book_code, a.book_isbn, a.book_cdd, a.book_name, a.book_language, a.category_name, 
@@ -219,6 +219,8 @@ BEGIN
 				 b.quantity_total, b.quantity_stopped, b.quantity_circulation
 		FROM temp_books a
 			join temp_quantity b on a.book_code = b.FK_book;
+	DROP TEMPORARY TABLE temp_books;
+	DROP TEMPORARY TABLE temp_quantity;
 	*/
 END $
 
