@@ -191,8 +191,7 @@ BEGIN
 	UPDATE tbl_lending SET penalty = 
 		(SELECT penalty + (DATEDIFF(CURRENT_DATE, return_prediction) * @penalty_value)),
 		overdue = true, last_penaly_date = CURRENT_DATE WHERE lending_code = lending_code;
-END
-$
+END $
 
 # Procedure para apagar o token de recuperação de senha caso esteja expirado
 delimiter $
@@ -200,7 +199,36 @@ CREATE PROCEDURE SP_recovery_token_check()
 BEGIN
 	UPDATE tbl_librarian SET recovery_token = NULL, recovery_token_expiration = NULL 
 		WHERE recovery_token_expiration < CURRENT_DATE;
-END
+END $
 
+# Pocedure para aumentar a perfomance ddo carregamento de livros com tabela temporaria
+delimiter $
+CREATE PROCEDURE SP_create_tempTable_loadBooks()
+BEGIN
+	-- Cria uma tabela temporaria para armazenar os dados dos livros
+	CREATE TEMPORARY TABLE temp_books SELECT * FROM tbl_book;
+
+	-- Cria uma tabela temporaria para armazenar os dados das quantidades
+	CREATE TEMPORARY TABLE temp_quantity SELECT * FROM tbl_quantity;
+
+	-- Clona os dados da tabela de livros e insere na tabela temporaria
+	INSERT INTO temp_books SELECT * FROM tbl_book;
+
+	-- Clona os dados da tabela de quantidades e insere na tabela temporaria
+	INSERT INTO temp_quantity SELECT * FROM tbl_quantity;
+
+	-- Para realizar a consulta dessa tabela temporaria use o comando:
+	/*
+	CALL SP_create_tempTable_loadBooks();
+	SELECT a.book_code, a.book_isbn, a.book_cdd, a.book_name, a.book_language, a.category_name, 
+				 a.release_year, a.book_author, a.book_edition, a.book_position, a.book_tombo, 
+				 b.quantity_total, b.quantity_stopped, b.quantity_circulation
+		FROM temp_books a
+			join temp_quantity b on a.book_code = b.FK_book;
+	*/
+END $
+
+	
 # DROP PROCEDURE IF EXISTS SP_penalty;
 # DROP PROCEDURE IF EXISTS SP_recovery_token_check;
+# DROP PROCEDURE IF EXISTS SP_create_tempTable_viewReference_loadBooks;
