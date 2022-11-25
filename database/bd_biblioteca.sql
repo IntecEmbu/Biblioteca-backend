@@ -28,17 +28,17 @@ CREATE TABLE tbl_user(
 
 CREATE TABLE tbl_book(
 	book_code INT(10) PRIMARY KEY AUTO_INCREMENT,
-	book_isbn VARCHAR(22) NOT NULL,
-	book_cdd VARCHAR(22) NOT NULL,
-	book_name VARCHAR(100) NOT NULL,
-	book_language VARCHAR(45) NOT NULL,
-	category_name VARCHAR(45) NOT NULL,
+	book_isbn VARCHAR(50) NOT NULL,
+	book_cdd VARCHAR(50) NOT NULL,
+	book_name VARCHAR(250) NOT NULL,
+	book_language VARCHAR(50) NOT NULL,
+	category_name VARCHAR(150) NOT NULL,
 	release_year YEAR NOT NULL,
-	book_author VARCHAR(45) NOT NULL,
-	book_edition VARCHAR(45) NOT NULL,
+	book_author VARCHAR(250) NOT NULL,
+	book_edition VARCHAR(100) NOT NULL,
 	book_date_register TIMESTAMP,
-	book_position VARCHAR(45) NOT NULL,
-	book_tombo VARCHAR(45) NOT NULL
+	book_position VARCHAR(50) NOT NULL,
+	book_tombo VARCHAR(50) NOT NULL
 );
 
 CREATE TABLE tbl_quantity(
