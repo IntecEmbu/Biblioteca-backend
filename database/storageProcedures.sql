@@ -1,9 +1,12 @@
 # DROP PROCEDURE IF EXISTS SP_penalty;
 # DROP PROCEDURE IF EXISTS SP_recovery_token_check;
 # DROP PROCEDURE IF EXISTS SP_create_tempTable_loadBooks;
+# DROP PROCEDURE IF EXISTS SP_drop_tempTable_loadBooks;
 # DROP PROCEDURE IF EXISTS SP_create_tempTable_reportInventory;
+# DROP PROCEDURE IF EXISTS SP_drop_tempTable_reportInventory;
 # DROP PROCEDURE IF EXISTS SP_create_tempTable_reportLendingReturned;
 # DROP PROCEDURE IF EXISTS SP_create_tempTable_reportLendingPending;
+# DROP PROCEDURE IF EXISTS SP_drop_tempTable_reportLending;
 
 # Aplicar multa em emprestimos que ainda não sofreram multa no dia
 delimiter $
@@ -44,9 +47,17 @@ BEGIN
 				 b.quantity_total, b.quantity_stopped, b.quantity_circulation
 		FROM temp_books a
 			join temp_quantity b on a.book_code = b.FK_book;
+	CALL SP_drop_tempTable_loadBooks();
+	*/
+END $
+
+
+# Apaga a tabela temporaria de carregamento de livros
+delimiter $
+CREATE PROCEDURE SP_drop_tempTable_loadBooks()
+BEGIN
 	DROP TEMPORARY TABLE temp_quantity;
 	DROP TEMPORARY TABLE temp_books;
-	*/
 END $
 
 
@@ -68,9 +79,17 @@ BEGIN
 				 b.quantity_total, b.quantity_stopped, b.quantity_circulation
 		FROM temp_books a
 			join temp_quantity b on a.book_code = b.FK_book;
+	CALL SP_drop_tempTable_reportInventory();
+	*/
+END $
+
+
+# Apaga a tabela temporaria de geração de relatóro de iventário
+delimiter $
+CREATE PROCEDURE SP_drop_tempTable_reportInventory()
+BEGIN
 	DROP TEMPORARY TABLE temp_quantity;
 	DROP TEMPORARY TABLE temp_books;
-	*/
 END $
 
 
@@ -107,11 +126,7 @@ BEGIN
     join temp_librarian c on d.FK_librarian = c.librarian_code
 			where d.return_date IS NOT NULL
 				order by d.withdraw_date desc;
-  DROP TEMPORARY TABLE temp_lending;
-  DROP TEMPORARY TABLE temp_quantity;
-  DROP TEMPORARY TABLE temp_books;
-  DROP TEMPORARY TABLE temp_user;
-  DROP TEMPORARY TABLE temp_librarian;
+	CALL SP_drop_tempTable_reportLending();
   */
 END $
 
@@ -148,10 +163,18 @@ BEGIN
     join temp_librarian c on d.FK_librarian = c.librarian_code
       where d.return_date IS NULL
 				order by d.withdraw_date desc;
-  DROP TEMPORARY TABLE temp_lending;
+	CALL SP_drop_tempTable_reportLending();
+  */
+END $
+
+
+# Apaga a tabela temporaria de geração de relatórios de emprestimos
+delimiter $
+CREATE PROCEDURE SP_drop_tempTable_reportLending()
+BEGIN
+	DROP TEMPORARY TABLE temp_lending;
   DROP TEMPORARY TABLE temp_quantity;
   DROP TEMPORARY TABLE temp_books;
   DROP TEMPORARY TABLE temp_user;
   DROP TEMPORARY TABLE temp_librarian;
-  */
 END $
