@@ -5,14 +5,13 @@ import checkRecoveryToken from "./checkRecoveryToken.js";
 async function execTask(){
   // Inicia contador para contabilizar o tempo de execução da tarefa
   const start = new Date();
-  console.log("Iniciando tarefa...");
 
   try {
     await applyPenalty();
     await warningLending();
     await checkRecoveryToken();
 
-    console.log("Tempo de execução: ", new Date() - start);
+    console.log("Execução de TASK: ", new Date() - start + "ms");
   }catch (error) {
     console.log(error.message);
   } 
