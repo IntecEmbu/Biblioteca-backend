@@ -50,6 +50,9 @@ async function insertBook(data) {
 async function getAllBooks() {
   const conn = await db.connect();
 
+  // inicializa timer
+  let start = new Date().getTime();
+
   await conn.query("call SP_create_tempTable_loadBooks()");
   const [rows] = await conn.query(`
       SELECT a.book_code, a.book_isbn, a.book_cdd, a.book_name, a.book_language, a.category_name, 
@@ -59,7 +62,14 @@ async function getAllBooks() {
         join temp_quantity b on a.book_code = b.FK_book;`
   )
 
-  await conn.query("call SP_drop_tempTable_loadBooks()");
+  conn.query("call SP_drop_tempTable_loadBooks()");
+
+  // const [rows] = await conn.query("SELECT * FROM VW_all_books");
+
+  // finaliza timer
+  let end = new Date().getTime();
+  let time = end - start;
+  console.log("Tempo de execução: " + time + "ms");
 
   conn.end();
   return rows;
