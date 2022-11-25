@@ -20,7 +20,7 @@ export default async function(){
 
   const conn = await db.connect();
   for (const lending of lendings) {
-    conn.query("CALL SP_lending_penalty(?)", lending.lending_code);
+    await conn.query("CALL SP_lending_penalty(?)", lending.lending_code);
   }
 
   conn.end();
