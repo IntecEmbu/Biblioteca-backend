@@ -46,7 +46,8 @@ CREATE VIEW VW_quantity AS
 SELECT sum(b.quantity_total) as total, sum(b.quantity_circulation) as circulation, 
 			 sum(b.quantity_stopped) as stopped
 	from tbl_book a
-		inner join tbl_quantity b on a.book_code = b.FK_book;		
+		inner join tbl_quantity b on a.book_code = b.FK_book
+			where a.book_status = 'Ativo';		
 
 
 # Coleta os emprestimos em atraso
