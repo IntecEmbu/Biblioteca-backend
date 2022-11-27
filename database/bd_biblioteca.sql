@@ -36,7 +36,6 @@ CREATE TABLE tbl_book(
 	release_year YEAR NOT NULL,
 	book_author VARCHAR(250) NOT NULL,
 	book_edition VARCHAR(100) NOT NULL,
-	book_date_register TIMESTAMP,
 	book_position VARCHAR(50) NOT NULL,
 	book_tombo VARCHAR(50) NOT NULL,
 	book_status ENUM ('Ativo', 'Inativo') NOT NULL DEFAULT 'Ativo';
