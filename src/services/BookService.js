@@ -167,15 +167,9 @@ async function updateBook(data) {
 async function deleteBook(id) {
   const conn = await db.connect();
 
-  const tbl_quantity_sql = "DELETE FROM tbl_quantity WHERE FK_book = ?";
-  const tbl_penalty_sql = "DELETE FROM tbl_penalty WHERE FK_book = ?";
-  const tbl_lending_sql = "DELETE FROM tbl_lending WHERE FK_book = ?";
-  const tbl_book_sql = "DELETE FROM tbl_book WHERE book_code = ?";
+  const sql = "UPDATE tbl_book SET book_status = 'Inativo' WHERE book_code = ?";
 
-  await conn.query(tbl_quantity_sql, id);
-  await conn.query(tbl_penalty_sql, id);
-  await conn.query(tbl_lending_sql, id);
-  await conn.query(tbl_book_sql, id);
+  await conn.query(sql, id);
 
   conn.end();
 }
