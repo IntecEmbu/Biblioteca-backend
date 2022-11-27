@@ -38,7 +38,8 @@ SELECT a.lending_code, a.withdraw_date, a.return_prediction, b.user_name,
 		inner join tbl_user b on a.FK_user = b.user_code
 		inner join tbl_book c on a.FK_book = c.book_code
 		inner join tbl_librarian d on a.FK_librarian = d.librarian_code
-			where a.return_date IS NULL;
+			where a.return_date IS NULL
+				order by a.lending_code desc;
 
 
 # Quantidade de livros parados e em circulação, quantidade e total
