@@ -25,6 +25,7 @@ SELECT a.book_code, a.book_isbn, a.book_cdd, a.book_name, a.book_language,
 			 b.quantity_stopped
 	from tbl_book a
 		inner join tbl_quantity b on a.book_code = b.FK_book
+			where a.book_status = 'Ativo',
 			order by a.book_code desc;
 
 
@@ -80,6 +81,7 @@ select a.book_name "Título", a.book_author "Autor", a.book_edition "Edição", 
        b.quantity_circulation "Quant. Circulação"
 	from tbl_book a
 		inner join tbl_quantity b on a.book_code = b.FK_book
+		where a.book_status = 'Ativo'
 			order by a.book_code desc;
 
 

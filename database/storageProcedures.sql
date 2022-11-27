@@ -46,7 +46,8 @@ BEGIN
 				 a.release_year, a.book_author, a.book_edition, a.book_position, a.book_tombo, 
 				 b.quantity_total, b.quantity_stopped, b.quantity_circulation
 		FROM temp_books a
-			join temp_quantity b on a.book_code = b.FK_book;
+			join temp_quantity b on a.book_code = b.FK_book
+				WHERE a.book_status = "Ativo";
 	CALL SP_drop_tempTable_loadBooks();
 	*/
 END $
@@ -78,7 +79,8 @@ BEGIN
 				 a.release_year, a.book_author, a.book_edition, a.book_position, a.book_tombo, 
 				 b.quantity_total, b.quantity_stopped, b.quantity_circulation
 		FROM temp_books a
-			join temp_quantity b on a.book_code = b.FK_book;
+			join temp_quantity b on a.book_code = b.FK_book
+				WHERE a.book_status = "Ativo";
 	CALL SP_drop_tempTable_reportInventory();
 	*/
 END $
