@@ -20,7 +20,7 @@ async function createUser(data) {
 async function getAllUsers() {
   const conn = await db.connect();
 
-  const sql = "SELECT * From tbl_user ORDER BY user_code DESC WHERE user_status = 'Ativo'";
+  const sql = "SELECT * From tbl_user WHERE user_status = 'Ativo' ORDER BY user_code DESC";
 
   const [rows] = await conn.query(sql);
 
