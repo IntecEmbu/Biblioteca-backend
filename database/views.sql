@@ -69,8 +69,9 @@ CREATE VIEW VW_top_readers AS
 	SELECT a.user_name as name, COUNT(a.user_name) as count
 		FROM tbl_user a
 			inner join tbl_lending b on a.user_code = b.FK_user
-				where b.withdraw_date >= (SELECT CURRENT_DATE - INTERVAL 1 MONTH)
-					GROUP BY a.user_name
+				where b.withdraw_date >= (SELECT CURRENT_DATE - INTERVAL 1 MONTH) AND
+				a.user_status = 'Ativo'
+ 					GROUP BY a.user_name
 						ORDER BY COUNT(a.user_name) DESC
 							LIMIT 3;						
 
