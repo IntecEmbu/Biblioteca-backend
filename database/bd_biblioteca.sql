@@ -22,8 +22,9 @@ CREATE TABLE tbl_user(
 	user_type ENUM ('Aluno', 'Funcionario') NOT NULL,
 	user_email VARCHAR(45) NOT NULL,
 	user_cpf VARCHAR(20) NOT NULL,
-  	user_phone  VARCHAR(20) NOT NULL,	
-	user_course VARCHAR(45) NOT NULL
+  user_phone  VARCHAR(20) NOT NULL,	
+	user_course VARCHAR(45) NOT NULL,
+	user_status ENUM ('Ativo', 'Inativo') NOT NULL DEFAULT 'Ativo';
 );
 
 CREATE TABLE tbl_book(

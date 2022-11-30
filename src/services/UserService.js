@@ -20,7 +20,7 @@ async function createUser(data) {
 async function getAllUsers() {
   const conn = await db.connect();
 
-  const sql = "SELECT * From tbl_user ORDER BY user_code DESC";
+  const sql = "SELECT * From tbl_user ORDER BY user_code DESC WHERE user_status = 'Ativo'";
 
   const [rows] = await conn.query(sql);
 
@@ -61,7 +61,7 @@ async function updateUser(data) {
 async function deleteUser(id) {
   const conn = await db.connect();
 
-  const sql = "DELETE FROM tbl_user WHERE user_code = ?";
+  const sql = "UPDATE tbl_user SET user_status = 'Inativo' WHERE user_code = ?";
 
   await conn.query(sql, id);
 
