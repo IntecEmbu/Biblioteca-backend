@@ -50,7 +50,7 @@ async function updateUser(data) {
 
   const sql =
     "UPDATE tbl_user SET user_name = ?, user_email = ?, user_type = ?, user_phone = ?, user_course = ?, user_cpf = ? WHERE user_code = ?";
-  const values = [name, email, type, phone, course, id, cpf];
+  const values = [name, email, type, phone, course, cpf, id];
 
   await conn.query(sql, values);
 
