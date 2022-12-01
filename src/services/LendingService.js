@@ -39,19 +39,11 @@ async function createLending(data) {
     return { error: "Usuário já possui 5 empréstimos!" };
   }
 
-  // Verifica o tipo do usuario para calular o tempo de emprestimo
-  if (user_type === "Aluno") {
-    // Emprestimo de 7 dias no formato YYYY-MM-DD
-    var return_prediction = new Date();
-    return_prediction.setDate(return_prediction.getDate() + 7);
-  } else {
-    // Emprestimo de 14 dias no formato YYYY
-    var return_prediction = new Date();
-    return_prediction.setDate(return_prediction.getDate() + 14);
-  }
+  // Define a quantidade de dias para devolução
+  const return_prediction = user_type === "Aluno" ? 7 : 14;
 
   // Realiza o emprestimo
-  const sqlLending = "INSERT INTO tbl_lending (FK_librarian, FK_book, FK_user, return_prediction, withdraw_date) VALUES (?, ?, ?, ?, (SELECT NOW()))";
+  const sqlLending = "INSERT INTO tbl_lending (FK_librarian, FK_book, FK_user, return_prediction, withdraw_date) VALUES (?, ?, ?, (SELECT NOW() + INTERVAL ? DAY), (SELECT NOW()))";
 
   const values = [librarian_id, book_id, user_id, return_prediction];
 
