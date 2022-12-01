@@ -26,26 +26,37 @@ async function createLending(data) {
     return { error: "Livro indisponível!" };
   }
 
+  // Verifica se o usuário já tem mais de 2 emprestimos
+  const sqlVerifyQuantity = "SELECT count(*) as count FROM tbl_lending WHERE FK_user = ? AND return_date IS NULL";
+
+  const [rowsVerifyQuantity] = await conn.query(sqlVerifyQuantity, user_id);
+
+  if (rowsVerifyQuantity[0].count >= 2 && user_type === "Aluno") {
+    conn.end();
+    return { error: "Usuário já possui 2 empréstimos!" };
+  } else if(rowsVerifyQuantity[0].count >= 5 && user_type === "Funcionario") {
+    conn.end();
+    return { error: "Usuário já possui 5 empréstimos!" };
+  }
+
   // Verifica o tipo do usuario para calular o tempo de emprestimo
   if (user_type === "Aluno") {
     // Emprestimo de 7 dias no formato YYYY-MM-DD
     var return_prediction = new Date();
     return_prediction.setDate(return_prediction.getDate() + 7);
   } else {
-    // Emprestimo de 14 dias no formato YYYY-MM-DD
+    // Emprestimo de 14 dias no formato YYYY
     var return_prediction = new Date();
     return_prediction.setDate(return_prediction.getDate() + 14);
   }
 
   // Realiza o emprestimo
-  const sqlLending =
-    "INSERT INTO tbl_lending (FK_librarian, FK_book, FK_user, return_prediction, withdraw_date) VALUES (?, ?, ?, ?, (SELECT NOW()))";
+  const sqlLending = "INSERT INTO tbl_lending (FK_librarian, FK_book, FK_user, return_prediction, withdraw_date) VALUES (?, ?, ?, ?, (SELECT NOW()))";
 
   const values = [librarian_id, book_id, user_id, return_prediction];
 
   // Atualiza a quantidade de livros disponiveis
-  const sqlQuantity =
-    "UPDATE tbl_quantity SET quantity_stopped = quantity_stopped - 1, quantity_circulation = quantity_circulation + 1 WHERE FK_book = ?";
+  const sqlQuantity = "UPDATE tbl_quantity SET quantity_stopped = quantity_stopped - 1, quantity_circulation = quantity_circulation + 1 WHERE FK_book = ?";
 
   await conn.query(sqlLending, values);
   await conn.query(sqlQuantity, book_id);
@@ -70,8 +81,7 @@ async function returnBook(lending_id) {
     "UPDATE tbl_lending SET return_date = (SELECT NOW()) WHERE lending_code = ?";
 
   // Atualiza a quantidade de livros disponiveis
-  const sqlQuantity =
-    "UPDATE tbl_quantity SET quantity_stopped = quantity_stopped + 1, quantity_circulation = quantity_circulation - 1 WHERE FK_book = (SELECT book_code FROM tbl_book WHERE book_code = (SELECT FK_book FROM tbl_lending WHERE lending_code = ?))";
+  const sqlQuantity = "UPDATE tbl_quantity SET quantity_stopped = quantity_stopped + 1, quantity_circulation = quantity_circulation - 1 WHERE FK_book = (SELECT book_code FROM tbl_book WHERE book_code = (SELECT FK_book FROM tbl_lending WHERE lending_code = ?))";
 
   await conn.query(sqlLending, lending_id);
   await conn.query(sqlQuantity, lending_id);
