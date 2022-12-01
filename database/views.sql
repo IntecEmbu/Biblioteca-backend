@@ -7,6 +7,7 @@
 # DROP VIEW IF EXISTS VW_report_all_books;
 # DROP VIEW IF EXISTS VW_report_lending_pending;
 # DROP VIEW IF EXISTS VW_report_lending_returned;
+# DROP VIEW IF EXISTS VW_all_users_with_lending;
 
 # Livros proximos da devolução de 4 dias
 CREATE VIEW VW_lending_CloseToDate_4 AS
@@ -115,3 +116,14 @@ SELECT a.book_name "Título", a.book_tombo "Tombo", a.book_position "Posição",
 		join tbl_librarian c on c.librarian_code = d.FK_librarian
 			where d.return_date IS NOT NULL
 				order by d.withdraw_date desc;
+
+
+# Todos os alunos com quantidade de livros pendentes e sem emprestimo
+CREATE VIEW VW_all_users_with_lending AS
+SELECT a.user_name, a.user_course, a.user_email, a.user_phone, a.user_cpf, a.user_type,
+			 COUNT(b.lending_code) as count
+	from tbl_user a
+		left join tbl_lending b on a.user_code = b.FK_user
+			where a.user_status = 'Ativo' AND b.return_date IS NULL
+				GROUP BY a.user_name
+					ORDER BY a.user_code DESC;
