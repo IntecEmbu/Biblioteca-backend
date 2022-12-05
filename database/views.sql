@@ -62,7 +62,7 @@ CREATE VIEW VW_lending_delay AS
 CREATE VIEW VW_lending_delay_penalty AS
 	SELECT lending_code from tbl_lending
 		where return_date IS NULL AND return_prediction < (SELECT CURRENT_DATE) AND 
-			last_penaly_date != (SELECT CURRENT_DATE);
+			(last_penaly_date != (SELECT CURRENT_DATE) OR last_penaly_date IS NULL);
 
 
 # Coleta os 3 leitores que mais coletaram livros no ultimo mes
