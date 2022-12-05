@@ -187,5 +187,6 @@ delimiter $
 CREATE PROCEDURE SP_lending_penalty(IN lending_id INT)
 BEGIN
 	UPDATE tbl_lending SET penalty = (SELECT DATEDIFF(CURDATE() - INTERVAL 1 DAY, return_prediction) * 1),
-	last_penaly_date = NOW() WHERE lending_code = lending_id;
+	last_penaly_date = NOW(), overdue = (SELECT DATEDIFF(CURDATE() - INTERVAL 1 DAY, return_prediction))
+	WHERE lending_code = lending_id;
 END $
