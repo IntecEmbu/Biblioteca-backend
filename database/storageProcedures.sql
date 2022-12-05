@@ -180,3 +180,12 @@ BEGIN
   DROP TEMPORARY TABLE temp_user;
   DROP TEMPORARY TABLE temp_librarian;
 END $
+
+
+# Aplica a multa pelo id do emprestimo
+delimiter $
+CREATE PROCEDURE SP_lending_penalty(IN lending_id INT)
+BEGIN
+	UPDATE tbl_lending SET penalty = (SELECT DATEDIFF(CURDATE() - INTERVAL 1 DAY, return_prediction) * 1),
+	last_penaly_date = NOW() WHERE lending_code = lending_id;
+END $
