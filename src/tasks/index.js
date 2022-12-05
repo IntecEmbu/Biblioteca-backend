@@ -7,7 +7,7 @@ async function execTask(){
   const start = new Date();
 
   try {
-    // await applyPenalty();
+    await applyPenalty();
     // await warningLending();
     // await checkRecoveryToken();
 
