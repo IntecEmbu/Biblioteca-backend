@@ -34,7 +34,11 @@ SELECT a.book_code, a.book_isbn, a.book_cdd, a.book_name, a.book_language,
 CREATE VIEW VW_lending_pending AS
 SELECT a.lending_code, a.withdraw_date, a.return_prediction, b.user_name, 
        b.user_course, b.user_email, b.user_phone, c.book_name, d.librarian_name, 
-			 a.overdue, a.penalty
+			 a.overdue, a.penalty, 
+			 	(
+					IF(DATEDIFF(CURRENT_DATE, a.return_prediction) > 0, 
+						DATEDIFF(CURRENT_DATE, a.return_prediction) - 1, 0)
+				) AS days_delay
 	from tbl_lending a
 		inner join tbl_user b on a.FK_user = b.user_code
 		inner join tbl_book c on a.FK_book = c.book_code
