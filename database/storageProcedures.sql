@@ -186,7 +186,10 @@ END $
 delimiter $
 CREATE PROCEDURE SP_lending_penalty(IN lending_id INT)
 BEGIN
-	UPDATE tbl_lending SET penalty = (SELECT DATEDIFF(CURDATE() - INTERVAL 1 DAY, return_prediction) * 1),
-	last_penaly_date = NOW(), overdue = (SELECT DATEDIFF(CURDATE() - INTERVAL 1 DAY, return_prediction))
+	-- ajuste de fuso horario para o Brasil
+	SET time_zone = '-03:00';
+
+	UPDATE tbl_lending SET penalty = (SELECT DATEDIFF(CURDATE(), return_prediction) * 1),
+	last_penaly_date = NOW(), overdue = (SELECT DATEDIFF(CURDATE(), return_prediction))
 	WHERE lending_code = lending_id;
 END $
