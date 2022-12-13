@@ -70,10 +70,22 @@ async function getReportLendingReturned(){
   return rows
 }
 
+async function getLendingPending(){
+  const conn = await db.connect()
+
+  const sql = "SELECT * FROM VW_lending_pending_report"
+
+  const [rows] = await conn.query(sql)
+
+  conn.end()
+  return rows
+}
+
 export default {
   getBookQuantity,
   getTopReaders,
   getReportAllBoks,
   getReportLendingPending,
-  getReportLendingReturned
+  getReportLendingReturned,
+  getLendingPending
 };

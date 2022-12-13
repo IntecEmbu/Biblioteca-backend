@@ -78,4 +78,17 @@ router.get("/generator/:type", async (req, res, next) => {
   }
 })
 
+// ENDPOINT: /reports/lending-pending (GET)
+// Descrição: Coleta a quantidade de empréstimos no prazo, atrasados e total
+router.get("/lending-pending", async (req, res, next) => {
+  try {
+    const result = await ReportService.getLendingPending();
+      res.status(200).send(result);
+  } catch (err) {
+    res.status(500).send(err.message);
+  } finally{
+    next();
+  }
+});
+
 export default router;

@@ -8,6 +8,7 @@
 # DROP VIEW IF EXISTS VW_report_lending_pending;
 # DROP VIEW IF EXISTS VW_report_lending_returned;
 # DROP VIEW IF EXISTS VW_all_users_with_lending;
+# DROP VIEW IF EXISTS VW_lending_pending_report;
 
 # Livros proximos da devolução de 4 dias
 CREATE VIEW VW_lending_CloseToDate_4 AS
@@ -127,3 +128,10 @@ SELECT a.user_name, a.user_course, a.user_email, a.user_phone, a.user_cpf, a.use
 			where a.user_status = 'Ativo' AND b.return_date IS NULL
 				GROUP BY a.user_name
 					ORDER BY a.user_code DESC;
+
+# Quantidade total de emprestimos pendentes, atrasados e a soma dos dois
+CREATE VIEW VW_lending_pending_report as
+SELECT
+		(SELECT COUNT(lending_code) from tbl_lending where return_date IS NULL) as pending,
+		(SELECT COUNT(lending_code) from tbl_lending where return_date IS NULL AND return_prediction < (SELECT CURRENT_DATE)) as delay,
+		(SELECT COUNT(lending_code) from tbl_lending where return_date IS NULL) + (SELECT COUNT(lending_code) from tbl_lending where return_date IS NULL AND return_prediction < (SELECT CURRENT_DATE)) as total;
