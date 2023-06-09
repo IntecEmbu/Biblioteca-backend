@@ -58,9 +58,10 @@ async function createLending(data) {
   const sqlEmail = `
   SELECT
     u.user_email AS user_email,
-    u.user_email AS user_name,
+    u.user_name AS user_name,
     b.book_name AS book_name,
-    l.return_prediction AS return_date
+    l.return_prediction AS return_date,
+    l.lending_code AS lending_code
   FROM
     tbl_lending l
     JOIN tbl_user u ON u.user_code = l.FK_user
@@ -74,16 +75,20 @@ async function createLending(data) {
 
   const [ rowsEmail ] = await conn.query(sqlEmail, valuesEmail);
 
-  const day_week = new Date(
-    rowsEmail.return_prediction
-  ).toLocaleDateString("pt-BR", { weekday: "long" });
+  const day_week = new Date(rowsEmail[0].return_date).toLocaleString("pt-BR", {
+    weekday: "long",
+  });
+
+  const name = rowsEmail[0].user_name.split(" ")[0].replace(/^\w/, (c) =>
+    c.toUpperCase()
+  );
 
   const emailData = {
-    name: rowsEmail[0].user_name,
+    name: name,
     to: rowsEmail[0].user_email,
     book_name: rowsEmail[0].book_name,
     lending_id: rowsEmail[0].lending_code,
-    return_date: dateFormat(rowsEmail[0].return_prediction),
+    return_prediction: dateFormat(rowsEmail[0].return_date),
     day_week: day_week,
   }
 
