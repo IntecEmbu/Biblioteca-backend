@@ -1,14 +1,14 @@
 import emailTemplate from "./template.js";
 import sendEmail from "../services/sendEmail.js";
 
-async function welcomeUser(
+export default async function ({
   name,
   to,
   book_name,
   lending_id,
   day_week,
   return_prediction
-) {
+}) {
   const html = emailTemplate(
     "Empréstimo realizado!",
     name,
@@ -32,5 +32,3 @@ async function welcomeUser(
     console.log(error.message);
   }
 }
-
-export default welcomeUser;
